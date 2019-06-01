@@ -1,11 +1,11 @@
 import React, {Component} from "react";
-
 class BookingForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       customer: "",
+      phoneNumber: "",
       numberOfPeople: "",
       date: "",
       time: "",
@@ -13,6 +13,7 @@ class BookingForm extends Component {
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleNumberOfPeopleChange = this.handleNumberOfPeopleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
@@ -23,6 +24,7 @@ class BookingForm extends Component {
   handleBookingSubmit(event) {
     event.preventDefault();
     const customer = this.state.customer;
+    const phoneNumber = this.state.phoneNumber;
     const numberOfPeople = this.state.numberOfPeople;
     const date = this.state.date;
     const time = this.state.time;
@@ -30,6 +32,7 @@ class BookingForm extends Component {
 
     this.props.onBookingSubmit({
       customer: customer,
+      phoneNumber: phoneNumber,
       numberOfPeople : numberOfPeople,
       date: date,
       time: time,
@@ -37,8 +40,9 @@ class BookingForm extends Component {
     });
 
     this.setState({
-      customer: '',
-      numberOfPeople: '',
+      customer: "",
+      phoneNumber: "",
+      numberOfPeople: "",
       date: "",
       time: "",
       table: "",
@@ -48,6 +52,12 @@ class BookingForm extends Component {
   handleCustomerChange(event) {
     this.setState({
       customer: event.target.value
+    });
+  }
+
+  handlePhoneNumberChange(event) {
+    this.setState({
+      phoneNumber: event.target.value
     });
   }
 
@@ -81,11 +91,17 @@ class BookingForm extends Component {
       <form className = "booking-form" onSubmit = {this.handleBookingSubmit}>
         <input
           type = "text"
-          placeholder = "Customer"
+          placeholder = "customer"
           value = {this.state.customer}
           onChange = {this.handleCustomerChange}
         />
 
+        <input
+            type = "number"
+            placeholder = "phoneNumber"
+            value = {this.state.phoneNumber}
+            onChange = {this.handlePhoneNumberChange}
+          />
         <input
             type = "number"
             placeholder = "NameOfPeople"
