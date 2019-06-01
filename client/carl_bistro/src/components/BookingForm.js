@@ -7,44 +7,59 @@ class BookingForm extends Component {
     super(props);
     this.state = {
       customer: "",
+      phoneNumber: "",
       numberOfPeople: "",
       date: "",
       time: "",
+      table: "",
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleNumberOfPeopleChange = this.handleNumberOfPeopleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
   }
 
   handleBookingSubmit(event) {
     event.preventDefault();
     const customer = this.state.customer;
+    const phoneNumber = this.state.phoneNumber;
     const numberOfPeople = this.state.numberOfPeople;
     const date = this.state.date;
     const time = this.state.time;
-    if (!customer || !numberOfPeople || !date || !time) {
-      return
-    }
+    const table = this.state.table;
+
     this.props.onBookingSubmit({
       customer: customer,
+      phoneNumber: phoneNumber,
       numberOfPeople : numberOfPeople,
       date: date,
-      time: time
+      time: time,
+      table: table,
     });
+
     this.setState({
-      customer: '',
-      numberOfPeople: '',
+      customer: "",
+      phoneNumber: "",
+      numberOfPeople: "",
       date: "",
       time: "",
+      table: "",
     });
   }
 
   handleCustomerChange(event) {
     this.setState({
       customer: event.target.value
+    });
+  }
+
+  handlePhoneNumberChange(event) {
+    this.setState({
+      phoneNumber: event.target.value
     });
   }
 
@@ -66,12 +81,35 @@ class BookingForm extends Component {
       });
     }
 
+    handleTableChange(event) {
+        this.setState({
+         table: event.target.value
+        });
+      }
+
 
   render() {
     return (
-      <div className="booking-form">
-        <h1>New Booking</h1>
-        <form className onSubmit = {this.handleSubmit}>
+      <form className = "booking-form" onSubmit = {this.handleBookingSubmit}>
+        <input
+          type = "text"
+          placeholder = "customer"
+          value = {this.state.customer}
+          onChange = {this.handleCustomerChange}
+        />
+
+        <input
+            type = "number"
+            placeholder = "phoneNumber"
+            value = {this.state.phoneNumber}
+            onChange = {this.handlePhoneNumberChange}
+          />
+        <input
+            type = "number"
+            placeholder = "NameOfPeople"
+            value = {this.state.numberOfPeople}
+            onChange = {this.handleNumberOfPeopleChange}
+          />
           <input
             type = "text"
             placeholder = "Name"
@@ -80,23 +118,17 @@ class BookingForm extends Component {
           />
 
           <input
-              type = "number"
-              placeholder = "NameOfPeople"
-              value = {this.state.numberOfPeople}
-              onChange = {this.handleNumberOfPeopleChange}
-            />
-            <input
-              type = "date"
-              placeholder = "date"
-              value = {this.state.date}
-              onChange = {this.handleDateChange}
-            />
-            <input
-              type = "time"
-              placeholder = "number"
-              value = {this.state.time}
-              onChange = {this.handleTimeChange}
-            />
+            type = "time"
+            placeholder = "time"
+            value = {this.state.time}
+            onChange = {this.handleTimeChange}
+          />
+          <input
+            type = "number"
+            placeholder = "table"
+            value = {this.state.table}
+            onChange = {this.handleTableChange}
+          />
 
           <input
             id="submit-button"

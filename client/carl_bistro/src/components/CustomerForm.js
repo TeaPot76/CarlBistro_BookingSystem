@@ -11,10 +11,10 @@ class CustomerForm extends Component {
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCustomerSubmit = this.handleCustomerSubmit.bind(this);
   }
 
-  handleSubmit(event) {
+  handleCustomerSubmit(event) {
     event.preventDefault();
     const name = this.state.name.trim();
     const phoneNumber = this.state.phoneNumber;
@@ -45,7 +45,7 @@ class CustomerForm extends Component {
 
   render() {
     return (
-      <form className = "customer-form" onSubmit = {this.handleSubmit}>
+      <form className = "customer-form" onSubmit = {this.handleCustomerSubmit}>
         <input
           type = "text"
           placeholder = "Name"
