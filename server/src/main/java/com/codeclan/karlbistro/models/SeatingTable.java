@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "seatingtables")
+@Table(name = "seating_tables")
 public class SeatingTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class SeatingTable {
     @Column(name = "table_number")
     private int tableNumber;
 
-    @OneToMany(mappedBy = "seatingtable")
+    @OneToMany(mappedBy = "seatingTable")
     private List<Booking> bookings;
 
 

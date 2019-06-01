@@ -31,21 +31,22 @@ public class Booking {
     private Booker booker;
 
     @ManyToOne
-    @JoinColumn(name = "seatingtable_id", nullable = false)
-    private SeatingTable table;
+    @JoinColumn(name = "seating_table_id", nullable = false)
+    private SeatingTable seatingTable;
+//    mappedBy reference an unknown target entity property: com.codeclan.karlbistro.models.Booking.seatingtable
 
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
     private List<Order> orders;
 
     @Column(name = "booking_note")
     private String bookingNote;
 
-    public Booking(LocalDate date, LocalTime time, int partySize, Booker booker, String bookingNote) {
+    public Booking(LocalDate date, LocalTime time, int partySize, Booker booker, SeatingTable table, String bookingNote) {
         this.date = date;
         this.time = time;
         this.partySize = partySize;
         this.booker = booker;
-        this.table = null;
+        this.seatingTable = table;
         this.orders = new ArrayList<>();
         this.bookingNote = bookingNote;
     }
@@ -114,12 +115,12 @@ public class Booking {
     }
 
     public SeatingTable getTable() {
-        return table;
+        return seatingTable;
     }
 
     public void setTable(SeatingTable table) {
         if(table.getCapacity()>=partySize) {
-            this.table = table;
+            this.seatingTable = table;
         }
     }
 

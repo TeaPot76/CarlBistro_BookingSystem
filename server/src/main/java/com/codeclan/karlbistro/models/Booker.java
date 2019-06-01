@@ -33,7 +33,7 @@ public class Booker {
     public Booker() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

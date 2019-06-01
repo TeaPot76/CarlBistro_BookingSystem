@@ -29,7 +29,7 @@ public class BookingTest {
         table = new SeatingTable(4, 1);
         date = LocalDate.of(2019,3, 31);
         time = LocalTime.of(17,0);
-        booking = new Booking(date, time, 4, booker, "no-note" );
+        booking = new Booking(date, time, 4, booker, table, "no-note" );
         order1 = new Order(booking, food);
         order2 = new Order(booking, drink);
     }
@@ -116,12 +116,11 @@ public class BookingTest {
     public void setTableTooSmall() {
         SeatingTable table2 = new SeatingTable(1,5);
         booking.setTable(table2);
-        assertEquals(null, booking.getTable());
+        assertEquals(table, booking.getTable());
     }
 
     @Test
     public void setTableTooSmallFromOtherTable() {
-        booking.setTable(table);
         SeatingTable table2 = new SeatingTable(1,5);
         booking.setTable(table2);
 //        should not set the second table
