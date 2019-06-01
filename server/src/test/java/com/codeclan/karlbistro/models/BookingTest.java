@@ -112,6 +112,21 @@ public class BookingTest {
         assertEquals(table, booking.getTable());
     }
 
+    @Test
+    public void setTableTooSmall() {
+        SeatingTable table2 = new SeatingTable(1,5);
+        booking.setTable(table2);
+        assertEquals(null, booking.getTable());
+    }
+
+    @Test
+    public void setTableTooSmallFromOtherTable() {
+        booking.setTable(table);
+        SeatingTable table2 = new SeatingTable(1,5);
+        booking.setTable(table2);
+//        should not set the second table
+        assertEquals(table, booking.getTable());
+    }
 
     @Test
     public void getBookingNote() {

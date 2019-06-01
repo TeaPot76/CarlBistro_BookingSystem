@@ -53,8 +53,6 @@ public class Booking {
     public Booking() {
     }
 
-
-
     public void addOrder(Order order){
         orders.add(order);
     }
