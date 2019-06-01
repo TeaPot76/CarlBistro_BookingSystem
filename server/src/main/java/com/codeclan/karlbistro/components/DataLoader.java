@@ -1,12 +1,10 @@
 package com.codeclan.karlbistro.components;
 
-import com.codeclan.karlbistro.models.Booker;
-import com.codeclan.karlbistro.models.Booking;
-import com.codeclan.karlbistro.models.MenuItem;
-import com.codeclan.karlbistro.models.SeatingTable;
+import com.codeclan.karlbistro.models.*;
 import com.codeclan.karlbistro.repositories.BookerRepository.BookerRepository;
 import com.codeclan.karlbistro.repositories.BookingRepository.BookingRepository;
 import com.codeclan.karlbistro.repositories.MenuItemRepository.MenuItemRepository;
+import com.codeclan.karlbistro.repositories.OrderRepository.OrderRepository;
 import com.codeclan.karlbistro.repositories.SeatingTableRepository.SeatingTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -30,6 +28,9 @@ public class DataLoader implements ApplicationRunner {
 
     @Autowired
     BookingRepository bookingRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
     public DataLoader() {
     }
@@ -98,5 +99,23 @@ public class DataLoader implements ApplicationRunner {
         LocalTime time3 = LocalTime.of(19,30);
         Booking booking3 = new Booking(date3, time3, 3, booker4, table6, "allergic to metal spoons");
         bookingRepository.save(booking3);
+
+        Order order1 = new Order(booking1, drink1);
+        orderRepository.save(order1);
+
+        Order order2 = new Order(booking1, food1);
+        orderRepository.save(order2);
+
+        Order order3 = new Order(booking1, food2);
+        orderRepository.save(order3);
+
+        Order order4 = new Order(booking2, drink3);
+        orderRepository.save(order4);
+
+        Order order5 = new Order(booking2, food3);
+        orderRepository.save(order5);
+
+        Order order6 = new Order(booking3, drink2);
+        orderRepository.save(order6);
     }
 }
