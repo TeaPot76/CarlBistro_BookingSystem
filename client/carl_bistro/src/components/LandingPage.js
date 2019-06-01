@@ -7,10 +7,11 @@ class LandingPage extends Component {
         return ( 
             <div className="landing-page">
                 <h1>LandingPage</h1>
-                <Link to="/">Home</Link>
-                <Link to="/newbooking">New Booking</Link>
-                <Link to="/managebookings">Manage Bookings</Link>
-                <Link to="/bookinglog">Booking Log</Link>
+                <Link className="link" to="/">Home</Link>
+                <Link className="link" to="/newbooking">New Booking</Link>
+                <Link className="link" to="/managebookings">Manage Bookings</Link>
+                <Link className="link" to="/bookinglog">Booking Log</Link>
+                <Link className="link" to="/tablelist">Tables</Link>
             </div>
             
         );

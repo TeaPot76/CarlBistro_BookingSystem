@@ -71,7 +71,7 @@ class BookingForm extends Component {
     return (
       <div className="booking-form">
         <h1>New Booking</h1>
-        <form className = "booking-form" onSubmit = {this.handleSubmit}>
+        <form className onSubmit = {this.handleSubmit}>
           <input
             type = "text"
             placeholder = "Name"

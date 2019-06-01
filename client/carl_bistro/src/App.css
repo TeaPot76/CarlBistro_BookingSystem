@@ -15,7 +15,7 @@
   left: 0;
   top: 0;
   text-align: center;
-  background-color: white;
+  background-color: orange;
 }
 
 .booking-list {
@@ -36,4 +36,18 @@
   top: 0; 
   text-align: center;
   background-color: purple;
+}
+
+.table-list {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0; 
+  text-align: center;
+  background-color: grey;
+}
+
+.link {
+  padding: 5em;
 }
