@@ -12,7 +12,7 @@ class BookingForm extends Component {
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
-    this.handleNumberOfPeople = this.handleNumberOfPeople.bind(this);
+    this.handleNumberOfPeopleChange = this.handleNumberOfPeopleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
@@ -57,12 +57,14 @@ class BookingForm extends Component {
     this.setState({
       date: event.target.value
     });
+  }
 
   handleTimeChange(event) {
       this.setState({
        time: event.target.value
       });
-  }
+    }
+
 
   render() {
     return (
@@ -102,6 +104,6 @@ class BookingForm extends Component {
     )
   }
 }
-}
+
 
 export default BookingForm;

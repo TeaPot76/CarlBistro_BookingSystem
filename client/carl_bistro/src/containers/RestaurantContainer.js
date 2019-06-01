@@ -17,8 +17,19 @@ class RestaurantContainer extends Component {
 }
 
  handleBookingSubmit(bookingForm){
-   bookingFrom.id = Date.now()
-   const customer = bookingForm.customer,
+   bookingForm.id = Date.now()
+   const customer = bookingForm.customer;
+   const numberOfPeople = bookingForm.numberOfPeople;
+   const date = bookingForm.date;
+   const time = bookingForm.time;
+   this.setState ({
+     customer: customer,
+     numberOfPeople: numberOfPeople,
+     date: date,
+     time: time
+   })
+
+
 
 
 
