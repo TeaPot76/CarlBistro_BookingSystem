@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Link } from "react-router-dom"
 
 class BookingForm extends Component {
 
@@ -68,39 +69,43 @@ class BookingForm extends Component {
 
   render() {
     return (
-      <form className = "booking-form" onSubmit = {this.handleSubmit}>
-        <input
-          type = "text"
-          placeholder = "Name"
-          value = {this.state.name}
-          onChange = {this.handleNameChange}
-        />
-
-        <input
-            type = "number"
-            placeholder = "NameOfPeople"
-            value = {this.state.numberOfPeople}
-            onChange = {this.handleNumberOfPeopleChange}
-          />
+      <div className="booking-form">
+        <h1>New Booking</h1>
+        <form className = "booking-form" onSubmit = {this.handleSubmit}>
           <input
-            type = "date"
-            placeholder = "date"
-            value = {this.state.date}
-            onChange = {this.handleDateChange}
-          />
-          <input
-            type = "time"
-            placeholder = "number"
-            value = {this.state.time}
-            onChange = {this.handleTimeChange}
+            type = "text"
+            placeholder = "Name"
+            value = {this.state.name}
+            onChange = {this.handleNameChange}
           />
 
-        <input
-          id="submit-button"
-          type = "submit"
-          value = "Post"
-        />
-      </form>
+          <input
+              type = "number"
+              placeholder = "NameOfPeople"
+              value = {this.state.numberOfPeople}
+              onChange = {this.handleNumberOfPeopleChange}
+            />
+            <input
+              type = "date"
+              placeholder = "date"
+              value = {this.state.date}
+              onChange = {this.handleDateChange}
+            />
+            <input
+              type = "time"
+              placeholder = "number"
+              value = {this.state.time}
+              onChange = {this.handleTimeChange}
+            />
+
+          <input
+            id="submit-button"
+            type = "submit"
+            value = "Post"
+          />
+        </form>
+        <Link to="/">Home</Link>
+      </div>  
     )
   }
 }
