@@ -5,22 +5,22 @@ class BookingForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      customer: this.props.customer,
+      customer: "",
       numberOfPeople: "",
       date: "",
-      time: ""
+      time: "",
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
     this.handleNumberOfPeople = this.handleNumberOfPeople.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
   }
 
-  handleSubmit(event) {
+  handleBookingSubmit(event) {
     event.preventDefault();
-    const customer = this.props.customer;
+    const customer = this.state.customer;
     const numberOfPeople = this.state.numberOfPeople;
     const date = this.state.date;
     const time = this.state.time;
@@ -43,7 +43,7 @@ class BookingForm extends Component {
 
   handleCustomerChange(event) {
     this.setState({
-      customer: this.props.customer 
+      customer: event.target.value
     });
   }
 
@@ -66,19 +66,33 @@ class BookingForm extends Component {
 
   render() {
     return (
-      <form className = "customer-form" onSubmit = {this.handleSubmit}>
+      <form className = "booking-form" onSubmit = {this.handleSubmit}>
         <input
           type = "text"
           placeholder = "Name"
           value = {this.state.name}
           onChange = {this.handleNameChange}
         />
+
         <input
-          type = "number"
-          placeholder = "phoneNumber"
-          value = {this.state.phoneNumber}
-          onChange = {this.handlePhoneNumberChange}
-        />
+            type = "number"
+            placeholder = "NameOfPeople"
+            value = {this.state.numberOfPeople}
+            onChange = {this.handleNumberOfPeopleChange}
+          />
+          <input
+            type = "date"
+            placeholder = "date"
+            value = {this.state.date}
+            onChange = {this.handleDateChange}
+          />
+          <input
+            type = "time"
+            placeholder = "number"
+            value = {this.state.time}
+            onChange = {this.handleTimeChange}
+          />
+
         <input
           id="submit-button"
           type = "submit"
@@ -88,5 +102,6 @@ class BookingForm extends Component {
     )
   }
 }
+}
 
-export default CustomerForm;
+export default BookingForm;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import BookingForm from "../components/BookingForm";
 
 
 
@@ -7,54 +7,32 @@ class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      customers: this.props.customers,
+      customer: null,
       tables: [],
       bookings: [],
       date: new Date(),
       time: null
     }
+    this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
+}
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleNewBooking = this.handleNewBooking.bind(this);
-  }
-
-
-  handleChange(date) {
-    this.setState({
-      date: date,
-    });
-  }
-
-  componentWillMount() {
-    console.log('will mount')
-    const request = new Request();
-    request.get('customers/')
-      .then(res => {
-        this.setState({customers: res._embedded.customers})
-      })
-    this.getTables();
-  }
+ handleBookingSubmit(bookingForm){
+   bookingFrom.id = Date.now()
+   const customer = bookingForm.customer,
 
 
-  getTables() {
-    const request = new Request();
-    request.get('restaurantTables/')
-      .then(res => {
-        this.setState({tables: res._embedded.restaurantTables})
 
-        const allTables = this.state.tables
 
-        for (const table of allTables) {
-          table.taken = false;
-        }
+ }
+      render() {
+        return (
+          <div className = "restaurant-container" >
+            <h2>Bookings</h2>
+            <BookingForm onBookingSubmit = {this.handleBookingSubmit}/>
 
-        this.setState({tables: allTables})
-      })
-  }
-
+          </div>
+        );
+      }
 
 }
 

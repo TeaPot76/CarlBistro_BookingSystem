@@ -5,15 +5,16 @@ import {Link} from 'react-router-dom'
 const Booking = (props) => {
 
   return (
-            <Link to={`/editbooking/${props.booking.id}`} className="bookingLink">
-              <div className="booking">
-                Customer: {props.booking.customer.name} <br />
-                Table: {props.booking.restaurantTable.tableNumber} <br />
-                Time: {props.booking.time} PM
-              </div>
-            </Link>
+    <div className = "booking">
+    <ul>
+    <li>{this.props.customer}</li>
+    <li>{this.props.numberOfPeople}</li>
+    <li>{this.props.date}</li>
+    <li>{this.props.time}</li>
+    </ul>
+   </div>
 
-    )
+  )
 }
 
 export default Booking;
