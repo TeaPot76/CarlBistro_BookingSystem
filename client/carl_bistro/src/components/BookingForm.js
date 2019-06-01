@@ -9,12 +9,14 @@ class BookingForm extends Component {
       numberOfPeople: "",
       date: "",
       time: "",
+      table: "",
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
     this.handleNumberOfPeopleChange = this.handleNumberOfPeopleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
+    this.handleTableChange = this.handleTableChange.bind(this);
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
   }
 
@@ -24,20 +26,22 @@ class BookingForm extends Component {
     const numberOfPeople = this.state.numberOfPeople;
     const date = this.state.date;
     const time = this.state.time;
-    if (!customer || !numberOfPeople || !date || !time) {
-      return
-    }
+    const table = this.state.table;
+
     this.props.onBookingSubmit({
       customer: customer,
       numberOfPeople : numberOfPeople,
       date: date,
-      time: time
+      time: time,
+      table: table,
     });
+
     this.setState({
       customer: '',
       numberOfPeople: '',
       date: "",
       time: "",
+      table: "",
     });
   }
 
@@ -65,10 +69,16 @@ class BookingForm extends Component {
       });
     }
 
+    handleTableChange(event) {
+        this.setState({
+         table: event.target.value
+        });
+      }
+
 
   render() {
     return (
-      <form className = "booking-form" onSubmit = {this.handleSubmit}>
+      <form className = "booking-form" onSubmit = {this.handleBookingSubmit}>
         <input
           type = "text"
           placeholder = "Customer"
@@ -90,9 +100,15 @@ class BookingForm extends Component {
           />
           <input
             type = "time"
-            placeholder = "number"
+            placeholder = "time"
             value = {this.state.time}
             onChange = {this.handleTimeChange}
+          />
+          <input
+            type = "number"
+            placeholder = "table"
+            value = {this.state.table}
+            onChange = {this.handleTableChange}
           />
 
         <input

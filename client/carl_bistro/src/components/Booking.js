@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React from "react";
 
-class Booking extends Component {
-  render() {
+const Booking = (props) => {
+
     return (
       <div className = "booking" >
         <h4>{this.props.customer}</h4>
@@ -11,7 +11,7 @@ class Booking extends Component {
       </div>
     );
   }
-}
+
 
 
 

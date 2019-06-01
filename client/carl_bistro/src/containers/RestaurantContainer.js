@@ -10,7 +10,7 @@ class RestaurantContainer extends Component {
       customer: null,
       tables: [],
       bookings: [],
-      date: new Date(),
+      date: null,
       time: null
     }
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
@@ -34,13 +34,15 @@ class RestaurantContainer extends Component {
         return (
           <div className = "restaurant-container" >
             <h2>Bookings</h2>
-            <BookingForm onBookingSubmit = {this.handleBookingSubmit}/>
+            <BookingForm onBookingSubmit = {this.handleBookingSubmit}
 
-            <BookingList
-            customer = {this.state.customer}
-            numberOfPeople ={this.state.numberOfPeople}
-        
-           />
+            />
+           <BookingList customer ={this.state.customer}
+                        numberOfPeople ={this.state.numberOfPeople}
+                        date ={this.state.date}
+                        time ={this.state.time}
+
+                        />
 
           </div>
         );
