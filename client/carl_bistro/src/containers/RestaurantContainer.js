@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import BookingForm from "../components/BookingForm";
-
+import BookingList from "../components/BookingList";
 
 
 class RestaurantContainer extends Component {
@@ -29,17 +29,18 @@ class RestaurantContainer extends Component {
      time: time
    })
 
-
-
-
-
-
  }
       render() {
         return (
           <div className = "restaurant-container" >
             <h2>Bookings</h2>
             <BookingForm onBookingSubmit = {this.handleBookingSubmit}/>
+
+            <BookingList
+            customer = {this.state.customer}
+            numberOfPeople ={this.state.numberOfPeople}
+        
+           />
 
           </div>
         );

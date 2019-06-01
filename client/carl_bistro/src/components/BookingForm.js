@@ -71,9 +71,9 @@ class BookingForm extends Component {
       <form className = "booking-form" onSubmit = {this.handleSubmit}>
         <input
           type = "text"
-          placeholder = "Name"
-          value = {this.state.name}
-          onChange = {this.handleNameChange}
+          placeholder = "Customer"
+          value = {this.state.customer}
+          onChange = {this.handleCustomerChange}
         />
 
         <input
