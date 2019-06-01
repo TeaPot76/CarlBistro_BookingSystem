@@ -1,5 +1,6 @@
 package com.codeclan.karlbistro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "seating_tables")
+@Table(name = "seatingTables")
 public class SeatingTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +21,8 @@ public class SeatingTable {
     @Column(name = "table_number")
     private int tableNumber;
 
-    @OneToMany(mappedBy = "seatingTable")
+    @JsonIgnoreProperties("seatingTable")
+    @OneToMany(mappedBy = "seatingTable", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
 

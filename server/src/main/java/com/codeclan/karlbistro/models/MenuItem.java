@@ -3,7 +3,7 @@ package com.codeclan.karlbistro.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="menu_items")
+@Table(name="menuItems")
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
