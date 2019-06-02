@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import Navbar from '../NavBar';
+
 
 class BookingEdit extends Component {
 
@@ -35,7 +33,7 @@ class BookingEdit extends Component {
 
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
-      const booking = await (await fetch(`/api/booking/${this.props.match.params.id}`)).json();
+      const booking = await (await fetch('http://localhost:8080/bookings'${this.props.match.params.id}`)).json();
       this.setState({item: booking});
     }
   }
@@ -53,7 +51,7 @@ class BookingEdit extends Component {
     event.preventDefault();
     const {item} = this.state;
 
-    await fetch('/api/booking', {
+    await fetch('http://localhost:8080/bookings', {
       method: (item.id) ? 'PUT' : 'POST',
       headers: {
         'Accept': 'application/json',

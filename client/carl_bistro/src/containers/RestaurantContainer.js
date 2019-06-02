@@ -3,7 +3,7 @@ import BookingForm from "../components/BookingForm";
 import BookingList from "../components/BookingList";
 import CustomerForm from "../components/CustomerForm";
 import Customer from "../components/Customer";
-
+import NewBookingList from "../components/NewBookingList";
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class RestaurantContainer extends Component {
         return (
           <div className = "restaurant-container" >
             <h2>Bookings</h2>
-
+            <NewBookingList/>
             <BookingForm onBookingSubmit = {this.handleBookingSubmit}
             />
 
