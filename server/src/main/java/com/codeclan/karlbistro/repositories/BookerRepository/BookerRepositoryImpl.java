@@ -2,15 +2,16 @@ package com.codeclan.karlbistro.repositories.BookerRepository;
 
 
 import com.codeclan.karlbistro.models.Booker;
-import com.codeclan.karlbistro.models.SeatingTable;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -20,30 +21,27 @@ public class BookerRepositoryImpl implements BookerRepositoryCustom {
     EntityManager entityManager;
 
     @Transactional
-    public List<Booker> getBookersByBookingFrequency() {
-        List<Booker> results = null;
+    public List<Long> orderBookersIDByNumberOfBookings() {
+        List<Long> results = null;
 
         Session session = entityManager.unwrap(Session.class);
 
         try {
-            Criteria cr = session.createCriteria(Booker.class);
-            cr.add(Restrictions.);
-
-//// Define the CriteriaQuery
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Book> cq = cb.createQuery(Book.class);
-//            Root<Book> root = cq.from(Book.class);
-//            cq.orderBy(cb.asc(root.get(Book_.title)));
-//
-//// Execute query with pagination
-//            List<Book> books = em.createQuery(cq).getResultList();
-
+            Criteria cr = session.createCriteria(Booker.class, "booker");
+            cr.createAlias("booker.bookings", "bookingAlias", Criteria.LEFT_JOIN);
+            cr.setProjection(Projections.projectionList()
+                    .add(Projections.groupProperty("booker.id"))
+                    .add(Projections.count("bookingAlias.id").as("numberOfBookings")));
+            cr.addOrder(Order.desc("numberOfBookings"));
             results = cr.list();
-            System.out.println(results);
-        } catch (HibernateException ex){
+
+
+        } catch (HibernateException ex) {
             ex.printStackTrace();
         }
         return results;
 
     }
 }
+
+

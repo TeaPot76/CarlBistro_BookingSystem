@@ -18,4 +18,10 @@ public class SeatingTableController {
     public List<SeatingTable> getAvailableTables(@PathVariable int partysize){
         return seatingTableRepository.getAvailableTables(partysize);
     }
+
+    //not functional yet!
+    @GetMapping(value = "/partysize/{partysize}/today/now")
+    public List<SeatingTable> getAvailableTablesNow(@PathVariable int partysize){
+        return seatingTableRepository.getAvailableTablesNow(partysize);
+    }
 }

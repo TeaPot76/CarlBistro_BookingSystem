@@ -100,6 +100,11 @@ public class DataLoader implements ApplicationRunner {
         Booking booking3 = new Booking(date3, time3, 3, booker4, table6, "allergic to metal spoons");
         bookingRepository.save(booking3);
 
+        LocalDate dateNow = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        Booking booking4 = new Booking(dateNow, timeNow, 3, booker4, table6, "booking right now");
+        bookingRepository.save(booking4);
+
         Order order1 = new Order(booking1, drink1);
         orderRepository.save(order1);
 

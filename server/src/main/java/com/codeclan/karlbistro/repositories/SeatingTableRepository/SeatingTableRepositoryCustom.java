@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SeatingTableRepositoryCustom {
     List<SeatingTable> getAvailableTables(int partysize);
+    List<SeatingTable> getAvailableTablesNow(int partysize);
 }
