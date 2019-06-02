@@ -96,20 +96,20 @@ class BookingForm extends Component {
           <form className="form-inputs" onSubmit = {this.handleBookingSubmit}>
             <input
               type = "text"
-              placeholder = "customer"
+              placeholder = "Customer"
               value = {this.state.customer}
               onChange = {this.handleCustomerChange}
             />
 
             <input
                 type = "number"
-                placeholder = "phoneNumber"
+                placeholder = "Phone number"
                 value = {this.state.phoneNumber}
                 onChange = {this.handlePhoneNumberChange}
               />
             <input
                 type = "number"
-                placeholder = "NameOfPeople"
+                placeholder = "Number of guests"
                 value = {this.state.numberOfPeople}
                 onChange = {this.handleNumberOfPeopleChange}
               />
@@ -122,13 +122,13 @@ class BookingForm extends Component {
 
               <input
                 type = "time"
-                placeholder = "time"
+                placeholder = "Time"
                 value = {this.state.time}
                 onChange = {this.handleTimeChange}
               />
               <input
                 type = "number"
-                placeholder = "table"
+                placeholder = "Table"
                 value = {this.state.table}
                 onChange = {this.handleTableChange}
               />
