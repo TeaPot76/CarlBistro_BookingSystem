@@ -19,7 +19,7 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Route path="/Home" component={Home} />
-          <Route path="/bookings" component={BookingEditForm} />
+          <Route path="/bookings" component={AllBookings} />
           <Route path="/newbooking" component={BookingForm} />
           <Route path="/customers" component={Customer} />
           <Route path="/newcustomer" component={CustomerForm} />

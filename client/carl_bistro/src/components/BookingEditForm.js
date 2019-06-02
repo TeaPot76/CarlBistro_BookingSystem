@@ -27,12 +27,12 @@ class BookingEditForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // async componentDidMount() {
-  //   if (this.props.match.params.id !== 'new') {
-  //     const booking = await (await fetch('http://localhost:8080/bookings'${this.props.match.params.id}`)).json();
-  //     this.setState({item: booking});
-  //   }
-  // }
+  async componentDidMount() {
+    // if (this.props.match.params.id !== 'new') {
+      const booking = await fetch('http://localhost:8080/bookings').json();
+      this.setState({item: booking});
+    // }
+  }
 
   handleChange(event) {
     const target = event.target;
