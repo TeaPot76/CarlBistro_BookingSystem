@@ -7,6 +7,7 @@ import BookingForm from "./components/BookingForm";
 import CustomerForm from "./components/CustomerForm";
 import Customer from "./components/Customer";
 import Home from "./containers/Home";
+import BookingEditForm from "./components/BookingEditForm";
 
 class App extends Component {
 
@@ -18,7 +19,7 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Route path="/Home" component={Home} />
-          <Route path="/bookings" component={AllBookings} />
+          <Route path="/bookings" component={BookingEditForm} />
           <Route path="/newbooking" component={BookingForm} />
           <Route path="/customers" component={Customer} />
           <Route path="/newcustomer" component={CustomerForm} />

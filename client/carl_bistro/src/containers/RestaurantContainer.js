@@ -3,7 +3,9 @@ import BookingForm from "../components/BookingForm";
 import BookingList from "../components/BookingList";
 import CustomerForm from "../components/CustomerForm";
 import Customer from "../components/Customer";
-import NewBookingList from "../components/NewBookingList";
+//import NewBookingList from "../components/NewBookingList";
+import Booking from "../components/Booking";
+import NavBar from "../NavBar";
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -54,13 +56,10 @@ class RestaurantContainer extends Component {
  }
       render() {
         return (
-          <div className = "restaurant-container" >
-            <h2>Bookings</h2>
-            <NewBookingList/>
-            <BookingForm onBookingSubmit = {this.handleBookingSubmit}
-            />
+          <div>
+          <NavBar/>
 
-           <BookingList
+           <Booking
            customer ={this.state.customer}
            phoneNumber ={this.state.phoneNumber}
            numberOfPeople ={this.state.numberOfPeople}
