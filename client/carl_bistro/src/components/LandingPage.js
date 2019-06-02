@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom"
+import {NavLink} from "react-router-dom";
 
 class LandingPage extends Component {
     state = {  }
     render() { 
         return ( 
-            <div className="landing-page">
-                <h1>LandingPage</h1>
-                <Link className="link" to="/">Home</Link>
-                <Link className="link" to="/newbooking">New Booking</Link>
-                <Link className="link" to="/managebookings">Manage Bookings</Link>
-                <Link className="link" to="/bookinglog">Booking Log</Link>
-                <Link className="link" to="/tablelist">Tables</Link>
+            <div className="page-container">
+                <div className="landing-page">
+                    <h1>Karl's Bistro</h1>
+                    <div className="nav-link-container">
+                        <div>
+                            <NavLink className="link" to="/newbooking">New Booking</NavLink>
+                        </div>
+                        <div>
+                            <NavLink className="link" to="/managebookings">Manage Bookings</NavLink>
+                        </div>
+                        <div>
+                            <NavLink className="link" to="/bookinglog">Booking Log</NavLink>
+                        </div>
+                        <div>
+                            <NavLink className="link" to="/tablelist">Tables</NavLink>
+                        </div>
+                    </div>
+                </div>
             </div>
             
         );

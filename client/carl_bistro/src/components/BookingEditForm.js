@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 class BookingEditForm extends Component {
     constructor(props) {
@@ -8,9 +8,11 @@ class BookingEditForm extends Component {
     }
     render() { 
         return ( 
-            <div className="booking-edit-form">
-                <h1>Booking Edit Form goes here</h1>
-                <Link to="/">Home</Link>
+            <div className="page-container">
+                <div className="booking-edit-form">
+                    <h1>Booking Edit Form goes here</h1>
+                    <NavLink className="home-link" to="/">Home</NavLink>
+                </div>
             </div>
          );
     }

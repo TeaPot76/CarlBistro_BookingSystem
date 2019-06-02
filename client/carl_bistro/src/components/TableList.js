@@ -8,9 +8,11 @@ class TableList extends Component {
     }
     render() { 
         return ( 
-            <div className="table-list">
-                <h1>Table List goes here!</h1>
-                <Link to="/">Home</Link>
+            <div className="page-container">
+                <div className="table-list">
+                    <h1>Table List goes here!</h1>
+                    <Link className="home-link" to="/">Home</Link>
+                </div>
             </div>
             
          );

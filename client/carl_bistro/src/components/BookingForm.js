@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 class BookingForm extends Component {
 
@@ -90,54 +90,58 @@ class BookingForm extends Component {
 
   render() {
     return (
-      <form className = "booking-form" onSubmit = {this.handleBookingSubmit}>
-        <input
-          type = "text"
-          placeholder = "customer"
-          value = {this.state.customer}
-          onChange = {this.handleCustomerChange}
-        />
+      <div className="page-container">
+        <div className="booking-form">
+          <h1>New Booking</h1>
+          <form className="form-inputs" onSubmit = {this.handleBookingSubmit}>
+            <input
+              type = "text"
+              placeholder = "customer"
+              value = {this.state.customer}
+              onChange = {this.handleCustomerChange}
+            />
 
-        <input
-            type = "number"
-            placeholder = "phoneNumber"
-            value = {this.state.phoneNumber}
-            onChange = {this.handlePhoneNumberChange}
-          />
-        <input
-            type = "number"
-            placeholder = "NameOfPeople"
-            value = {this.state.numberOfPeople}
-            onChange = {this.handleNumberOfPeopleChange}
-          />
-          <input
-            type = "text"
-            placeholder = "Name"
-            value = {this.state.name}
-            onChange = {this.handleNameChange}
-          />
+            <input
+                type = "number"
+                placeholder = "phoneNumber"
+                value = {this.state.phoneNumber}
+                onChange = {this.handlePhoneNumberChange}
+              />
+            <input
+                type = "number"
+                placeholder = "NameOfPeople"
+                value = {this.state.numberOfPeople}
+                onChange = {this.handleNumberOfPeopleChange}
+              />
+              <input
+                type = "text"
+                placeholder = "Name"
+                value = {this.state.name}
+                onChange = {this.handleNameChange}
+              />
 
-          <input
-            type = "time"
-            placeholder = "time"
-            value = {this.state.time}
-            onChange = {this.handleTimeChange}
-          />
-          <input
-            type = "number"
-            placeholder = "table"
-            value = {this.state.table}
-            onChange = {this.handleTableChange}
-          />
+              <input
+                type = "time"
+                placeholder = "time"
+                value = {this.state.time}
+                onChange = {this.handleTimeChange}
+              />
+              <input
+                type = "number"
+                placeholder = "table"
+                value = {this.state.table}
+                onChange = {this.handleTableChange}
+              />
 
-          <input
-            id="submit-button"
-            type = "submit"
-            value = "Post"
-          />
-        </form>
-        <Link to="/">Home</Link>
-      </div>  
+              <input
+                id="submit-button"
+                type = "submit"
+                value = "Post"
+              />
+            </form>
+            <NavLink className="home-link" to="/">Home</NavLink>
+          </div> 
+        </div> 
     )
   }
 }

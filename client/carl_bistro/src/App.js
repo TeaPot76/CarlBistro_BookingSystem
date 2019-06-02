@@ -1,6 +1,7 @@
 import React from 'react';
 // import RestaurantContainer from './containers/RestaurantContainer';
 import LandingPage from "./components/LandingPage";
+import NavBar from "./components/NavBar";
 import BookingForm from "./components/BookingForm";
 import BookingList from "./components/BookingList";
 import BookingEditForm from "./components/BookingEditForm";
@@ -11,6 +12,7 @@ import {Route, Switch} from "react-router-dom";
 function App() {
   return (
     <div className="app">
+      <NavBar />
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/newbooking" component={BookingForm} />
