@@ -1,5 +1,7 @@
 package com.codeclan.karlbistro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,11 +32,13 @@ public class Booking {
     @JoinColumn(name = "booker_id", nullable = false)
     private Booker booker;
 
+//    @JsonIgnoreProperties("bookings")
     @ManyToOne
     @JoinColumn(name = "seating_table_id", nullable = false)
     private SeatingTable seatingTable;
 //    mappedBy reference an unknown target entity property: com.codeclan.karlbistro.models.Booking.seatingtable
 
+//    @JsonIgnore
     @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
     private List<Order> orders;
 

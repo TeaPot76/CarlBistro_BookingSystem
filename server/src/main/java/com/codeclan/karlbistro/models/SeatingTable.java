@@ -21,7 +21,7 @@ public class SeatingTable {
     @Column(name = "table_number")
     private int tableNumber;
 
-    @JsonIgnoreProperties("seatingTable")
+    @JsonIgnore
     @OneToMany(mappedBy = "seatingTable", fetch = FetchType.LAZY)
     private List<Booking> bookings;
 

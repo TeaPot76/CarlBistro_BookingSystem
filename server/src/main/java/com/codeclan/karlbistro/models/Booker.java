@@ -1,5 +1,6 @@
 package com.codeclan.karlbistro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Booker {
     @Column(name = "phone")
     private String phone;
 
-    @JsonIgnoreProperties("booker")
+//    @JsonIgnore
     @OneToMany(mappedBy = "booker")
     private List<Booking> bookings;
 
