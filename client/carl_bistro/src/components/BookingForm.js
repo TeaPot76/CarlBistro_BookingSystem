@@ -1,4 +1,8 @@
 import React, {Component} from "react";
+import Request from "../helpers/Request";
+
+
+
 class BookingForm extends Component {
 
   constructor(props) {
@@ -19,7 +23,16 @@ class BookingForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
-  }
+
+  //   const req = new Request()
+  //      req.post('/customers', customer)
+  //        .then(data => data.json())
+  //        .then((newCustomer) => {
+  //          reservation.customer = "http://localhost:8080/customers/" + newCustomer.id
+  //          return reservation;
+  //        })
+  //        .then(reservation => props.handleReservationPost(reservation));
+   }
 
   handleBookingSubmit(event) {
     event.preventDefault();
@@ -84,6 +97,8 @@ class BookingForm extends Component {
          table: event.target.value
         });
       }
+
+
 
 
   render() {
