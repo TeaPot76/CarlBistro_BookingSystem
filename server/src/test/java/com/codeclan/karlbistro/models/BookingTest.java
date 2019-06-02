@@ -2,7 +2,6 @@ package com.codeclan.karlbistro.models;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -108,23 +107,23 @@ public class BookingTest {
 
     @Test
     public void setTable() {
-        booking.setTable(table);
-        assertEquals(table, booking.getTable());
+        booking.setSeatingTable(table);
+        assertEquals(table, booking.getSeatingTable());
     }
 
     @Test
     public void setTableTooSmall() {
         SeatingTable table2 = new SeatingTable(1,5);
-        booking.setTable(table2);
-        assertEquals(table, booking.getTable());
+        booking.setSeatingTable(table2);
+        assertEquals(table, booking.getSeatingTable());
     }
 
     @Test
     public void setTableTooSmallFromOtherTable() {
         SeatingTable table2 = new SeatingTable(1,5);
-        booking.setTable(table2);
+        booking.setSeatingTable(table2);
 //        should not set the second table
-        assertEquals(table, booking.getTable());
+        assertEquals(table, booking.getSeatingTable());
     }
 
     @Test

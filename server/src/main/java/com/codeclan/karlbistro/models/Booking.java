@@ -28,13 +28,14 @@ public class Booking {
     @Column(name = "party_size")
     private int partySize;
 
+    @JsonIgnoreProperties("bookings")
     @ManyToOne
     @JoinColumn(name = "booker_id", nullable = false)
     private Booker booker;
 
-//    @JsonIgnoreProperties("bookings")
+    @JsonIgnoreProperties("bookings")
     @ManyToOne
-    @JoinColumn(name = "seating_table_id", nullable = false)
+    @JoinColumn(name = "seatingTable_id", nullable = false)
     private SeatingTable seatingTable;
 //    mappedBy reference an unknown target entity property: com.codeclan.karlbistro.models.Booking.seatingtable
 
@@ -45,12 +46,12 @@ public class Booking {
     @Column(name = "booking_note")
     private String bookingNote;
 
-    public Booking(LocalDate date, LocalTime time, int partySize, Booker booker, SeatingTable table, String bookingNote) {
+    public Booking(LocalDate date, LocalTime time, int partySize, Booker booker, SeatingTable seatingTable, String bookingNote) {
         this.date = date;
         this.time = time;
         this.partySize = partySize;
         this.booker = booker;
-        this.seatingTable = table;
+        this.seatingTable = seatingTable;
         this.orders = new ArrayList<>();
         this.bookingNote = bookingNote;
     }
@@ -118,14 +119,12 @@ public class Booking {
         this.booker = booker;
     }
 
-    public SeatingTable getTable() {
+    public SeatingTable getSeatingTable() {
         return seatingTable;
     }
 
-    public void setTable(SeatingTable table) {
-        if(table.getCapacity()>=partySize) {
-            this.seatingTable = table;
-        }
+    public void setSeatingTable(SeatingTable seatingTable) {
+            this.seatingTable = seatingTable;
     }
 
     public List<Order> getOrders() {
