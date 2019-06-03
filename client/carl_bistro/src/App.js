@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import AllBookings from "./components/AllBookings";
 import AllCustomers from "./components/AllCustomers";
+import BookingChart from "./components/BookingChart";
 import NavBar from "./NavBar";
 import BookingForm from "./components/BookingForm";
 import BookerForm from "./components/BookerForm";
@@ -31,7 +32,7 @@ function App() {
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/newbooking" component={BookingForm} />
         <Route exact path="/bookings" component={AllBookings}/>
-        <Route exact path="/bookinglog" component={BookingList} />
+        <Route exact path="/bookingchart" component={BookingChart} />
         <Route exact path="/tablelist" component={TableList} />
         <Route exact path="/customers" component={AllCustomers} />
 

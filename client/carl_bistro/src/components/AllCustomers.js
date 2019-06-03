@@ -31,8 +31,6 @@ class AllCustomers extends Component {
 
 
 
-
-
       return <ReactTable data={this.state.bookers}
                          filterable
                          defaultFilterMethod={(filter, row)=>
