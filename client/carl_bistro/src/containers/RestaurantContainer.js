@@ -49,9 +49,7 @@ class RestaurantContainer extends Component {
   //  const name = customerForm.name;
   //  const phone = customerForm.phone;
    const request = new Request();
-    request.post('http://localhost:8080/bookers', {
-      name: customerForm.customer, 
-      phone: customerForm.phoneNumber})
+    request.post('http://localhost:8080/bookers', customerForm)
   //  this.setState ({
   //    name: name,
   //    phone: phone,

@@ -20,12 +20,15 @@ class CreateCustomer extends Component {
 
   handleCustomerSubmit(evt) {
     evt.preventDefault();
+    // console.log(evt.target);
     let thingToSave = {
       name: evt.target.booker.value,
       phone: evt.target.number.value
     }    
+    // console.log(thingToSave);
     this.props.onCustomerSubmit(thingToSave);
- }
+
+  }
 
   handleCustomerChange(event) {
     this.setState({
