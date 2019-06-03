@@ -11,6 +11,11 @@ import java.util.List;
 
 @RepositoryRestResource(excerptProjection = EmbedSeatingTableWithBookings.class)
 public interface SeatingTableRepository extends JpaRepository<SeatingTable, Long>, SeatingTableRepositoryCustom {
-    List<SeatingTable> getAvailableTables(int partysize);
+    List<SeatingTable> getAvailableTables(
+            int partysize,
+            String date,
+            int hr,
+            int min);
+
     List<SeatingTable> getAvailableTablesNow(int partysize);
 }

@@ -9,6 +9,7 @@ import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,17 +24,34 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
     SeatingTableRepository seatingTableRepository;
 
     @Transactional
-    public  List<SeatingTable> getAvailableTables(int partysize) {
+    public  List<SeatingTable> getAvailableTables(
+            int partysize,
+            String date,
+            int hr,
+            int min) {
         List<SeatingTable> results = null;
 
+        LocalDate lDate = LocalDate.parse(date);
+
+        String timeStr = hr + ":" + min + ":00";
+        LocalTime lTime = LocalTime.parse(timeStr);
+        LocalTime lTimePlusTwo = lTime.plusHours(2);
+
+        String queryStr = "SELECT * FROM seating_tables WHERE seating_tables.capacity >= ?1 AND seating_tables.id NOT IN (SELECT seating_tables.id FROM seating_tables INNER JOIN bookings ON seating_tables.id = bookings.seating_table_id WHERE date = '?2' AND time BETWEEN '?3' AND '?4')";
         Session session = entityManager.unwrap(Session.class);
 
         try {
-            Criteria cr = session.createCriteria(SeatingTable.class);
-            cr.add(Restrictions.ge("capacity",partysize));
-
-            results = cr.list();
-            System.out.println(results);
+            Query query = entityManager.createNativeQuery(queryStr);
+            query.setParameter(1, partysize);
+            query.setParameter(2, lDate);
+            query.setParameter(3, lTime);
+            query.setParameter(4, lTimePlusTwo);
+            results = query.getResultList();
+//            Criteria cr = session.createCriteria(SeatingTable.class);
+//            cr.add(Restrictions.ge("capacity",partysize));
+//
+//            results = cr.list();
+//            System.out.println(results);
         } catch (HibernateException ex){
             ex.printStackTrace();
         }
@@ -58,7 +76,7 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
             //doesnt work yet
             Criteria cr2 = session.createCriteria(SeatingTable.class);
             cr2.add(Restrictions.ge("capacity", partysize));
-            cr2.createAlias("bookings", "bookingsAlias");
+            cr2.createAlias("bookings", "bookingsAlias", JoinType.INNER_JOIN);
             cr2.add(Restrictions.not(
                     Restrictions.eq("bookingsAlias.date", LocalDate.of(2019, 03, 27))));
 
