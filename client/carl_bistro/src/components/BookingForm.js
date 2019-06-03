@@ -27,7 +27,7 @@ class BookingForm extends Component {
 }
 
 componentDidMount(){
-  fetch("http://localhost:8080/tables", {
+  fetch("http://localhost:8080/bookings", {
     method: "GET"
   })
     .then(res => res.json())

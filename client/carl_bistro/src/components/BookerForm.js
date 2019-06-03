@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 
-class CustomerForm extends Component {
+class BookerForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       name:"",
-      phoneNumber:"",
+      phone:"",
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,19 +15,20 @@ class CustomerForm extends Component {
   }
 
   handleCustomerSubmit(event) {
+    console.log("customer submit")
     event.preventDefault();
-    const name = this.state.name.trim();
-    const phoneNumber = this.state.phoneNumber;
-    if (!name || !phoneNumber) {
+    const name = this.state.name;
+    const phone= this.state.phone;
+    if (!name || !phone) {
       return
     }
     this.props.onCustomerSubmit({
       name: name,
-      phoneNumber: phoneNumber
+      phone: phone
     });
     this.setState({
       name: '',
-      phoneNumber: ''
+      phone: ''
     });
   }
 
@@ -39,13 +40,13 @@ class CustomerForm extends Component {
 
   handlePhoneNumberChange(event) {
     this.setState({
-      phoneNumber: event.target.value
+      phone: event.target.value
     });
   }
 
   render() {
     return (
-      <form className = "customer-form" onSubmit = {this.handleCustomerSubmit}>
+      <form className = "booking-form" onSubmit = {this.handleCustomerSubmit}>
         <input
           type = "text"
           placeholder = "Name"
@@ -54,8 +55,8 @@ class CustomerForm extends Component {
         />
         <input
           type = "number"
-          placeholder = "phoneNumber"
-          value = {this.state.phoneNumber}
+          placeholder = "phone"
+          value = {this.state.phone}
           onChange = {this.handlePhoneNumberChange}
         />
         <input
@@ -66,6 +67,7 @@ class CustomerForm extends Component {
       </form>
     )
   }
+
 }
 
-export default CustomerForm;
+export default BookerForm;

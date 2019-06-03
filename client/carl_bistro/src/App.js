@@ -4,8 +4,8 @@ import './App.css';
 import AllBookings from "./components/AllBookings";
 import NavBar from "./NavBar";
 import BookingForm from "./components/BookingForm";
-import CustomerForm from "./components/CustomerForm";
-import Customer from "./components/Customer";
+import BookerForm from "./components/BookerForm";
+import Booker from "./components/Booker";
 import Home from "./containers/Home";
 import BookingEditForm from "./components/BookingEditForm";
 
@@ -21,8 +21,8 @@ class App extends Component {
           <Route path="/Home" component={Home} />
           <Route path="/bookings" component={AllBookings} />
           <Route path="/newbooking" component={BookingForm} />
-          <Route path="/customers" component={Customer} />
-          <Route path="/newcustomer" component={CustomerForm} />
+          <Route path="/customers" component={Booker} />
+          <Route path="/newcustomers" component={BookerForm} />
 
         </div>
       </Router>
