@@ -1,8 +1,9 @@
 import React, {
   Component
 } from "react";
-import Request from "../../helpers/Request";
+// import Request from "../../helpers/Request";
 import ImageMapper from 'react-image-mapper';
+import ReactTooltip from 'react-tooltip';
 
 class TableList extends Component {
   constructor(props) {
@@ -18,11 +19,11 @@ class TableList extends Component {
       .then(res => res.json())
       .then((allTables) => {
           this.setState({
-              tables: allTables,
+              tables: allTables._embedded.seatingTables,
               hoveredArea: null,
               clickedTable: null,
               msg: null,
-              preFill: "yellow",
+              preFill: {"yellow"},
               moveMsg: null }
             );
           })
@@ -32,6 +33,9 @@ class TableList extends Component {
        return (
          <div className="container">
          <h1> List of tables </h1>
+
+         <p data-tip="hello world">Tooltip</p>
+         <ReactTooltip />
 
              <ImageMapper
               src={require("../../images/map.png")}
@@ -54,9 +58,10 @@ class TableList extends Component {
             	onMouseEnter={area => this.enterArea(area)}
             	onMouseLeave={area => this.leaveArea(area)}
               onClick={area => this.clicked(area)}
-
-
+              strokeColor= "white"
+              lineWidth= {5}
              />
+
              {
              	this.state.hoveredArea &&
              	<span className="tooltip"
@@ -64,6 +69,7 @@ class TableList extends Component {
              		{ this.state.hoveredArea && this.state.hoveredArea.name}
              	</span>
              }
+
          </div>
        );
      }
@@ -71,10 +77,16 @@ class TableList extends Component {
      clicked(area) {
        this.setState( {clickedTable: area});
        console.log(area.name);
-       console.log(this.state.tables)
+       this.state.tables.forEach((table) => {
+         if (table.tableNumber == area.name) {
+           console.log(table);
+         }
+       })
      }
+
      enterArea(area) {
          this.setState({ hoveredArea: area });
+         this.renderToolTip(area);
      }
 
      leaveArea(area) {
@@ -84,6 +96,11 @@ class TableList extends Component {
      getTipPosition(area) {
          return { top: `${area.center[1]}px`, left: `${area.center[0]}px` };
      }
+
+     renderToolTip(area) {
+       return <h1> TEST TOOLTIP</h1>;
+     }
+
     }
 
 
