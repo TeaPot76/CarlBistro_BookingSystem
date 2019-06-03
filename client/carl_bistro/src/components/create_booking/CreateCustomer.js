@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 // import AnimatedWrapper from "../AnimatedWrapper";
 
 class CreateCustomer extends Component {
@@ -10,12 +10,14 @@ class CreateCustomer extends Component {
       customer: "",
       customer_id: "",
       phoneNumber: "",
+      redirect: false
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleCustomerSubmit = this.handleCustomerSubmit.bind(this);
-
+    this.setRedirect = this.setRedirect.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
 }
 
   handleCustomerSubmit(evt) {
@@ -40,6 +42,17 @@ class CreateCustomer extends Component {
     this.setState({
       phoneNumber: event.target.value
     });
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/createbooking' />
+    }
   }
 
 
@@ -67,10 +80,12 @@ class CreateCustomer extends Component {
                 id="submit-button"
                 type = "submit"
                 value = "Next >"
+                onClick={this.setRedirect}
               />
             </form>
             <NavLink className="home-link" to="/">Home</NavLink>
           </div> 
+          {this.renderRedirect()}
         </div> 
     )
   }

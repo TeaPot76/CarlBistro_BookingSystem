@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Route, Switch} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 
 import CreateCustomer from "../components/create_booking/CreateCustomer";
+import CreateBooking from "../components/create_booking/CreateBooking";
 import LandingPage from "../components/home/LandingPage";
 import BookingEditForm from "../components/BookingEditForm";
 
@@ -48,11 +49,9 @@ class RestaurantContainer extends Component {
   //  const name = customerForm.name;
   //  const phone = customerForm.phone;
    const request = new Request();
-    request.post('http://localhost:8080/bookers', customerForm);
-  //  this.setState ({
-  //    name: name,
-  //    phone: phone,
-  //  })
+    request.post('http://localhost:8080/bookers', customerForm)
+ 
+
  }
       render() {
         return (
@@ -61,6 +60,9 @@ class RestaurantContainer extends Component {
               <Route exact path="/" component={LandingPage}/>
               <Route exact path="/createcustomer" 
               render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
+              randomProp="hello"/>}/>
+              <Route exact path="/createbooking" 
+              render={()=><CreateBooking 
               randomProp="hello"/>}/>
               <Route exact path="/managebookings" component={BookingEditForm}/>
             </Switch>

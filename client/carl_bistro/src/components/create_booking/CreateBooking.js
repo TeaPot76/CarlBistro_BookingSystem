@@ -46,25 +46,30 @@ class CreateBooking extends Component {
 
   render() {
     return (
-      <form className = "booking-form" onSubmit = {this.handleCustomerSubmit}>
-        <input
-          type = "text"
-          placeholder = "Name"
-          value = {this.state.name}
-          onChange = {this.handleNameChange}
-        />
-        <input
-          type = "number"
-          placeholder = "phone"
-          value = {this.state.phone}
-          onChange = {this.handlePhoneNumberChange}
-        />
-        <input
-          id="submit-button"
-          type = "submit"
-          value = "Post"
-        />
-      </form>
+      <div className="page-container">
+        <div className="booking-form">
+          <form className = "booking-form" onSubmit = {this.handleCustomerSubmit}>
+            <input
+              type = "text"
+              placeholder = "Name"
+              value = {this.state.name}
+              onChange = {this.handleNameChange}
+            />
+            <input
+              type = "number"
+              placeholder = "phone"
+              value = {this.state.phone}
+              onChange = {this.handlePhoneNumberChange}
+            />
+            <input
+              id="submit-button"
+              type = "submit"
+              value = "Post"
+            />
+          </form>
+        </div>  
+      </div>
+      
     )
   }
 
