@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+
 public class BookingController {
 
     @Autowired
     BookingRepository bookingRepository;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/bookings")
     public List<Booking> bookings() {
         return bookingRepository.findAll();
