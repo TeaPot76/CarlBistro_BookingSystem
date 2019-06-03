@@ -2,6 +2,7 @@ package com.codeclan.karlbistro.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -40,7 +41,7 @@ public class Booking {
 //    mappedBy reference an unknown target entity property: com.codeclan.karlbistro.models.Booking.seatingtable
 
 //    @JsonIgnore
-    @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
 
     @Column(name = "booking_note")

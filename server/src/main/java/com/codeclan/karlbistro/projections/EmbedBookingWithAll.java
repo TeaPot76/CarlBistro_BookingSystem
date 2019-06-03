@@ -15,5 +15,6 @@ public interface EmbedBookingWithAll {
     Booker getBooker();
     List<Order> getOrders();
     SeatingTable getSeatingTable();
+    String getBookingNote();
 
 }

@@ -5,7 +5,17 @@ import com.codeclan.karlbistro.projections.EmbedSeatingTableWithBookings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @RepositoryRestResource(excerptProjection = EmbedSeatingTableWithBookings.class)
 public interface SeatingTableRepository extends JpaRepository<SeatingTable, Long>, SeatingTableRepositoryCustom {
+    List<SeatingTable> getAvailableTables(
+            int partysize,
+            String date,
+            int hr,
+            int min);
+
+    List<SeatingTable> getAvailableTablesNow(int partysize);
 }

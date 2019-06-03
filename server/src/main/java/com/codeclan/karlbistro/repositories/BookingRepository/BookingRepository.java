@@ -8,6 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource(excerptProjection = EmbedBookingWithAll.class)
-public interface BookingRepository extends JpaRepository<Booking, Long>, BookerRepositoryCustom {
+public interface BookingRepository extends JpaRepository<Booking, Long>, BookingRepositoryCustom {
 
 }
