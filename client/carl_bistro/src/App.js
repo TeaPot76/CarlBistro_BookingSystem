@@ -1,9 +1,12 @@
-import React from 'react';
-// import RestaurantContainer from './containers/RestaurantContainer';
-import LandingPage from "./components/LandingPage";
-import NavBar from "./components/NavBar";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import './App.css';
+import AllBookings from "./components/AllBookings";
+import NavBar from "./NavBar";
 import BookingForm from "./components/BookingForm";
-import BookingList from "./components/BookingList";
+import BookerForm from "./components/BookerForm";
+import Booker from "./components/Booker";
+import Home from "./containers/Home";
 import BookingEditForm from "./components/BookingEditForm";
 import TableList from "./components/TableList";
 // import "bootstrap";

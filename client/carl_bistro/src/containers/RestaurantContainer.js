@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import BookingForm from "../components/BookingForm";
 import BookingList from "../components/BookingList";
-import CustomerForm from "../components/CustomerForm";
-import Customer from "../components/Customer";
-
+import BookerForm from "../components/BookerForm";
+import Booker from "../components/Booker";
+//import NewBookingList from "../components/NewBookingList";
+import Booking from "../components/Booking";
+import NavBar from "../NavBar";
 
 class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      customer: null,
-      phoneNumber: null,
+      booker: null,
+      phone: null,
       tables: [],
       bookings: [],
       date: null,
@@ -18,20 +20,20 @@ class RestaurantContainer extends Component {
       name: null,
     }
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
-    this.handleCustomersSubmit = this.handleCustomersSubmit.bind(this);
+    this.handleCustomerSubmit = this.handleCustomerSubmit.bind(this);
 }
 
  handleBookingSubmit(bookingForm){
    bookingForm.id = Date.now()
    const customer = bookingForm.customer;
-   const phoneNumber = bookingForm.phoneNumber;
+   const phone = bookingForm.phone;
    const numberOfPeople = bookingForm.numberOfPeople;
    const date = bookingForm.date;
    const time = bookingForm.time;
    const table = bookingForm.table;
    this.setState ({
      customer: customer,
-     phoneNumber: phoneNumber,
+     phone: phone,
      numberOfPeople: numberOfPeople,
      date: date,
      time: time,
@@ -40,27 +42,28 @@ class RestaurantContainer extends Component {
 
  }
 
- handleCustomersSubmit(customerForm){
+ handleCustomerSubmit(customerForm){
    customerForm.id = Date.now()
    const name = customerForm.name;
-   const phoneNumber = customerForm.phoneNumber;
+   const phone = customerForm.phone;
 ;
    this.setState ({
      name: name,
-     phoneNumber: phoneNumber,
+     phone: phone,
 
    })
 
  }
       render() {
         return (
-          <div className = "restaurant-container" >
-            <h2>Bookings</h2>
+          <div>
+          <NavBar/>
+          <BookerForm
+           onCustomerSubmit ={this.handleCustomerSubmit}/>
+           <Booker booker ={this.state.booker.name}
+           />
 
-            <BookingForm onBookingSubmit = {this.handleBookingSubmit}
-            />
-
-           <BookingList
+           <Booking
            customer ={this.state.customer}
            phoneNumber ={this.state.phoneNumber}
            numberOfPeople ={this.state.numberOfPeople}
@@ -69,6 +72,9 @@ class RestaurantContainer extends Component {
            table ={this.state.table}
 
                         />
+
+
+
 
           </div>
         );

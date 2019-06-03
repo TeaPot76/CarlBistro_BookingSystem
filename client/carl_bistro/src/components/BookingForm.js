@@ -4,10 +4,11 @@ import { NavLink } from "react-router-dom";
 
 class BookingForm extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       customer: "",
+      customer_id: "",
       phoneNumber: "",
       numberOfPeople: "",
       date: "",
@@ -16,45 +17,88 @@ class BookingForm extends Component {
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
+    this.handleCustomerIdChange = this.handleCustomerIdChange.bind(this);
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
     this.handleNumberOfPeopleChange = this.handleNumberOfPeopleChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
     this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
-  }
+
+}
+
+componentDidMount(){
+  fetch("http://localhost:8080/bookings", {
+    method: "GET"
+  })
+    .then(res => res.json())
+    .then(res => this.setState({availableTables: res._embedded.tables}))
+    .catch(err => console.log(err))
+}
 
   handleBookingSubmit(event) {
     event.preventDefault();
-    const customer = this.state.customer;
-    const phoneNumber = this.state.phoneNumber;
-    const numberOfPeople = this.state.numberOfPeople;
-    const date = this.state.date;
-    const time = this.state.time;
-    const table = this.state.table;
 
-    this.props.onBookingSubmit({
-      customer: customer,
-      phoneNumber: phoneNumber,
-      numberOfPeople : numberOfPeople,
-      date: date,
-      time: time,
-      table: table,
-    });
+    const state = this.state;
+    const detailsToSubmit = {
+    name: state.customer,
+    customer_id: state.customer_id,
+    phoneNumber: state.phoneNumber,
+    numberOfPeople : state.numberOfPeople,
+    date: state.date,
+    time: state.time,
+    table: state.table,
 
-    this.setState({
-      customer: "",
-      phoneNumber: "",
-      numberOfPeople: "",
-      date: "",
-      time: "",
-      table: "",
-    });
+
+    // this.setState({
+    //   customer: "",
+    //   phoneNumber: "",
+    //   numberOfPeople: "",
+    //   date: "",
+    //   time: "",
+    //   table: "",
+    // });
   }
+
+   fetch("hhtp://localhost:8080/bookings", {
+    method: "POST",
+     body: JSON.stringify(detailsToSubmit),
+     headers: {
+       "Accept": "application/json",
+       "Content-Type": "application/json"
+     }
+   })
+     .then(res => res.json())
+     .then(data => {this.state.bookingTables.forEach((bookingTable) => {
+       let pairingDetails = {
+         table_id: bookingTable.id,
+         booking: data._links.self.href,
+         // table: tables.url
+       }
+       fetch("http://localhost:8080/pairings", {
+         method: "POST",
+         body: JSON.stringify(pairingDetails),
+         headers: {
+           "Accept": "application/json",
+           "Content-Type": "application/json"
+         }
+       })
+       .catch(err => console.log(err));
+     })})
+     .catch(err => console.log(err))
+
+   // evt.target.reset();
+ }
+
 
   handleCustomerChange(event) {
     this.setState({
       customer: event.target.value
+    });
+  }
+  handleCustomerIdChange(event) {
+    this.setState({
+      customer_id: event.target.value
     });
   }
 
@@ -87,6 +131,8 @@ class BookingForm extends Component {
          table: event.target.value
         });
       }
+
+
 
 
   render() {
