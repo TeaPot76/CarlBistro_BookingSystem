@@ -57,10 +57,9 @@ class RestaurantContainer extends Component {
         return (
           <div>
           <NavBar/>
-          <BookerForm
-           onCustomerSubmit ={this.handleCustomerSubmit}/>
-           <Booker booker ={this.state.booker.name}
-           />
+          <BookingForm onCustomerSubmit={this.handleCustomerSubmit}/>
+
+          <Booker booker ={this.state.booker.name} />
 
            <Booking
            customer ={this.state.customer}

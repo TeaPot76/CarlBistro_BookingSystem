@@ -23,21 +23,24 @@ class BookingForm extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
-    this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
+    // this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
 
 }
 
-componentDidMount(){
-  fetch("http://localhost:8080/bookings", {
-    method: "GET"
-  })
-    .then(res => res.json())
-    .then(res => this.setState({availableTables: res._embedded.tables}))
-    .catch(err => console.log(err))
-}
+// componentDidMount(){
+//   fetch("http://localhost:8080/bookings", {
+//     method: "GET"
+//   })
+//     .then(res => res.json())
+//     .then(res => this.setState({availableTables: res._embedded.tables}))
+//     .catch(err => console.log(err))
+// }
 
   handleCustomerSubmit(evt) {
-    this.props.handleCustomerSubmit(evt.target.value)
+    evt.preventDefault();
+    console.log(evt.target.value);
+    
+    this.props.onCustomerSubmit(evt.target.value);
  }
 
   handleCustomerChange(event) {
