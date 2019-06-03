@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import AllBookings from "./components/AllBookings";
+import AllCustomers from "./components/AllCustomers";
 import NavBar from "./NavBar";
 import BookingForm from "./components/BookingForm";
 import BookerForm from "./components/BookerForm";
@@ -32,7 +33,9 @@ function App() {
         <Route exact path="/bookings" component={AllBookings}/>
         <Route exact path="/bookinglog" component={BookingList} />
         <Route exact path="/tablelist" component={TableList} />
-      </Switch>
+        <Route exact path="/customers" component={AllCustomers} />
+
+    </Switch>
     </div>
 
   );
