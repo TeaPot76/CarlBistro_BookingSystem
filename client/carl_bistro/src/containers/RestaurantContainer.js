@@ -46,7 +46,6 @@ class RestaurantContainer extends Component {
    customerForm.id = Date.now()
    const name = customerForm.name;
    const phone = customerForm.phone;
-;
    this.setState ({
      name: name,
      phone: phone,

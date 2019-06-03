@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 
 class BookingForm extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       customer: "",
       customer_id: "",
@@ -13,7 +13,7 @@ class BookingForm extends Component {
       numberOfPeople: "",
       date: "",
       time: "",
-      table: "",
+      table: ""
     };
 
     this.handleCustomerChange = this.handleCustomerChange.bind(this);
@@ -36,60 +36,9 @@ componentDidMount(){
     .catch(err => console.log(err))
 }
 
-  handleBookingSubmit(event) {
-    event.preventDefault();
-
-    const state = this.state;
-    const detailsToSubmit = {
-    name: state.customer,
-    customer_id: state.customer_id,
-    phoneNumber: state.phoneNumber,
-    numberOfPeople : state.numberOfPeople,
-    date: state.date,
-    time: state.time,
-    table: state.table,
-
-
-    // this.setState({
-    //   customer: "",
-    //   phoneNumber: "",
-    //   numberOfPeople: "",
-    //   date: "",
-    //   time: "",
-    //   table: "",
-    // });
-  }
-
-   fetch("hhtp://localhost:8080/bookings", {
-    method: "POST",
-     body: JSON.stringify(detailsToSubmit),
-     headers: {
-       "Accept": "application/json",
-       "Content-Type": "application/json"
-     }
-   })
-     .then(res => res.json())
-     .then(data => {this.state.bookingTables.forEach((bookingTable) => {
-       let pairingDetails = {
-         table_id: bookingTable.id,
-         booking: data._links.self.href,
-         // table: tables.url
-       }
-       fetch("http://localhost:8080/pairings", {
-         method: "POST",
-         body: JSON.stringify(pairingDetails),
-         headers: {
-           "Accept": "application/json",
-           "Content-Type": "application/json"
-         }
-       })
-       .catch(err => console.log(err));
-     })})
-     .catch(err => console.log(err))
-
-   // evt.target.reset();
+  handleCustomerSubmit(evt) {
+    this.props.handleCustomerSubmit(evt.target.value)
  }
-
 
   handleCustomerChange(event) {
     this.setState({
@@ -140,46 +89,21 @@ componentDidMount(){
       <div className="page-container">
         <div className="booking-form"> 
           <h1>New Booking</h1>
-          <form className="form-inputs" onSubmit = {this.handleBookingSubmit}>
+          <form className="form-inputs" onSubmit={this.handleCustomerSubmit}>
+            {/* customer name */}
             <input
               type = "text"
               placeholder = "Customer"
               value = {this.state.customer}
               onChange = {this.handleCustomerChange}
             />
-
+            {/* customer phone number */}
             <input
                 type = "number"
                 placeholder = "Phone number"
                 value = {this.state.phoneNumber}
                 onChange = {this.handlePhoneNumberChange}
               />
-            <input
-                type = "number"
-                placeholder = "Number of guests"
-                value = {this.state.numberOfPeople}
-                onChange = {this.handleNumberOfPeopleChange}
-              />
-              <input
-                type = "text"
-                placeholder = "Name"
-                value = {this.state.name}
-                onChange = {this.handleNameChange}
-              />
-
-              <input
-                type = "time"
-                placeholder = "Time"
-                value = {this.state.time}
-                onChange = {this.handleTimeChange}
-              />
-              <input
-                type = "number"
-                placeholder = "Table"
-                value = {this.state.table}
-                onChange = {this.handleTableChange}
-              />
-
               <input
                 id="submit-button"
                 type = "submit"
@@ -195,3 +119,30 @@ componentDidMount(){
 
 // const Booking = AnimatedWrapper(BookingForm);
 export default BookingForm;
+
+
+// <input
+//   type="number"
+//   placeholder="Number of guests"
+//   value={this.state.numberOfPeople}
+//   onChange={this.handleNumberOfPeopleChange}
+// />
+//   <input
+//     type="text"
+//     placeholder="Name"
+//     value={this.state.name}
+//     onChange={this.handleNameChange}
+//   />
+
+//   <input
+//     type="time"
+//     placeholder="Time"
+//     value={this.state.time}
+//     onChange={this.handleTimeChange}
+//   />
+//   <input
+//     type="number"
+//     placeholder="Table"
+//     value={this.state.table}
+//     onChange={this.handleTableChange}
+//   />
