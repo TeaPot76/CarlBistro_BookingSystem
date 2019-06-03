@@ -1,7 +1,6 @@
 import React, {Component} from "react";
-
-
-
+import { NavLink } from "react-router-dom";
+// import AnimatedWrapper from "../AnimatedWrapper";
 
 class BookingForm extends Component {
 
@@ -29,7 +28,7 @@ class BookingForm extends Component {
 }
 
 componentDidMount(){
-  fetch("http://localhost:8080/tables", {
+  fetch("http://localhost:8080/bookings", {
     method: "GET"
   })
     .then(res => res.json())
@@ -138,90 +137,61 @@ componentDidMount(){
 
   render() {
     return (
-      <div className ="booking-form">
-      <form action="" onSubmit = {this.handleBookingSubmit}>
-      <div className= "form-content">
-        <input
-          type = "text"
-          placeholder = "customer"
-          value = {this.state.customer}
-          onChange = {this.handleCustomerChange}
-          id = "customer"
-          name = "customer"
-        />
-        </div>
-        <div className = "form-content">
-        <input
-          type = "text"
-          placeholder = "customer_id"
-          value = {this.state.customerId}
-          onChange = {this.handleCustomerIdChange}
-          id = "customer_id"
-          name = "customer_id"
-        />
-        </div>
-       <div className = "form-content">
-        <input
-            type = "number"
-            placeholder = "phoneNumber"
-            value = {this.state.phoneNumber}
-            onChange = {this.handlePhoneNumberChange}
-            id = "phoneNumber"
-            name = "phoneNumber"
-          />
-          </div>
-          <div className = "form-content">
-        <input
-            type = "number"
-            placeholder = "NameOfPeople"
-            value = {this.state.numberOfPeople}
-            onChange = {this.handleNumberOfPeopleChange}
-            id = "numberOfPeople"
-            name = "numberOfPeople"
-          />
-          </div>
-           <div className = "form-content">
-          <input
-            type = "date"
-            placeholder = "date"
-            value = {this.state.date}
-            onChange = {this.handleDateChange}
-            id = "date"
-            name = "date"
-          />
-          </div>
-           <div className = "form-content">
-          <input
-            type = "time"
-            placeholder = "time"
-            value = {this.state.time}
-            onChange = {this.handleTimeChange}
-            id = "time"
-            name = "time"
-          />
-          </div>
-           <div className = "form-content">
-          <input
-            type = "number"
-            placeholder = "table"
-            value = {this.state.table}
-            onChange = {this.handleTableChange}
-            id = "table"
-            name = "table"
-          />
-          </div>
-         <div className = "form-content">
-        <input
-          id="submit-button"
-          type = "submit"
-          value = "Add Booking"
-        />
-        </div>
-      </form>
-      </div>
+      <div className="page-container">
+        <div className="booking-form"> 
+          <h1>New Booking</h1>
+          <form className="form-inputs" onSubmit = {this.handleBookingSubmit}>
+            <input
+              type = "text"
+              placeholder = "Customer"
+              value = {this.state.customer}
+              onChange = {this.handleCustomerChange}
+            />
+
+            <input
+                type = "number"
+                placeholder = "Phone number"
+                value = {this.state.phoneNumber}
+                onChange = {this.handlePhoneNumberChange}
+              />
+            <input
+                type = "number"
+                placeholder = "Number of guests"
+                value = {this.state.numberOfPeople}
+                onChange = {this.handleNumberOfPeopleChange}
+              />
+              <input
+                type = "text"
+                placeholder = "Name"
+                value = {this.state.name}
+                onChange = {this.handleNameChange}
+              />
+
+              <input
+                type = "time"
+                placeholder = "Time"
+                value = {this.state.time}
+                onChange = {this.handleTimeChange}
+              />
+              <input
+                type = "number"
+                placeholder = "Table"
+                value = {this.state.table}
+                onChange = {this.handleTableChange}
+              />
+
+              <input
+                id="submit-button"
+                type = "submit"
+                value = "Post"
+              />
+            </form>
+            <NavLink className="home-link" to="/">Home</NavLink>
+          </div> 
+        </div> 
     )
   }
 }
 
-
+// const Booking = AnimatedWrapper(BookingForm);
 export default BookingForm;
