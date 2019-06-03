@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-
-import RestaurantContainer from './containers/RestaurantContainer';
-import NavBar from "./components/home/NavBar";
-import './App.css';
-
 // import { BrowserRouter as Router, Route } from "react-router-dom";
-// import AllBookings from "./components/AllBookings";
-// import BookingForm from "./components/create_booking/CreateCustomer";
-// import BookerForm from "./components/create_booking/CreateBooking";
-// import Booker from "./components/Booker";
-// // import Home from "./containers/Home";
-// import LandingPage from "./components/LandingPage";
-// import BookingList from "./components/BookingList";
-// import BookingEditForm from "./components/BookingEditForm";
-// import TableList from "./components/TableList";
+import './App.css';
+import AllBookings from "./components/AllBookings";
+import AllCustomers from "./components/AllCustomers";
+import BookingChart from "./components/BookingChart";
+import NavBar from "./NavBar";
+import BookingForm from "./components/BookingForm";
+import BookerForm from "./components/BookerForm";
+import Booker from "./components/Booker";
+// import Home from "./containers/Home";
+import LandingPage from "./components/LandingPage";
+import BookingList from "./components/BookingList";
+import BookingEditForm from "./components/BookingEditForm";
+import TableList from "./components/TableList";
 // import "bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
-// import {Route, Switch} from "react-router-dom";
-// import TransitionGroup from "react-transition-group/TransitionGroup";
+import './App.css';
+import {Route, Switch} from "react-router-dom";
+import TransitionGroup from "react-transition-group/TransitionGroup";
 
 const firstChild = props => {
   const childrenArray = React.Children.toArray(props.children);
@@ -28,9 +28,17 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      <RestaurantContainer/>
+      <Switch>
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/newbooking" component={BookingForm} />
+        <Route exact path="/bookings" component={AllBookings}/>
+        <Route exact path="/bookingchart" component={BookingChart} />
+        <Route exact path="/tablelist" component={TableList} />
+        <Route exact path="/customers" component={AllCustomers} />
+
+    </Switch>
     </div>
-  
+
   );
 }
 
