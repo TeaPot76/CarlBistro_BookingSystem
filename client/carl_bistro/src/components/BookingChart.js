@@ -2,7 +2,7 @@ import React, {
   Component
 } from "react";
 import Request from "../helpers/Request";
-import BookingForm from "./BookingForm";
+
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
