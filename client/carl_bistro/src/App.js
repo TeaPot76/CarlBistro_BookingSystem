@@ -29,12 +29,12 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/newbooking" component={BookingForm} />
-        <Route exact path="/managebookings" component={BookingEditForm}/>
+        <Route exact path="/bookings" component={AllBookings}/>
         <Route exact path="/bookinglog" component={BookingList} />
         <Route exact path="/tablelist" component={TableList} />
       </Switch>
     </div>
-  
+
   );
 }
 

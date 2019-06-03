@@ -30,40 +30,57 @@ class AllBookings extends Component {
       let content = this.state.bookings.map((booking) => {
        return (
 
-         
+
          <tr>
          <td>
-         Name: {
-           booking.booker.name
-         }
-         </td>
-         <td>
-         Name: {
-           booking.booker.phone
-         }
-         </td>
-         <td>
-         Booking Date: {
+        {
          booking.date
          }
          </td>
          <td>
-         Time: {
-           booking.time
-         }
-         </td>
-         <td>
-         Table: {
-           booking.seatingTable.tableNumber
+         {
+           booking.time.slice(0, -3)
          }
          </td>
 
-           </tr>
+         <td>
+          {
+           booking.partySize
+         }
+         </td>
+
+         <td>
+         {
+           booking.seatingTable.tableNumber
+         }
+         </td>
+         <td>
+         {
+           booking.booker.name
+         }
+         </td>
+         <td>
+           {
+           booking.booker.phone
+         }
+         </td>
+
+          <button type ="button">edit</button>
+          <button type ="button">cancel</button> </tr>
 
        );
      })
 
-      return <table>{content}</table>
+      return <table> <th>Date</th>
+                    <td><th>Time</th></td>
+                    <td><th>Party Size</th></td>
+                    <td><th>Table Number</th></td>
+                    <td><th>Customer Name</th></td>
+                    <td><th>Customer Phone</th></td>
+
+
+
+      {content}</table>
     }
 
   }
