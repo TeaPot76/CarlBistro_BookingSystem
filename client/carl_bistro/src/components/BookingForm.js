@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
+// import AnimatedWrapper from "../AnimatedWrapper";
 
 class BookingForm extends Component {
 
@@ -91,7 +92,7 @@ class BookingForm extends Component {
   render() {
     return (
       <div className="page-container">
-        <div className="booking-form">
+        <div className="booking-form"> 
           <h1>New Booking</h1>
           <form className="form-inputs" onSubmit = {this.handleBookingSubmit}>
             <input
@@ -146,5 +147,5 @@ class BookingForm extends Component {
   }
 }
 
-
+// const Booking = AnimatedWrapper(BookingForm);
 export default BookingForm;

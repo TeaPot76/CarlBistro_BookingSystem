@@ -10,9 +10,28 @@ class TableList extends Component {
         return ( 
             <div className="page-container">
                 <div className="table-list">
-                    <h1>Table List goes here!</h1>
-                    <Link className="home-link" to="/">Home</Link>
+                    <form>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                        <div>
+                            <input type="radio"></input>
+                        </div>
+                    </form>   
                 </div>
+                <Link className="home-link" to="/">Home</Link>
             </div>
             
          );
