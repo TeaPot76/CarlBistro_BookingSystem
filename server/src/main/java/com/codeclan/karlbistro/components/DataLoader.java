@@ -122,5 +122,6 @@ public class DataLoader implements ApplicationRunner {
 
         Order order6 = new Order(booking3, drink2);
         orderRepository.save(order6);
+
     }
 }
