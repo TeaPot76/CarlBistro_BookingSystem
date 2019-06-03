@@ -1,8 +1,8 @@
 import React, {
   Component
 } from "react";
-import Request from "../helpers/Request";
-import BookingForm from "./create_booking/CreateCustomer";
+import Request from "../../helpers/Request";
+import BookingForm from "../create_booking/CreateCustomer";
 
 
 

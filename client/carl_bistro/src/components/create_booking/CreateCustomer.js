@@ -27,7 +27,7 @@ class CreateCustomer extends Component {
     }    
     // console.log(thingToSave);
     this.props.onCustomerSubmit(thingToSave);
-
+    
   }
 
   handleCustomerChange(event) {

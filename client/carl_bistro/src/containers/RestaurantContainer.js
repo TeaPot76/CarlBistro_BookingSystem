@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
+import {Route, Switch} from "react-router-dom";
+
 import CreateCustomer from "../components/create_booking/CreateCustomer";
-// import BookingList from "../components/BookingList";
-// import BookerForm from "../components/BookerForm";
-import Booker from "../components/Booker";
-//import NewBookingList from "../components/NewBookingList";
-import Booking from "../components/Booking";
-import NavBar from "../NavBar";
+import LandingPage from "../components/home/LandingPage";
+import BookingEditForm from "../components/BookingEditForm";
+
 
 import Request from '../helpers/Request';
 
@@ -49,18 +48,23 @@ class RestaurantContainer extends Component {
   //  const name = customerForm.name;
   //  const phone = customerForm.phone;
    const request = new Request();
-    request.post('http://localhost:8080/bookers', customerForm)
+    request.post('http://localhost:8080/bookers', customerForm);
   //  this.setState ({
   //    name: name,
   //    phone: phone,
   //  })
-
  }
       render() {
         return (
           <div>
-          <CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
-          randomProp="hello"/>
+            <Switch>
+              <Route exact path="/" component={LandingPage}/>
+              <Route exact path="/createcustomer" 
+              render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
+              randomProp="hello"/>}/>
+              <Route exact path="/managebookings" component={BookingEditForm}/>
+            </Switch>
+          
 
           {/* <Booker booker ={this.state.booker.name} /> */}
 

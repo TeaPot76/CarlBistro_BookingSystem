@@ -19,9 +19,7 @@ class LandingPage extends Component {
                         <div>
                             <NavLink className="link" to="/bookinglog">Booking Log</NavLink>
                         </div>
-                        <div>
-                            <NavLink className="link" to="/tablelist">Tables</NavLink>
-                        </div>
+
                     </div>
                 </div>
             </div>
