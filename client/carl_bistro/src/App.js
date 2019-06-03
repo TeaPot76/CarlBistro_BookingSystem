@@ -16,6 +16,7 @@ import TableList from "./components/TableList";
 import './App.css';
 import {Route, Switch} from "react-router-dom";
 import TransitionGroup from "react-transition-group/TransitionGroup";
+import RestaurantContainer from './containers/RestaurantContainer';
 
 const firstChild = props => {
   const childrenArray = React.Children.toArray(props.children);
@@ -25,14 +26,15 @@ const firstChild = props => {
 function App() {
   return (
     <div className="app">
-      <NavBar />
-      <Switch>
+      {/* <NavBar /> */}
+      {/* <Switch>
         <Route exact path="/" component={LandingPage}/>
         <Route exact path="/newbooking" component={BookingForm} />
         <Route exact path="/managebookings" component={BookingEditForm}/>
         <Route exact path="/bookinglog" component={BookingList} />
         <Route exact path="/tablelist" component={TableList} />
-      </Switch>
+      </Switch> */}
+      <RestaurantContainer/>
     </div>
   
   );

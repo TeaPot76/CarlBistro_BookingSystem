@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import BookingForm from "../components/BookingForm";
-import BookingList from "../components/BookingList";
-import BookerForm from "../components/BookerForm";
+// import BookingList from "../components/BookingList";
+// import BookerForm from "../components/BookerForm";
 import Booker from "../components/Booker";
 //import NewBookingList from "../components/NewBookingList";
 import Booking from "../components/Booking";
 import NavBar from "../NavBar";
+
+import Request from '../helpers/Request';
 
 class RestaurantContainer extends Component {
   constructor(props) {
@@ -43,25 +45,28 @@ class RestaurantContainer extends Component {
  }
 
  handleCustomerSubmit(customerForm){
-   customerForm.id = Date.now()
-   const name = customerForm.name;
-   const phone = customerForm.phone;
-   this.setState ({
-     name: name,
-     phone: phone,
-
-   })
+  //  customerForm.id = Date.now()
+  //  const name = customerForm.name;
+  //  const phone = customerForm.phone;
+   const request = new Request();
+    request.post('http://localhost:8080/bookers', {
+      name: customerForm.customer, 
+      phone: customerForm.phoneNumber})
+  //  this.setState ({
+  //    name: name,
+  //    phone: phone,
+  //  })
 
  }
       render() {
         return (
           <div>
-          <NavBar/>
-          <BookingForm onCustomerSubmit={this.handleCustomerSubmit}/>
+          <BookingForm onCustomerSubmit={this.handleCustomerSubmit}
+          randomProp="hello"/>
 
-          <Booker booker ={this.state.booker.name} />
+          {/* <Booker booker ={this.state.booker.name} /> */}
 
-           <Booking
+           {/* <Booking
            customer ={this.state.customer}
            phoneNumber ={this.state.phoneNumber}
            numberOfPeople ={this.state.numberOfPeople}
@@ -69,7 +74,7 @@ class RestaurantContainer extends Component {
            time ={this.state.time}
            table ={this.state.table}
 
-                        />
+                        /> */}
 
 
 

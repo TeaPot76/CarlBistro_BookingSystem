@@ -24,6 +24,7 @@ class BookingForm extends Component {
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleTableChange = this.handleTableChange.bind(this);
     // this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
+    this.handleCustomerSubmit = this.handleCustomerSubmit.bind(this);
 
 }
 
@@ -38,9 +39,15 @@ class BookingForm extends Component {
 
   handleCustomerSubmit(evt) {
     evt.preventDefault();
-    console.log(evt.target.value);
+    // console.log(evt.target.booker.value);
+    let thingToSave = {
+      name: evt.target.booker.value,
+      phone: evt.target.number.value
+    }
+
+    console.log(thingToSave)
     
-    this.props.onCustomerSubmit(evt.target.value);
+    this.props.onCustomerSubmit(thingToSave);
  }
 
   handleCustomerChange(event) {
@@ -99,6 +106,7 @@ class BookingForm extends Component {
               placeholder = "Customer"
               value = {this.state.customer}
               onChange = {this.handleCustomerChange}
+              name="booker"
             />
             {/* customer phone number */}
             <input
@@ -106,6 +114,7 @@ class BookingForm extends Component {
                 placeholder = "Phone number"
                 value = {this.state.phoneNumber}
                 onChange = {this.handlePhoneNumberChange}
+                name="number"
               />
               <input
                 id="submit-button"
