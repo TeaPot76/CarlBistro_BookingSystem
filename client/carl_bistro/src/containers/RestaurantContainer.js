@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import BookingForm from "../components/BookingForm";
+import CreateCustomer from "../components/create_booking/CreateCustomer";
 // import BookingList from "../components/BookingList";
 // import BookerForm from "../components/BookerForm";
 import Booker from "../components/Booker";
@@ -61,7 +61,7 @@ class RestaurantContainer extends Component {
       render() {
         return (
           <div>
-          <BookingForm onCustomerSubmit={this.handleCustomerSubmit}
+          <CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
           randomProp="hello"/>
 
           {/* <Booker booker ={this.state.booker.name} /> */}

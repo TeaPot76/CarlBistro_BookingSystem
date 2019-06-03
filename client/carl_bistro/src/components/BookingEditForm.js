@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from "../NavBar";
-import BookingForm from "./BookingForm";
+import BookingForm from "./create_booking/CreateCustomer";
 import { Button, Container, Form, FormGroup, Input, Label } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
