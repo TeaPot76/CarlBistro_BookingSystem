@@ -1,26 +1,33 @@
-import React from 'react';
-// import RestaurantContainer from './containers/RestaurantContainer';
-import LandingPage from "./components/LandingPage";
-import BookingForm from "./components/BookingForm";
-import BookingList from "./components/BookingList";
-import BookingEditForm from "./components/BookingEditForm";
-import TableList from "./components/TableList";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
-import {Route, Switch} from "react-router-dom";
+import AllBookings from "./components/AllBookings";
+import NavBar from "./NavBar";
+import BookingForm from "./components/BookingForm";
+import CustomerForm from "./components/CustomerForm";
+import Customer from "./components/Customer";
+import Home from "./containers/Home";
+import BookingEditForm from "./components/BookingEditForm";
 
-function App() {
-  return (
-    <div className="app">
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/newbooking" component={BookingForm} />
-        <Route exact path="/managebookings" component={BookingEditForm}/>
-        <Route exact path="/bookinglog" component={BookingList} />
-        <Route exact path="/tablelist" component={TableList} />
-      </Switch>
-    </div>
-  
-  );
+class App extends Component {
+
+  render() {
+    return (
+
+      <Router>
+
+        <div className="App">
+          <NavBar />
+          <Route path="/Home" component={Home} />
+          <Route path="/bookings" component={AllBookings} />
+          <Route path="/newbooking" component={BookingForm} />
+          <Route path="/customers" component={Customer} />
+          <Route path="/newcustomer" component={CustomerForm} />
+
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
