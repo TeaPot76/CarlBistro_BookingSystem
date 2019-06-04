@@ -103,38 +103,37 @@ nextButton(){
   
   render() {    
     return (
-      <React.Fragment>
-      <h1>React Wizard Form 🧙‍♂️</h1>
-      <p>Step {this.state.currentStep} </p> 
-
-      <form onSubmit={this.handleSubmit}>
-      {/* 
-        render the form steps and pass required props in
-      */}
-        <Step1 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          name={this.state.name}
-          phone={this.state.phone}
-        />
-        <Step2 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          date={this.state.date}
-          time={this.state.time}
-          partySize={this.state.partySize}
-          partySize={this.state.partySize}
-        />
-        <Step3 
-          currentStep={this.state.currentStep} 
-          handleChange={this.handleChange}
-          password={this.state.password}
-        />
-        {this.previousButton()}
-        {this.nextButton()}
-
-      </form>
-      </React.Fragment>
+      <div className="page-container">
+        <div className="booking-form">
+          <React.Fragment>
+          <h1>New Booking</h1>
+            <form onSubmit={this.handleSubmit}>
+              <Step1 
+                currentStep={this.state.currentStep} 
+                handleChange={this.handleChange}
+                name={this.state.name}
+                phone={this.state.phone}
+              />
+              <Step2 
+                currentStep={this.state.currentStep} 
+                handleChange={this.handleChange}
+                date={this.state.date}
+                time={this.state.time}
+                partySize={this.state.partySize}
+                partySize={this.state.partySize}
+              />
+              <Step3 
+                currentStep={this.state.currentStep} 
+                handleChange={this.handleChange}
+                password={this.state.password}
+              />
+              {this.previousButton()}
+              {this.nextButton()}
+            </form>
+           
+          </React.Fragment>
+        </div>
+      </div>  
     );
   }
 }
