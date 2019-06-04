@@ -5,6 +5,7 @@ import Request from "../../helpers/Request";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
+import EditForm from "./EditForm";
 
 
 
@@ -26,6 +27,7 @@ class AllBookings extends Component {
             );
           })
       }
+
 
 
     render() {
@@ -72,7 +74,9 @@ class AllBookings extends Component {
 
        );
      })
-
+     // handleBookingEdit(filter.value){
+     //
+     // }
       return <ReactTable data={this.state.bookings}
                          filterable
                          defaultFilterMethod={(filter, row)=>
@@ -126,20 +130,23 @@ class AllBookings extends Component {
 
 
                //onClick require the props function redirecting to edit and update booking
-              { Header: "Edit" ,
-                id: "edit",
-                accessor: "id",
-                Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
-              },
-
-              //onClick require the props function redirecting to delete  booking
-
-              { Header: "Delete",
-                id: "delete",
-                accessor: "id",
-                Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
-              },
-
+               //
+               // <input type="Edit" value="edit" id="edir" />
+              //  // <input type="button" value="Go Back" id="go-back" onClick = { () =>  window.location='/reservations'}/>
+              // { Header: "Edit" ,
+              //   id: "edit",
+              //   accessor: "date",
+              //   Cell: ({value}) =>(<Link className="btn" to={'/edit/${value}'}>Edit</button>)
+              // },
+              //
+              // //onClick require the props function redirecting to delete  booking
+              //
+              // { Header: "Delete",
+              //   id: "delete",
+              //   accessor: "id",
+              //   Cell: ({value}) =>(<button onClick={() => this.handleButtonClick}>Delete</button>)
+              // },
+              //
 
              {
                    Header: "Bookings",
@@ -167,6 +174,7 @@ class AllBookings extends Component {
                      </select>
                   }
                 ]
+
 
      }
             defaultPageSize={10}
