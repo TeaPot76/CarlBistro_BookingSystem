@@ -80,6 +80,7 @@ class TableList extends Component {
        this.state.tables.forEach((table) => {
          if (table.tableNumber == area.name) {
            console.log(table);
+           this.props.onSelectedTable(area.name);
          }
        })
      }

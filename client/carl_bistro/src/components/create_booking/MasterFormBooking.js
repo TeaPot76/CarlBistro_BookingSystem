@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import Request from '../../helpers/Request';
 
+import TableList from '../tablelist/TableList';
+
 // not implemented yet - KEEP
 class MasterForm extends React.Component {
   constructor(props) {
@@ -19,13 +21,30 @@ class MasterForm extends React.Component {
   }
 
   // retrieve avaiable tables - rerenders on setstate
-  componentDidMount(){};
+  // componentDidMount(){
+  //   const request = new Request();
+  // };
+
+  // componentDidMount() {
+  //   const url = 'http://localhost:8080/bookers';
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then((bookers) => {
+  //         this.setState({
+  //             bookers: bookers}
+  //           );
+  //         })
+  //     }
 
   handleChange = event => {
     const {name, value} = event.target
     this.setState({
       [name]: value
     })    
+  }
+
+  handleTableChoice = tableStateObj => {
+    this.setState(tableStateObj);
   }
    
   // require Spring query for find booker ID by booker phone WORKS
@@ -104,8 +123,8 @@ nextButton(){
   render() {    
     return (
       <React.Fragment>
-      <h1>React Wizard Form 🧙‍♂️</h1>
-      <p>Step {this.state.currentStep} </p> 
+      <h1>Booking Form:</h1>
+      <p>Step {this.state.currentStep} of 3</p> 
 
       <form onSubmit={this.handleSubmit}>
       {/* 
@@ -123,12 +142,13 @@ nextButton(){
           date={this.state.date}
           time={this.state.time}
           partySize={this.state.partySize}
-          partySize={this.state.partySize}
+          bookingNote={this.state.bookingNote}
         />
         <Step3 
           currentStep={this.state.currentStep} 
           handleChange={this.handleChange}
-          password={this.state.password}
+          table={this.state.table}
+          handleTableChoice={this.handleTableChoice}
         />
         {this.previousButton()}
         {this.nextButton()}
@@ -219,14 +239,56 @@ function Step2(props) {
   );
 }
 
-function Step3(props) {
-  if (props.currentStep !== 3) {
-    return null
-  } 
-  return(
-    // render radio buttons  based on tables request
-    <React.Fragment>
-    <div className="form-group">
+// COULD BE MADE TO HAVE STATE
+class Step3 extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      tableNumber: ''
+    }
+    this.handleTableClicked = this.handleTableClicked.bind(this);
+  }
+
+  handleTableClicked(tableNumber){
+    this.setState({
+      tableNumber: tableNumber
+    },()=>{
+      this.props.handleTableChoice({
+        table: `http://localhost:8080/seatingTables/${this.state.tableNumber}`
+      })
+    })
+  }
+
+  render(){
+    if (this.props.currentStep !== 3) {
+      return null
+    } 
+    return(
+      <React.Fragment>
+      <TableList onSelectedTable={this.handleTableClicked}/>
+      <button className="btn btn-success btn-block">Create Booking</button>
+      </React.Fragment>
+    )
+  }
+}
+
+
+// function Step3(props) {
+  // if (props.currentStep !== 3) {
+  //   return null
+  // } 
+//   return(
+//     // render radio buttons  based on tables request
+//     <React.Fragment>
+//     <TableList />
+//     <button className="btn btn-success btn-block">Create Booking</button>
+//     </React.Fragment>
+//   );
+// }
+
+export default MasterForm;
+
+{/* <div className="form-group">
       <label htmlFor="table">Table:</label>
       <input
         className="form-control"
@@ -236,10 +298,4 @@ function Step3(props) {
         value={props.table}
         onChange={props.handleChange}
         />      
-    </div>
-    <button className="btn btn-success btn-block">Create Booking</button>
-    </React.Fragment>
-  );
-}
-
-export default MasterForm;
+    </div> */}
