@@ -23,7 +23,7 @@ class TableList extends Component {
               hoveredArea: null,
               clickedTable: null,
               msg: null,
-              preFill: {"yellow"},
+              preFill: "yellow",
               moveMsg: null }
             );
           })

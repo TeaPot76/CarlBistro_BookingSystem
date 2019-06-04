@@ -17,7 +17,7 @@ class AllBookings extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:8080/bookings';
+    const url = 'http://localhost:8080/allbookings';
     fetch(url)
       .then(res => res.json())
       .then((allBookings) => {

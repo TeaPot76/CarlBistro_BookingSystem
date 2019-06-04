@@ -52,14 +52,6 @@ class MasterForm extends React.Component {
         })
       })
     })
-
-
-
-    // const { email, username, password } = this.state
-    // alert(`Your registration detail: \n 
-    //        Email: ${email} \n 
-    //        Username: ${username} \n
-    //        Password: ${password}`)
   }
   
   _next = () => {

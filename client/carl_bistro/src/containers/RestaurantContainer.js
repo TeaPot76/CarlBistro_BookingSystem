@@ -1,88 +1,28 @@
 import React, {Component} from 'react';
 import {Route, Switch, Redirect} from "react-router-dom";
 
-import CreateCustomer from "../components/create_booking/CreateCustomer";
-import CreateBooking from "../components/create_booking/CreateBooking";
+
 import LandingPage from "../components/home/LandingPage";
-import BookingEditForm from "../components/BookingEditForm";
 import TableList from "../components/tablelist/TableList";
 import MasterFormBooking from "../components/create_booking/MasterFormBooking";
-
-import Request from '../helpers/Request';
+import AllBookings from "../components/manage_bookings/AllBookings";
 
 class RestaurantContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      booker: null,
-      phone: null,
-      tables: [],
-      bookings: [],
-      date: null,
-      time: null,
-      name: null,
     }
-    this.handleBookingSubmit = this.handleBookingSubmit.bind(this);
-    this.handleCustomerSubmit = this.handleCustomerSubmit.bind(this);
 }
 
- handleBookingSubmit(bookingForm){
-   bookingForm.id = Date.now()
-   const customer = bookingForm.customer;
-   const phone = bookingForm.phone;
-   const numberOfPeople = bookingForm.numberOfPeople;
-   const date = bookingForm.date;
-   const time = bookingForm.time;
-   const table = bookingForm.table;
-   this.setState ({
-     customer: customer,
-     phone: phone,
-     numberOfPeople: numberOfPeople,
-     date: date,
-     time: time,
-     table: table,
-   })
-
- }
-
- handleCustomerSubmit(customerForm){
-  //  customerForm.id = Date.now()
-  //  const name = customerForm.name;
-  //  const phone = customerForm.phone;
-   const request = new Request();
-    request.post('http://localhost:8080/bookers', customerForm)
-
-
- }
       render() {
         return (
           <div>
             <Switch>
               <Route exact path="/" component={LandingPage}/>
-              <Route exact path="/createcustomer"
-              render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
-              randomProp="hello"/>}/>
               <Route exact path="/createbooking" render={()=><MasterFormBooking/>}/>
-              <Route exact path="/managebookings" component={BookingEditForm}/>
-              <Route exact path="/tablelist" component={TableList}/>
+              <Route exact path="/managebookings"  render={()=><AllBookings/>}/>
+              <Route exact path="/tablelist" render={()=><TableList/>}/>
             </Switch>
-
-
-          {/* <Booker booker ={this.state.booker.name} /> */}
-
-           {/* <Booking
-           customer ={this.state.customer}
-           phoneNumber ={this.state.phoneNumber}
-           numberOfPeople ={this.state.numberOfPeople}
-           date ={this.state.date}
-           time ={this.state.time}
-           table ={this.state.table}
-
-                        /> */}
-
-
-
-
           </div>
         );
       }
@@ -92,11 +32,3 @@ class RestaurantContainer extends Component {
 
   export default RestaurantContainer;
 
-// CREATE CUSTOMER AND CREATE BOOKING SEPARATE ROUTES
-
-  // <Route exact path="/createcustomer"
-  // render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
-  // randomProp="hello"/>}/>
-  // <Route exact path="/createbooking"
-  // render={()=><CreateBooking
-  // randomProp="hello"/>}/>
