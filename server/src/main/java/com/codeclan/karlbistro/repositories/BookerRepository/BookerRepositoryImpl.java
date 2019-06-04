@@ -42,6 +42,27 @@ public class BookerRepositoryImpl implements BookerRepositoryCustom {
         return results;
 
     }
+
+    @Transactional
+    public List<Long> findBookerIdByPhone(String phone){
+        List<Long> results = null;
+
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Booker.class, "booker");
+            cr.setProjection(Projections.projectionList()
+                    .add(Projections.groupProperty("booker.id")));
+            cr.add(Restrictions.eq("booker.phone", phone));
+            results = cr.list();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+            return results;
+    }
+
+
+
 }
 
 

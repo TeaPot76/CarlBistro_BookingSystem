@@ -8,4 +8,7 @@ public interface BookerRepositoryCustom {
 
     List<Long> orderBookersIDByNumberOfBookings();
 
+    List<Long> findBookerIdByPhone(String phone);
+
+
 }

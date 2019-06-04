@@ -4,13 +4,19 @@
   "private": true,
   "dependencies": {
     "eslint": "^5.16.0",
+    "match-sorter": "^3.0.0",
     "react": "^16.8.6",
+    "react-charts": "^2.0.0-alpha.12",
     "react-dom": "^16.8.6",
     "react-image-mapper": "0.0.14",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "react-scroll": "^1.7.11",
+<<<<<<< HEAD
     "react-tooltip": "^3.10.0",
+=======
+    "react-table": "^6.10.0",
+>>>>>>> develop_client
     "react-transition-group": "^4.1.0",
     "typescript": "^3.5.1"
   },

@@ -21,7 +21,7 @@ public class BookingController {
     @Autowired
     BookingRepository bookingRepository;
 
-    @RequestMapping(value = "/bookings")
+    @RequestMapping(value = "/allbookings")
     public List<Booking> bookings() {
         return bookingRepository.findAll();
     }

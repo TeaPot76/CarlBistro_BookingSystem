@@ -20,4 +20,9 @@ public class BookerController {
         return bookerRepository.orderBookersIDByNumberOfBookings();
     }
 
+    @GetMapping(value = "/phone/{phone}")
+    public List<Long> findBookerIdByPhone(@PathVariable String phone){
+        return bookerRepository.findBookerIdByPhone(phone);
+    }
+
 }
