@@ -20,22 +20,6 @@ class MasterForm extends React.Component {
     }
   }
 
-  // retrieve avaiable tables - rerenders on setstate
-  // componentDidMount(){
-  //   const request = new Request();
-  // };
-
-  // componentDidMount() {
-  //   const url = 'http://localhost:8080/bookers';
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then((bookers) => {
-  //         this.setState({
-  //             bookers: bookers}
-  //           );
-  //         })
-  //     }
-
   handleChange = event => {
     const {name, value} = event.target
     this.setState({
