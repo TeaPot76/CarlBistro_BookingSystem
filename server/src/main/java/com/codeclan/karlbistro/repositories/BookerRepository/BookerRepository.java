@@ -12,4 +12,6 @@ public interface BookerRepository extends JpaRepository<Booker, Long>, BookerRep
 
     List<Long> orderBookersIDByNumberOfBookings();
 
+    List<Long> findBookerIdByPhone(String phone);
+
 }

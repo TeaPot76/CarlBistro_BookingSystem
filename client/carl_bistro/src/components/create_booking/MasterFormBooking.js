@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Request from '../helpers/Request';
+import Request from '../../helpers/Request';
 
 // not implemented yet - KEEP
 class MasterForm extends React.Component {
@@ -28,36 +28,38 @@ class MasterForm extends React.Component {
     })    
   }
    
-  // require Spring query for find booker ID by booker phone
+  // require Spring query for find booker ID by booker phone WORKS
   handleSubmit = event => {
     event.preventDefault()
     const request = new Request();
-    const bookerObj = {"name": this.state.name, "phone": this.state.phone}
-    request.post('http://localhost:8080/bookers', bookerObj)
+    const bookerObj = {"name": this.state.name, "phone": this.state.phone};
+    request.post('http://localhost:8080/bookers', bookerObj) //WORKS
     .then(()=>{
-      request.get(`http://localhost:8080/bookers/${this.state.phone}`)
-    })
-    .then((result)=>{
-      this.setState({booker: `http://localhost:8080/bookers/${result.id}`})
-    })
-    .then(()=>{
-      const bookingObj = {
-        "date": this.state.date,
-        "time": this.state.time,
-        "partySize": this.state.partySize,
-        "booker": this.state.booker,
-        "seatingTable": this.state.table,
-        "bookingNote": this.state.bookingNote
-      }
-      request.post(`http://localhost:8080/bookerings`, bookingObj);
+      request.get(`http://localhost:8080/bookers/phone/${this.state.phone}`)
+      .then((result)=>{
+        console.log(result[0]); //returns sql ID of booker by query on phone number WORKS
+        
+        this.setState({booker: `http://localhost:8080/bookers/${result[0]}`},()=>{
+            const bookingObj = {
+              "date": this.state.date,
+              "time": this.state.time,
+              "partySize": this.state.partySize,
+              "booker": this.state.booker,
+              "seatingTable": this.state.table,
+              "bookingNote": this.state.bookingNote
+            }
+            request.post(`http://localhost:8080/bookings`, bookingObj);
+        })
+      })
     })
 
 
-    const { email, username, password } = this.state
-    alert(`Your registration detail: \n 
-           Email: ${email} \n 
-           Username: ${username} \n
-           Password: ${password}`)
+
+    // const { email, username, password } = this.state
+    // alert(`Your registration detail: \n 
+    //        Email: ${email} \n 
+    //        Username: ${username} \n
+    //        Password: ${password}`)
   }
   
   _next = () => {
@@ -248,3 +250,4 @@ function Step3(props) {
   );
 }
 
+export default MasterForm;

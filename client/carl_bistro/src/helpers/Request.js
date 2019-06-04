@@ -5,6 +5,10 @@ class Request {
     .then((res) => res.json());
   }
 
+  getNoJson(url){
+    return fetch(url);
+  }
+
   post(url, payload){
     return fetch(url, {
       method: "POST",

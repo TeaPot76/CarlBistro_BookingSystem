@@ -5,7 +5,7 @@ import CreateCustomer from "../components/create_booking/CreateCustomer";
 import CreateBooking from "../components/create_booking/CreateBooking";
 import LandingPage from "../components/home/LandingPage";
 import BookingEditForm from "../components/BookingEditForm";
-
+import MasterFormBooking from "../components/create_booking/MasterFormBooking";
 
 import Request from '../helpers/Request';
 
@@ -58,12 +58,7 @@ class RestaurantContainer extends Component {
           <div>
             <Switch>
               <Route exact path="/" component={LandingPage}/>
-              <Route exact path="/createcustomer" 
-              render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
-              randomProp="hello"/>}/>
-              <Route exact path="/createbooking" 
-              render={()=><CreateBooking 
-              randomProp="hello"/>}/>
+              <Route exact path="/createbooking" render={()=><MasterFormBooking/>}/>
               <Route exact path="/managebookings" component={BookingEditForm}/>
             </Switch>
           
@@ -91,3 +86,12 @@ class RestaurantContainer extends Component {
 
 
   export default RestaurantContainer;
+
+// CREATE CUSTOMER AND CREATE BOOKING SEPARATE ROUTES
+
+  // <Route exact path="/createcustomer" 
+  // render={()=><CreateCustomer onCustomerSubmit={this.handleCustomerSubmit}
+  // randomProp="hello"/>}/>
+  // <Route exact path="/createbooking" 
+  // render={()=><CreateBooking 
+  // randomProp="hello"/>}/>
