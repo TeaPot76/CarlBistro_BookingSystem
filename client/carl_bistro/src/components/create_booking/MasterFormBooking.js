@@ -151,6 +151,7 @@ nextButton(){
   render() {    
     return (
       <React.Fragment>
+      <div className="page-container">
       <h1>Booking Form:</h1>
       <p>Step {this.state.currentStep} of 3</p> 
 
@@ -182,11 +183,14 @@ nextButton(){
           chosenDate={this.state.date}
           chosenTime={this.state.time}
           availableAreas={this.state.availableAreas}
+          availableTables={this.state.availableTables}
+          onSelectedTable={this.state.onSelectedTable}
         />
         {this.previousButton()}
         {this.nextButton()}
 
       </form>
+      </div>
       </React.Fragment>
     );
   }
@@ -321,7 +325,10 @@ class Step3 extends Component {
     return(
       <React.Fragment>
         
-      <TableList availableAreas={this.props.availableAreas}/>
+      <TableList 
+      availableAreas={this.props.availableAreas}
+      availableTables={this.props.availableTables}
+      onSelectedTable={this.handleTableClicked}/>
       <button className="btn btn-success btn-block">Create Booking</button>
       </React.Fragment>
     )

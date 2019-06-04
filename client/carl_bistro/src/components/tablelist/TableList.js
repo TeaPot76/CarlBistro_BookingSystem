@@ -5,47 +5,46 @@ import React, {
 import ImageMapper from 'react-image-mapper';
 import ReactTooltip from 'react-tooltip';
 import Request from '../../helpers/Request';
+import TableCard from "./TableCard";
 
 class TableList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tables: []      
+      tables: [],
+      selectedTable: null
     }
-  }
+  } 
 
     render() {
        return (
-         <div className="container">
-         <h1> List of tables </h1>
-
-         <p data-tip="hello world">Tooltip</p>
-         <ReactTooltip />
-
-             <ImageMapper
-             
-              src={require("../../images/map.png")}
-              map={{
-                name: "my-map",
-                areas: this.props.availableAreas
-              }}
-              width={400}
-              imgWidth={750}
-            	onMouseEnter={area => this.enterArea(area)}
-            	onMouseLeave={area => this.leaveArea(area)}
-              onClick={area => this.clicked(area)}
-              strokeColor= "white"
-              lineWidth= {5}
-             />
-
-             {
-             	this.state.hoveredArea &&
-             	<span className="tooltip"
-             	    style={{ ...this.getTipPosition(this.state.hoveredArea)}}>
-             		{ this.state.hoveredArea && this.state.hoveredArea.name}
-             	</span>
-             }
-
+        <div className="page-container">
+          <div className="table-display-div">
+           <div className="tables-container">
+            <h1> Tables </h1>
+              <ImageMapper
+                src={require("../../images/map.png")}
+                map={{
+                  name: "my-map",
+                  areas: this.props.availableAreas
+                }}
+                width={400}
+                imgWidth={750}
+                onMouseEnter={area => this.enterArea(area)}
+                onMouseLeave={area => this.leaveArea(area)}
+                onClick={area => this.clicked(area)}
+                strokeColor= "white"
+                lineWidth= {5}
+              />
+                {
+                  this.state.hoveredArea &&
+                  <span className="tooltip"
+                      style={{ ...this.getTipPosition(this.state.hoveredArea)}}>
+                    { <TableCard table={this.state.selectedTable} />}
+                  </span>
+                } 
+              </div>
+            </div>
          </div>
        );
      }
@@ -57,12 +56,20 @@ class TableList extends Component {
          if (table.tableNumber == area.name) {
            console.log(table);
            this.props.onSelectedTable(area.name);
+           this.setState({ selectedTable: table }, () => {
+            console.log(this.state.selectedTable);
+           });
          }
        })
      }
 
+     onClick(area) {
+       this.clicked(area);
+     }
+
      enterArea(area) {
          this.setState({ hoveredArea: area });
+       this.clicked(area);
      }
 
      leaveArea(area) {
