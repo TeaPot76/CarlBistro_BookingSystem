@@ -12,4 +12,6 @@ public interface SeatingTableRepositoryCustom {
             int min);
 
     List<SeatingTable> getAvailableTablesNow(int partysize);
+
+    List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(int partysize);
 }

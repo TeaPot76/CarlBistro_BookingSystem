@@ -67,6 +67,9 @@ public class DataLoader implements ApplicationRunner {
         SeatingTable table6 = new SeatingTable(6, 6);
         seatingTableRepository.save(table6);
 
+        SeatingTable table7 = new SeatingTable(6, 6);
+        seatingTableRepository.save(table7);
+
         MenuItem food1 = new MenuItem("Burger", "main", 5.0);
         menuItemRepository.save(food1);
 

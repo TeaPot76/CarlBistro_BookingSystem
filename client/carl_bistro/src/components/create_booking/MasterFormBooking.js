@@ -16,7 +16,17 @@ class MasterForm extends React.Component {
       date: '',
       time: '',
       table: '',
-      bookingNote: ''
+      bookingNote: '',
+      areas: [{ name: "1", shape: "rect", coords: [43, 98, 105, 131], preFillColor: "pink", fillColor: "green" },
+      { name: "2", shape: "rect", coords: [43, 272, 105, 307], preFillColor: "pink", fillColor: "blue"  },
+      { name: "3", shape: "rect", coords: [42, 470, 104, 504], preFillColor: "pink", fillColor: "green" },
+      { name: "4", shape: "rect", coords: [41, 648, 105, 687], preFillColor: "pink", fillColor: "green" },
+      { name: "5", shape: "circle", coords: [304, 131, 45], preFillColor: "pink", fillColor: "green" },
+      { name: "6", shape: "circle", coords: [307, 350, 42], preFillColor: "pink", fillColor: "green" },
+      { name: "7", shape: "circle", coords: [302, 586, 43], preFillColor: "pink", fillColor: "green" },
+      { name: "8", shape: "circle", coords: [577, 198, 43], preFillColor: "pink", fillColor: "green" },
+      { name: "9", shape: "rect", coords: [556, 626, 666, 429], preFillColor: "pink", fillColor: "green" }],
+      availableAreas: []
     }
   }
 
@@ -25,6 +35,40 @@ class MasterForm extends React.Component {
     this.setState({
       [name]: value
     })    
+  }
+
+  handleChangePartySize = event => {
+    const {name, value} = event.target
+    this.setState({
+      [name]: value
+    } , ()=>{
+      const url2 = `http://localhost:8080/seatingTables/partySize/${this.state.partySize}`; //available tables (capacity only) 
+      const request = new Request();
+      request.get(url2)
+      .then((result)=>{
+        this.setState({
+          availableTables: result
+        })
+      })
+      .then(()=>{
+        let newArrayAreas = [];
+        if (this.state.partySize === '') {
+          return;
+        }
+        this.state.availableTables.forEach(table => {
+          let tableNumberOrAreaIndex = table.tableNumber - 1;
+          let areaObject = this.state.areas[tableNumberOrAreaIndex];
+          newArrayAreas.push(areaObject);
+        })
+        this.setState({
+          availableAreas: newArrayAreas
+        })
+      })
+    }
+    
+    
+    )
+
   }
 
   handleTableChoice = tableStateObj => {
@@ -123,6 +167,7 @@ nextButton(){
         <Step2 
           currentStep={this.state.currentStep} 
           handleChange={this.handleChange}
+          handleChangePartySize={this.handleChangePartySize}
           date={this.state.date}
           time={this.state.time}
           partySize={this.state.partySize}
@@ -133,6 +178,10 @@ nextButton(){
           handleChange={this.handleChange}
           table={this.state.table}
           handleTableChoice={this.handleTableChoice}
+          chosenPartySize={this.state.partySize}
+          chosenDate={this.state.date}
+          chosenTime={this.state.time}
+          availableAreas={this.state.availableAreas}
         />
         {this.previousButton()}
         {this.nextButton()}
@@ -207,7 +256,9 @@ function Step2(props) {
         name="partySize"
         type="number"
         value={props.partySize}
-        onChange={props.handleChange}
+        onChange={props.handleChangePartySize}
+        default="1"
+        
         />
       <label htmlFor="bookingNote">Booking Note:</label>
       <input
@@ -228,10 +279,30 @@ class Step3 extends Component {
   constructor(props){
     super(props);
     this.state = {
-      tableNumber: ''
+      tableNumber: '',
+      tables: [],
+      availableTables: [],
+
+
     }
     this.handleTableClicked = this.handleTableClicked.bind(this);
   }
+
+  componentDidMount() {
+    const url = `http://localhost:8080/seatingTables`; //all table
+    fetch(url)
+      .then(res => res.json())
+      .then((allTables) => {
+          this.setState({
+              tables: allTables._embedded.seatingTables,
+              hoveredArea: null,
+              clickedTable: null,
+              msg: null,
+              moveMsg: null }
+            )
+          })
+
+        }
 
   handleTableClicked(tableNumber){
     this.setState({
@@ -249,7 +320,8 @@ class Step3 extends Component {
     } 
     return(
       <React.Fragment>
-      <TableList onSelectedTable={this.handleTableClicked}/>
+        
+      <TableList availableAreas={this.props.availableAreas}/>
       <button className="btn btn-success btn-block">Create Booking</button>
       </React.Fragment>
     )
@@ -272,14 +344,14 @@ class Step3 extends Component {
 
 export default MasterForm;
 
-{/* <div className="form-group">
-      <label htmlFor="table">Table:</label>
-      <input
-        className="form-control"
-        id="table-1"
-        name="table"
-        type="table"
-        value={props.table}
-        onChange={props.handleChange}
-        />      
-    </div> */}
+{/* <label htmlFor="table">Table:</label>
+<input
+<div className="form-group">
+  className="form-control"
+  id="table-1"
+  name="table"
+  type="table"
+  value={this.props.table}
+  onChange={this.props.handleChange}
+  />      
+</div> */}

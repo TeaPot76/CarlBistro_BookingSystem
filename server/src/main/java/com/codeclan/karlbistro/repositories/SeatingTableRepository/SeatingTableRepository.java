@@ -18,4 +18,6 @@ public interface SeatingTableRepository extends JpaRepository<SeatingTable, Long
             int min);
 
     List<SeatingTable> getAvailableTablesNow(int partysize);
+
+    List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(int partySize);
 }

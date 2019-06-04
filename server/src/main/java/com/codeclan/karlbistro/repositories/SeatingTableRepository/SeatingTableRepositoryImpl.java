@@ -88,8 +88,24 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
             ex.printStackTrace();
         }
         return results;
+    }
+
+    @Transactional
+    public List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(int partySize){
+        List<SeatingTable> results = null;
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr1 = session.createCriteria(SeatingTable.class);
+            cr1.add(Restrictions.ge("capacity", partySize));
 
 
+            results = cr1.list();
 
-    };
+        } catch (HibernateException ex){
+            ex.printStackTrace();
+        }
+
+        return results;
+    }
 }

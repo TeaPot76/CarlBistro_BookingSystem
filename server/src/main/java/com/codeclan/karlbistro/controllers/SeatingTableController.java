@@ -15,10 +15,10 @@ public class SeatingTableController {
     @Autowired
     SeatingTableRepository seatingTableRepository;
 
-//    @GetMapping(value = "/partysize/{partysize}")
-//    public List<SeatingTable> getAvailableTables(@PathVariable int partysize){
-//        return seatingTableRepository.getAvailableTables(partysize);
-//    }
+    @GetMapping(value = "/partySize/{partySize}")
+    public List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(@PathVariable int partySize){
+        return seatingTableRepository.getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(partySize);
+    }
 
     //not functional yet!
     @GetMapping(value = "/partysize/{partysize}/today/now")
