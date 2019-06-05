@@ -10,7 +10,8 @@ import Request from '../../helpers/Request';
           this.state = {
             orderClicked: false,
             occupiedTables: [],
-            selectedTable: null
+            selectedTable: null,
+            selectedBookingUrl: null
           }
           this.handleClickedTable = this.handleClickedTable.bind(this);
       }
@@ -27,7 +28,20 @@ import Request from '../../helpers/Request';
       }
 
       handleClickedTable(object){
-          this.setState(object);
+          this.setState(object,()=>{
+            const url = `http://localhost:8080/bookings/today/seatingTable/${this.state.selectedTable}`;
+            const request = new Request();
+            request.get(url)
+            .then((bookings)=>{
+                if(bookings.length !== 0){
+                    const bookingID = bookings[0].id;
+                    this.setState({
+                        selectedBookingUrl: `http://localhost:8080/bookings/${bookingID}`
+                    })
+                }
+                
+            })
+          });
       }
 
       handleSubmit = event => {
@@ -72,7 +86,7 @@ import Request from '../../helpers/Request';
                     orderClicked={this.state.orderClicked}
                     onSubmit={this.handleSubmit}
                     backToTables={this._orderClicked}
-                    selectedTable={this.state.selectedTable}
+                    selectedBookingUrl={this.state.selectedBookingUrl}
                   />
                   
               </React.Fragment>

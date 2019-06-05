@@ -62,8 +62,8 @@ class CurrentTableTableList extends Component {
 
      clicked(area) {
        this.setState( {clickedTable: area},()=>{
-        const tableUrl = `http://localhost:8080/seatingTables/${this.state.clickedTable.name}` 
-        this.props.handleClickedTable({selectedTable: tableUrl})
+        const tableID = this.state.clickedTable.name;
+        this.props.handleClickedTable({selectedTable: tableID})
        });
        this.props.occupiedTables.forEach((table) => {
          if (table.tableNumber == area.name) {
