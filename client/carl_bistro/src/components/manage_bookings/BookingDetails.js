@@ -97,12 +97,24 @@ getSingleBooking(){
        );
      })
 
-      return <table><tr><th>Id:</th>
-                    <th>Name:</th>
-                    <th>Date:</th>
-                    <th>Time:</th></tr>
-
-      {content}</table>
+      return (
+          <div className="details-page-container">
+            <div className="details-page">
+              <h1 className="booking-h1">Edit/Delete</h1>
+              <div className="details-table-div">
+              <table className="details-table">
+                <thead>
+                  <th>Id:</th>
+                  <th>Name:</th>
+                  <th>Date:</th>
+                  <th>Time:</th>
+                </thead>
+                  {content}
+              </table>
+            </div>
+           </div>
+        </div>
+      )
     }
 
 

@@ -77,7 +77,6 @@ class EditForm extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div>
         <form className="reservation-form" onSubmit={this.handleSubmit}>

@@ -20,8 +20,8 @@ class TableList extends Component {
        return (
         <div className="page-container">
           <div className="table-display-div">
+           <h1 className="booking-h1"> Tables </h1>
            <div className="tables-container">
-            <h1> Tables </h1>
               <ImageMapper
                 src={require("../../images/map.png")}
                 map={{

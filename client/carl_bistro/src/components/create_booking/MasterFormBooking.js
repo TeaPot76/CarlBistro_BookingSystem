@@ -152,8 +152,8 @@ nextButton(){
     return (
       <React.Fragment>
       <div className="page-container">
+      <div className="landing-page">
       <h1>Booking Form:</h1>
-      <p>Step {this.state.currentStep} of 3</p> 
 
       <form onSubmit={this.handleSubmit}>
       {/* 
@@ -190,6 +190,7 @@ nextButton(){
         {this.nextButton()}
 
       </form>
+          </div>
       </div>
       </React.Fragment>
     );
