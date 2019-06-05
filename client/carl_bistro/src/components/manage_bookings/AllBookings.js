@@ -31,62 +31,12 @@ class AllBookings extends Component {
 
 
     render() {
-<<<<<<< HEAD
-      let content = this.state.bookings.map((booking) => {
-       return (
-
-
-         <tr>
-         <td>
-        {
-         booking.date
-         }
-         </td>
-         <td>
-         {
-           booking.time.slice(0, -3)
-         }
-         </td>
-
-         <td>
-          {
-           booking.partySize
-         }
-         </td>
-
-         <td>
-         {
-           booking.seatingTable.tableNumber
-         }
-         </td>
-         <td>
-         {
-           booking.booker.name
-         }
-         </td>
-         <td>
-           {
-           booking.booker.phone
-         }
-         </td>
-
-          <button type ="button">edit</button>
-          <button type ="button">cancel </button> </tr>
-
-       );
-     })
-     // handleBookingEdit(filter.value){
-     //
-     // }
-      return <ReactTable data={this.state.bookings}
-=======
 
       return (
-        
+
         <div className="all-bookings">
           <h1 className="booking-h1">Booking Log</h1>
          <ReactTable data={this.state.bookings}
->>>>>>> fbd3d18fc8a38b3a964d303b2b35126072097014
                          filterable
                          defaultFilterMethod={(filter, row)=>
                          String(row[filter.id])===filter.value}
@@ -137,27 +87,6 @@ class AllBookings extends Component {
                filterAll: true
              },
 
-<<<<<<< HEAD
-
-               //onClick require the props function redirecting to edit and update booking
-               //
-               // <input type="Edit" value="edit" id="edir" />
-              //  // <input type="button" value="Go Back" id="go-back" onClick = { () =>  window.location='/reservations'}/>
-              // { Header: "Edit" ,
-              //   id: "edit",
-              //   accessor: "date",
-              //   Cell: ({value}) =>(<Link className="btn" to={'/edit/${value}'}>Edit</button>)
-              // },
-              //
-              // //onClick require the props function redirecting to delete  booking
-              //
-              // { Header: "Delete",
-              //   id: "delete",
-              //   accessor: "id",
-              //   Cell: ({value}) =>(<button onClick={() => this.handleButtonClick}>Delete</button>)
-              // },
-              //
-=======
               { Header: "Edit" ,
                 id: "edit",
                 accessor: "id",
@@ -170,7 +99,6 @@ class AllBookings extends Component {
                 Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
               },
 
->>>>>>> fbd3d18fc8a38b3a964d303b2b35126072097014
 
              {
                    Header: "Bookings",
@@ -203,7 +131,7 @@ class AllBookings extends Component {
      }
             defaultPageSize={10}
             className="-striped -highlight"
-      /> 
+      />
         </div>
       )
     }
