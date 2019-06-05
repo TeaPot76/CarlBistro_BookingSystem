@@ -5,6 +5,7 @@ import Request from "../../helpers/Request";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
+import EditForm from "./EditForm";
 
 
 
@@ -26,6 +27,7 @@ class AllBookings extends Component {
             );
           })
       }
+
 
 
     render() {
@@ -124,6 +126,7 @@ class AllBookings extends Component {
                      </select>
                   }
                 ]
+
 
      }
             defaultPageSize={10}
