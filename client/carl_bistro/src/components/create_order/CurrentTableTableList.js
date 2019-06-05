@@ -2,8 +2,7 @@ import React, {
   Component
 } from "react";
 import ImageMapper from 'react-image-mapper';
-
-import TableCard from "./TableCard";
+import CreateOrderTablecard from "./CreateOrderTableCard";
 
 class CurrentTableTableList extends Component {
   constructor(props) {
@@ -27,7 +26,15 @@ class CurrentTableTableList extends Component {
                 src={require("../../images/map.png")}
                 map={{
                   name: "my-map",
-                  areas: this.props.availableAreas
+                  areas: [{ name: "1", shape: "rect", coords: [43, 98, 105, 131], preFillColor: "pink", fillColor: "green" },
+                  { name: "2", shape: "rect", coords: [43, 272, 105, 307], preFillColor: "pink", fillColor: "blue"  },
+                  { name: "3", shape: "rect", coords: [42, 470, 104, 504], preFillColor: "pink", fillColor: "green" },
+                  { name: "4", shape: "rect", coords: [41, 648, 105, 687], preFillColor: "pink", fillColor: "green" },
+                  { name: "5", shape: "circle", coords: [304, 131, 45], preFillColor: "pink", fillColor: "green" },
+                  { name: "6", shape: "circle", coords: [307, 350, 42], preFillColor: "pink", fillColor: "green" },
+                  { name: "7", shape: "circle", coords: [302, 586, 43], preFillColor: "pink", fillColor: "green" },
+                  { name: "8", shape: "circle", coords: [577, 198, 43], preFillColor: "pink", fillColor: "green" },
+                  { name: "9", shape: "rect", coords: [556, 626, 666, 429], preFillColor: "pink", fillColor: "green" }]
                 }}
                 width={400}
                 imgWidth={750}
@@ -37,11 +44,14 @@ class CurrentTableTableList extends Component {
                 strokeColor= "white"
                 lineWidth= {5}
               />
+              <CreateOrderTablecard
+              table={this.state.selectedTable}
+              orderButtonClick={this.props.orderButtonClick}
+              />
                 {
                   this.state.hoveredArea &&
                   <span className="tooltip"
                       style={{ ...this.getTipPosition(this.state.hoveredArea)}}>
-                    { <TableCard table={this.state.selectedTable} />}
                   </span>
                 }
               </div>
@@ -51,10 +61,15 @@ class CurrentTableTableList extends Component {
      }
 
      clicked(area) {
-       this.setState( {clickedTable: area});
-       this.props.availableTables.forEach((table) => {
+       this.setState( {clickedTable: area},()=>{
+        const tableUrl = `http://localhost:8080/seatingTables/${this.state.clickedTable.name}` 
+        this.props.handleClickedTable({selectedTable: tableUrl})
+       });
+       this.props.occupiedTables.forEach((table) => {
          if (table.tableNumber == area.name) {
-           this.props.onSelectedTable(area.name);
+            
+          //  this.props.onSelectedTable(area.name);
+
            this.setState({ selectedTable: table }, () => {
             console.log(this.state.selectedTable);
            });
