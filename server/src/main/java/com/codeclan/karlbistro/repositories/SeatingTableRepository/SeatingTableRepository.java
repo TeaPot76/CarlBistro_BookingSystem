@@ -13,21 +13,5 @@ import java.util.List;
 @RepositoryRestResource(excerptProjection = EmbedSeatingTableWithBookings.class)
 public interface SeatingTableRepository extends JpaRepository<SeatingTable, Long>, SeatingTableRepositoryCustom {
 
-//    @Query(value = "SELECT * FROM seating_tables\n" +
-//                    "WHERE seating_tables.capacity >= 4\n" +
-//                    "AND seating_tables.id NOT IN (\n" +
-//                    "SELECT seating_tables.id\n" +
-//                    "FROM seating_tables\n" +
-//                    "WHERE date = '2019-03-27'\n" +
-//                    "AND time BETWEEN '18:00:00' AND '20:00:00\n", nativeQuery = true)
-//    List<SeatingTable> getAvailableTablesHard();
-
-//    @Query(value = "SELECT * FROM  seatingTables", nativeQuery = true)
-//            List<SeatingTable> getAvailableTablesHard(int test);
-
-
-
-    List<SeatingTable> getAvailableTablesNow(int partysize);
-
     List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(int partySize);
 }

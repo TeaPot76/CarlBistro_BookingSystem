@@ -24,6 +24,7 @@ public class SeatingTableController {
         return seatingTableRepository.getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(partySize);
     }
 
+    //Get all available tables by partysize right now
     @GetMapping(value = "/partysize/{partysize}/today/now")
     public List<SeatingTable> getAvailableTablesNow(@PathVariable int partysize) {
         LocalDate todaysDate = LocalDate.now();
@@ -37,17 +38,23 @@ public class SeatingTableController {
                 availableTables.add(seatingTable);
             }
         return availableTables;
+    }
 
+    @GetMapping(value = "/currentlyOccupied")
+    public List <SeatingTable> getOccupiedTablesNow(){
+        LocalDate todaysDate = LocalDate.now();
+        LocalTime todaysTime = LocalTime.now();
+        List<SeatingTable> availableTables = new ArrayList<>();
+
+        List<SeatingTable> allTables = seatingTableRepository.findAll();
+
+        for (SeatingTable seatingTable : allTables)
+            if (seatingTable.isAvailableRightNow() == false) {
+                availableTables.add(seatingTable);
+            }
+        return availableTables;
     }
 }
-
-
-
-
-//    @GetMapping(value = "/seatingTables/hard/{1}")
-//    public List<SeatingTable> getAvailableTablesHard(@PathVariable int test){
-//        return seatingTableRepository.getAvailableTablesHard(test);
-//    }
 
 
 

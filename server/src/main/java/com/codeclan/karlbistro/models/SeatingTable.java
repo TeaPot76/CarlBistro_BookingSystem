@@ -93,31 +93,41 @@ public class SeatingTable {
         return true;
     }
 
-    //If the table has a booking for today it returns false
-    public boolean isAvailableToday(){
+    public boolean isBookedAtSomePointToday(){
         for (Booking booking : bookings)
-            if (LocalDate.now().equals(booking.getDate())) return false;
-        return true;
+            if (LocalDate.now().equals(booking.getDate())) return true;
+        return false;
     }
 
     // If the table has a booking for now or the next two hours it returns false
-    public boolean isAvailableNowAndNextTwoHours(){
-        LocalTime bookingStart = LocalTime.now();
-        LocalTime bookingTime = null;
+    public boolean isBookedBetweenNowAndNextTwoHours(){
+
+        LocalTime proposedStart = LocalTime.now();
+        LocalTime proposedEnd = LocalTime.now().plusHours(2);
+        LocalTime bookedStart = null;
+        LocalTime bookedEnd = null;
+
 
         for (Booking booking : bookings) {
-            bookingTime = booking.getTime();
+            bookedStart = booking.getTime();
+            bookedEnd = booking.getTime().plusHours(2);
 
-            if (bookingStart.isAfter(bookingTime) && (bookingStart.isBefore(bookingTime.plusHours(2)))) {
-                return false;
+            if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
+                return true;
+            }
+            else if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
+                return true;
+            }
+            else if (bookedStart.equals(proposedStart)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     // If the table has a booking for the next two hours AND today it returns false, otherwise true
     public boolean isAvailableRightNow(){
-        if (isAvailableToday() == false  && isAvailableNowAndNextTwoHours() == false) {
+        if (isBookedAtSomePointToday() == true  && isBookedBetweenNowAndNextTwoHours() == true) {
             return false;
         }
         return true;
