@@ -23,6 +23,7 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
     @Autowired
     SeatingTableRepository seatingTableRepository;
 
+
     @Transactional
     public  List<SeatingTable> getAvailableTables(
             int partysize,
@@ -100,14 +101,12 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
         try {
             Criteria cr1 = session.createCriteria(SeatingTable.class);
             cr1.add(Restrictions.ge("capacity", partySize));
-
-
             results = cr1.list();
 
         } catch (HibernateException ex){
             ex.printStackTrace();
         }
-
         return results;
     }
 }
+

@@ -20,27 +20,36 @@ public class SeatingTableController {
     SeatingTableRepository seatingTableRepository;
 
     @GetMapping(value = "/partySize/{partySize}")
-    public List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(@PathVariable int partySize){
+    public List<SeatingTable> getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(@PathVariable int partySize) {
         return seatingTableRepository.getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(partySize);
     }
 
+    @GetMapping(value = "/partysize/{partysize}/today/now")
+    public List<SeatingTable> getAvailableTablesNow(@PathVariable int partysize) {
+        LocalDate todaysDate = LocalDate.now();
+        LocalTime todaysTime = LocalTime.now();
+        List<SeatingTable> availableTables = new ArrayList<>();
 
+        List<SeatingTable> tablesBigEnough = seatingTableRepository.getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(partysize);
 
+        for (SeatingTable seatingTable : tablesBigEnough)
+            if (seatingTable.isAvailableRightNow()) {
+                availableTables.add(seatingTable);
+            }
+        return availableTables;
+
+    }
 }
 
 
-//    not functional yet!
-//    @GetMapping(value = "/partysize/{partysize}/today/now")
-//    LocalDate todaysDate = LocalDate.now();
-//    LocalTime todaysTime = LocalTime.now();
-//    List<SeatingTable> availableTables = new ArrayList<>();
-//
-//    public List<SeatingTable> getAvailableTablesNow(@PathVariable int partysize){
-//        List<SeatingTable> tablesBigEnough = seatingTableRepository.getSeatingTablesWhereCapacityIsGreaterOrEqualToPartySize(partysize);
-//        for (SeatingTable seatingTable : tablesBigEnough)
-//            if (seatingTable.isAvailableToday() == true) { availableTables.add(seatingTable);
-//        return availableTables;
-//    };
+
+
+//    @GetMapping(value = "/seatingTables/hard/{1}")
+//    public List<SeatingTable> getAvailableTablesHard(@PathVariable int test){
+//        return seatingTableRepository.getAvailableTablesHard(test);
+//    }
+
+
 
 //    @GetMapping(value = "/partysize/{partysize}/date/{date}/hr/{hr}/min/{min}")
 //    public List<SeatingTable> getAvailableTables(
