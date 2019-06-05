@@ -11,7 +11,20 @@ import Request from '../../helpers/Request';
             orderClicked: false,
             occupiedTables: [],
             selectedTable: null,
-            selectedBookingUrl: null
+            selectedBookingUrl: null,
+            menu: null,
+            item1: 0,
+            item2: 0,
+            item3: 0,
+            item4: 0,
+            item5: 0,
+            item6: 0,
+            item7: 0,
+            item8: 0,
+            item9: 0,
+            item10: 0,
+            item11: 0,
+            item12: 0
           }
           this.handleClickedTable = this.handleClickedTable.bind(this);
       }
@@ -23,6 +36,14 @@ import Request from '../../helpers/Request';
           .then((tables)=>{
               this.setState({
                 allTables: tables._embedded.seatingTables
+              },()=>{
+                const url2 = `http://localhost:8080/menuItems`;
+                request.get(url2)
+                .then((menuItems)=>{
+                    this.setState({
+                        menu: menuItems._embedded.menuItems
+                    })
+                })
               })
           })
       }
@@ -87,6 +108,19 @@ import Request from '../../helpers/Request';
                     onSubmit={this.handleSubmit}
                     backToTables={this._orderClicked}
                     selectedBookingUrl={this.state.selectedBookingUrl}
+                    menu={this.state.menu}
+                    item1={this.state.item1}
+                    item2={this.state.item2}
+                    item3={this.state.item3}
+                    item4={this.state.item4}
+                    item5={this.state.item5}
+                    item6={this.state.item6}
+                    item7={this.state.item7}
+                    item8={this.state.item8}
+                    item9={this.state.item9}
+                    item10={this.state.item10}
+                    item11={this.state.item11}
+                    item12={this.state.item12}
                   />
                   
               </React.Fragment>
@@ -99,11 +133,18 @@ import Request from '../../helpers/Request';
     if (props.orderClicked === false) {
         return null
     }
+    const menuOptions = props.menu.map((menuItem, index) => {
+        return (
+            <p><label htmlFor={menuItem.name}>{menuItem.name}: </label><input name={menuItem.name}type="number" value="0" key={index+1}/></p>
+            // <p><label htmlFor={menuItem.name}>Quantity: </label><input type="number" /></p>
+        )
+      })
     return(
         <div>
             <h1>Hello, I am menu item order form</h1>
                 <form onSubmit={props.onSubmit}>
-                    
+                    <label htmlFor="menuItem"></label>
+                    {menuOptions}
                 </form>
                 <button type="button" onClick={props.backToTables}>Back to Table View</button>
         </div>
