@@ -6,17 +6,21 @@ class BookingDetails extends Component{
   constructor(props){
     super(props);
     this.state ={
-      bookings: []
+      bookings: [],
+      booking: null
     }
  this.onDelete = this.onDelete.bind(this);
+ this.getSingleBooking = this.getSingleBooking.bind(this);
+
   }
   componentDidMount(){
-    this.getBooking();
+    this.getBookings();
+    // this.getSingleBooking();
   }
 
 
-  getBooking(){
-    let bookingId = this.props.match.params.name;
+  getBookings(){
+    // let bookingId = this.props.match.params.name;
     axios.get('http://localhost:8080/allbookings')
      .then(response => {
           this.setState({
@@ -27,6 +31,19 @@ class BookingDetails extends Component{
           .catch(err => console.log(err));
 
 }
+getSingleBooking(){
+  const bookingId = this.state.booking;
+
+  axios.get(`http://localhost:8080/bookings/${bookingId}`)
+   .then(response => {
+        this.setState({
+            booking: response.data}, () =>{
+              console.log(this.state);
+            })
+        })
+        .catch(err => console.log(err));
+
+}
 
   onDelete(evt){
      axios.delete(`http://localhost:8080/bookings/${evt.target.value}` )
@@ -34,6 +51,9 @@ class BookingDetails extends Component{
         this.props.history.push('/');
       }) .catch(err => console.log(err));
   }
+
+
+
 
     render() {
       let content = this.state.bookings.map((booking) => {
@@ -60,8 +80,16 @@ class BookingDetails extends Component{
          }
          </td>
 
-         <Link className="btn" to={'/bookings/edit/${this.state.details.id}'}>
-        Edit</Link>
+         <Link classNAme="btn" value={booking.id} to={{
+           pathname: `/bookings/edit/${booking.id}`,
+           state: {
+             booking: booking
+           }
+         }}>
+             Edit</Link>
+
+
+
         <button onClick={this.onDelete} value={booking.id} className="btn red right">Delete</button>
 
            </tr>
