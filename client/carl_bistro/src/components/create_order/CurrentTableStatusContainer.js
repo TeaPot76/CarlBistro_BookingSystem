@@ -41,12 +41,8 @@ import { log } from "util";
       }
 
       handleChange = event => {
-        const index = event.target.name - 1;
-        console.log(event.target);
-        
-        let newArrayItems = [...this.state.items];
-        console.log(newArrayItems);
-        
+        const index = event.target.name - 1;        
+        let newArrayItems = [...this.state.items];        
         newArrayItems[index] = event.target.value;
         this.setState({
             items: newArrayItems
@@ -76,16 +72,12 @@ import { log } from "util";
           this.state.items.forEach(quantityOfItem => {
               let intQuantity = parseInt(quantityOfItem)
               if (intQuantity != 0 || intQuantity != ''){
-                  let itemId = counter + 1;
-                  console.log(itemId);
-                  
+                  let itemId = counter + 1;                  
                   let url = `http://localhost:8080/menuItems/${itemId}`;
                   let postObject = {
                       "booking": this.state.selectedBookingUrl,
                       "menuItem": url
-                  }
-                  console.log(postObject);
-                  
+                  }                  
                   for (let index = 0; index < intQuantity; index++) {
                       request.post(`http://localhost:8080/orders`,postObject);
                   }
