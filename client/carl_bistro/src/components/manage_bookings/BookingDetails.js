@@ -8,7 +8,6 @@ class BookingDetails extends Component{
     this.state ={
       booking: []
     }
-    this.onDelete = this.onDelete.bind(this);
   }
   componentDidMount(){
     this.getBooking();
@@ -30,8 +29,7 @@ class BookingDetails extends Component{
 
   onDelete(){
     let bookingId = this.state.booking.id;
-    console.log(bookingId)
-    axios.delete('http://localhost:8080/bookings/${bookingId}')
+     axios.delete('http://localhost:8080/bookings/' + Number(bookingId))
       .then(response => {
         this.props.history.push('/');
       }) .catch(err => console.log(err));
