@@ -36,40 +36,48 @@ class MasterForm extends React.Component {
       [name]: value
     })    
   }
-
-  handleChangePartySize = event => {
+  handleChangeDateTimePSize = event => {
     const {name, value} = event.target
     this.setState({
       [name]: value
-    } , ()=>{
-      const url2 = `http://localhost:8080/seatingTables/partySize/${this.state.partySize}`; //available tables (capacity only) 
-      const request = new Request();
-      request.get(url2)
-      .then((result)=>{
-        this.setState({
-          availableTables: result
-        })
-      })
-      .then(()=>{
-        let newArrayAreas = [];
-        if (this.state.partySize === '') {
-          return;
-        }
-        this.state.availableTables.forEach(table => {
-          let tableNumberOrAreaIndex = table.tableNumber - 1;
-          let areaObject = this.state.areas[tableNumberOrAreaIndex];
-          newArrayAreas.push(areaObject);
-        })
-        this.setState({
-          availableAreas: newArrayAreas
-        })
-      })
+    }) 
+    this.getAvailableTables();
+  }
+
+  // GET ALL AVAILABLE TABLES
+  getAvailableTables = () => {
+//if
+    if (this.state.partySize != '' 
+        && this.state.date != ''
+        && this.state.time != '') {
+          const url2 = `http://localhost:8080/seatingTables/partySize/${this.state.partySize}`; //available tables (capacity only) 
+          const request = new Request();
+          request.get(url2)
+          .then((result)=>{
+            this.setState({
+              availableTables: result
+            })
+          })
+          .then(()=>{
+            let newArrayAreas = [];
+            if (this.state.partySize === '') {
+              return;
+            }
+            this.state.availableTables.forEach(table => {
+              let tableNumberOrAreaIndex = table.tableNumber - 1;
+              let areaObject = this.state.areas[tableNumberOrAreaIndex];
+              newArrayAreas.push(areaObject);
+            })
+            this.setState({
+              availableAreas: newArrayAreas
+            })
+          })
+    }
+
+      
     }
     
     
-    )
-
-  }
 
   handleTableChoice = tableStateObj => {
     this.setState(tableStateObj);
