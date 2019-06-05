@@ -6,37 +6,57 @@ class BookingDetails extends Component{
   constructor(props){
     super(props);
     this.state ={
-      booking: []
+      bookings: [],
+      booking: null
     }
+ this.onDelete = this.onDelete.bind(this);
+ this.getSingleBooking = this.getSingleBooking.bind(this);
+
   }
   componentDidMount(){
-    this.getBooking();
+    this.getBookings();
+    // this.getSingleBooking();
   }
 
 
-  getBooking(){
-    let bookingId = this.props.match.params.id;
+  getBookings(){
+    // let bookingId = this.props.match.params.name;
     axios.get('http://localhost:8080/allbookings')
      .then(response => {
           this.setState({
-              booking: response.data}, () =>{
+              bookings: response.data}, () =>{
                 console.log(this.state);
               })
           })
           .catch(err => console.log(err));
 
 }
+getSingleBooking(){
+  const bookingId = this.state.booking;
 
-  onDelete(){
-    let bookingId = this.state.booking.id;
-     axios.delete('http://localhost:8080/bookings/' + Number(bookingId))
+  axios.get(`http://localhost:8080/bookings/${bookingId}`)
+   .then(response => {
+        this.setState({
+            booking: response.data}, () =>{
+              console.log(this.state);
+            })
+        })
+        .catch(err => console.log(err));
+
+}
+
+  onDelete(evt){
+     axios.delete(`http://localhost:8080/bookings/${evt.target.value}` )
       .then(response => {
         this.props.history.push('/');
       }) .catch(err => console.log(err));
   }
 
+
+
+
     render() {
-      let content = this.state.booking.map((booking) => {
+      let content = this.state.bookings.map((booking) => {
        return (
          <tr>
          <td>
@@ -60,9 +80,17 @@ class BookingDetails extends Component{
          }
          </td>
 
-         <Link classNAme="btn" to={'/bookings/edit/${this.state.details.id}'}>
-        Edit</Link>
-        <button onClick={this.onDelete.bind(this)} className="btn red right">Delete</button>
+         <Link classNAme="btn" value={booking.id} to={{
+           pathname: `/bookings/edit/${booking.id}`,
+           state: {
+             booking: booking
+           }
+         }}>
+             Edit</Link>
+
+
+
+        <button onClick={this.onDelete} value={booking.id} className="btn red right">Delete</button>
 
            </tr>
 

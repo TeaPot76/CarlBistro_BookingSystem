@@ -138,6 +138,14 @@ public class DataLoader implements ApplicationRunner {
         Booking booking7 = new Booking(dateNow, time7, 2, booker2, table1, "");
         bookingRepository.save(booking7);
 
+        LocalTime time8 = LocalTime.of(17, 00);
+        Booking booking8 = new Booking(dateNow, time8, 2, booker2, table2, "");
+        bookingRepository.save(booking8);
+
+        LocalTime time9 = LocalTime.of(14, 00);
+        Booking booking9 = new Booking(dateNow, time9, 2, booker2, table2, "");
+        bookingRepository.save(booking9);
+
         Order order1 = new Order(booking1, drink1);
         orderRepository.save(order1);
 

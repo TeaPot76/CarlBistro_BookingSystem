@@ -26,8 +26,8 @@ class RestaurantContainer extends Component {
               <Route exact path="/createbooking" render={()=><MasterFormBooking/>}/>
               <Route exact path="/managebookings"  render={()=><AllBookings/>}/>
               <Route exact path="/managecustomers"  render={()=><AllCustomers/>}/>
-              <Route exact path="/tablelist" render={()=><TableList/>}/>
-              <Route exact path="/bookings/edit/:id" component={EditForm}/>
+              {/* <Route exact path="/tablelist" render={()=><TableList/>}/> */}
+              <Route exact path="/bookings/edit/:id" component={EditForm} />
               <Route exact path="/bookingdetails" component={BookingDetails}/>
               <Route exact path="/currenttablestatus" render={()=><CurrentTableStatusContainer/>}/>
 

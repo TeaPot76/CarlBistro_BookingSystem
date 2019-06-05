@@ -56,12 +56,12 @@ public class SeatingTableTest {
 
     @Test
     public void isNotAvailableToday() {
-        assertEquals(false, table.isAvailableToday());
+        assertEquals(false, table.isBookedAtSomePointToday());
     }
 
     @Test
     public void isAvailableToday() {
-        assertEquals(true, table1.isAvailableToday());
+        assertEquals(true, table1.isBookedAtSomePointToday());
     }
 
     @Test

@@ -10,10 +10,9 @@ class NavBar extends Component {
                 <NavLink exact activeClassName="active-link" className="link" to="/createbooking">New Booking</NavLink>
                 <NavLink exact activeClassName="active-link" className="link" to="/managebookings">Manage Bookings</NavLink>
                 <NavLink exact activeClassName="active-link" className="link" to="/managecustomers">Manage Customers</NavLink>
-                <NavLink exact activeClassName="active-link" className="link" to="/edit">Edit Form</NavLink>
-                <NavLink exact activeClassName="active-link" className="link" to="/bookingdetails">BookingsDetails</NavLink>
+                <NavLink exact activeClassName="active-link" className="link" to="/bookingdetails">Edit / Delete</NavLink>
 
-                <NavLink exact activeClassName="active-link" className="link" to="/tablelist">Tables</NavLink>
+                <NavLink exact activeClassName="active-link" className="link" to="/currenttablestatus">Tables</NavLink>
             </nav>
          );
     }

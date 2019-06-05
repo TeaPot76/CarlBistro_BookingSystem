@@ -93,11 +93,46 @@ public class SeatingTable {
         return true;
     }
 
-    public boolean isAvailableToday(){
+    public boolean isBookedAtSomePointToday(){
         for (Booking booking : bookings)
-            if (LocalDate.now().equals(booking.getDate())) return false;
+            if (LocalDate.now().equals(booking.getDate())) return true;
+        return false;
+    }
+
+    // If the table has a booking for now or the next two hours it returns false
+    public boolean isBookedBetweenNowAndNextTwoHours(){
+
+        LocalTime proposedStart = LocalTime.now();
+        LocalTime proposedEnd = LocalTime.now().plusHours(2);
+        LocalTime bookedStart = null;
+        LocalTime bookedEnd = null;
+
+
+        for (Booking booking : bookings) {
+            bookedStart = booking.getTime();
+            bookedEnd = booking.getTime().plusHours(2);
+
+            if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
+                return true;
+            }
+            else if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
+                return true;
+            }
+            else if (bookedStart.equals(proposedStart)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // If the table has a booking for the next two hours AND today it returns false, otherwise true
+    public boolean isAvailableRightNow(){
+        if (isBookedAtSomePointToday() == true  && isBookedBetweenNowAndNextTwoHours() == true) {
+            return false;
+        }
         return true;
     }
+
 
     public boolean isAvailableAtTime(int hour, int minute) {
         LocalTime bookingStart = LocalTime.of(hour, minute + 1);
