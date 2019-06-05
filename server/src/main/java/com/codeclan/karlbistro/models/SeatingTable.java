@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,4 +81,39 @@ public class SeatingTable {
     public void setTableNumber(int tableNumber) {
         this.tableNumber = tableNumber;
     }
+
+    public boolean isLargeEnough(int capacity){
+        if (this.capacity < capacity) {return false;}
+        else {return true;}
+    }
+
+    public boolean isAvailableOnDate(int year, int month, int day){
+        for (Booking booking : bookings)
+            if (LocalDate.of(year, month, day).equals(booking.getDate())) return false;
+        return true;
+    }
+
+    public boolean isAvailableToday(){
+        for (Booking booking : bookings)
+            if (LocalDate.now().equals(booking.getDate())) return false;
+        return true;
+    }
+
+    public boolean isAvailableAtTime(int hour, int minute) {
+        LocalTime bookingStart = LocalTime.of(hour, minute + 1);
+        LocalTime bookingTime = null;
+
+        for (Booking booking : bookings) {
+            bookingTime = booking.getTime();
+
+            if (bookingStart.isAfter(bookingTime) && (bookingStart.isBefore(bookingTime.plusHours(2)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
 }
