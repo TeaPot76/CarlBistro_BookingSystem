@@ -3,6 +3,7 @@ import React, {
   } from "react";
 import CurrentTableTableList from "./CurrentTableTableList";
 import Request from '../../helpers/Request';
+import { log } from "util";
 
   class CurrentTableStatus extends Component {
       constructor(props){
@@ -13,18 +14,7 @@ import Request from '../../helpers/Request';
             selectedTable: null,
             selectedBookingUrl: null,
             menu: null,
-            item1: 0,
-            item2: 0,
-            item3: 0,
-            item4: 0,
-            item5: 0,
-            item6: 0,
-            item7: 0,
-            item8: 0,
-            item9: 0,
-            item10: 0,
-            item11: 0,
-            item12: 0
+            items: [0,0,0,0,0,0,0,0,0,0,0,0]
           }
           this.handleClickedTable = this.handleClickedTable.bind(this);
       }
@@ -41,11 +31,26 @@ import Request from '../../helpers/Request';
                 request.get(url2)
                 .then((menuItems)=>{
                     this.setState({
-                        menu: menuItems._embedded.menuItems
+                        menu: menuItems._embedded.menuItems,
+                        [menuItems._embedded.menuItems[1].name]: "hello"
+
                     })
                 })
               })
           })
+      }
+
+      handleChange = event => {
+        const index = event.target.name - 1;
+        console.log(event.target);
+        
+        let newArrayItems = [...this.state.items];
+        console.log(newArrayItems);
+        
+        newArrayItems[index] = event.target.value;
+        this.setState({
+            items: newArrayItems
+        })       
       }
 
       handleClickedTable(object){
@@ -65,8 +70,28 @@ import Request from '../../helpers/Request';
           });
       }
 
-      handleSubmit = event => {
-          return null;
+      submitOrders = () => {
+        let counter = 0;
+        const request = new Request()
+          this.state.items.forEach(quantityOfItem => {
+              let intQuantity = parseInt(quantityOfItem)
+              if (intQuantity != 0 || intQuantity != ''){
+                  let itemId = counter + 1;
+                  console.log(itemId);
+                  
+                  let url = `http://localhost:8080/menuItems/${itemId}`;
+                  let postObject = {
+                      "booking": this.state.selectedBookingUrl,
+                      "menuItem": url
+                  }
+                  console.log(postObject);
+                  
+                  for (let index = 0; index < intQuantity; index++) {
+                      request.post(`http://localhost:8080/orders`,postObject);
+                  }
+              }
+              counter ++;
+          });
       }
 
       _orderClicked = () => {
@@ -109,18 +134,9 @@ import Request from '../../helpers/Request';
                     backToTables={this._orderClicked}
                     selectedBookingUrl={this.state.selectedBookingUrl}
                     menu={this.state.menu}
-                    item1={this.state.item1}
-                    item2={this.state.item2}
-                    item3={this.state.item3}
-                    item4={this.state.item4}
-                    item5={this.state.item5}
-                    item6={this.state.item6}
-                    item7={this.state.item7}
-                    item8={this.state.item8}
-                    item9={this.state.item9}
-                    item10={this.state.item10}
-                    item11={this.state.item11}
-                    item12={this.state.item12}
+                    items={this.state.items}
+                    handleChange={this.handleChange}
+                    submitOrders={this.submitOrders}
                   />
                   
               </React.Fragment>
@@ -133,18 +149,115 @@ import Request from '../../helpers/Request';
     if (props.orderClicked === false) {
         return null
     }
-    const menuOptions = props.menu.map((menuItem, index) => {
-        return (
-            <p><label htmlFor={menuItem.name}>{menuItem.name}: </label><input name={menuItem.name}type="number" value="0" key={index+1}/></p>
-            // <p><label htmlFor={menuItem.name}>Quantity: </label><input type="number" /></p>
-        )
-      })
+
+    // const menuOptions = props.menu.map((menuItem, index) => {
+    //     return (
+    //         <p><label htmlFor={menuItem.name}>{menuItem.name}: </label><input name={menuItem.name}type="number" value="0" key={index+1}/></p>
+    //         // <p><label htmlFor={menuItem.name}>Quantity: </label><input type="number" /></p>
+    //     )
+    //   })
     return(
         <div>
             <h1>Hello, I am menu item order form</h1>
                 <form onSubmit={props.onSubmit}>
-                    <label htmlFor="menuItem"></label>
-                    {menuOptions}
+                    <label htmlFor="menuItem">Menu</label>
+                    <p><label htmlFor="item1">Burger: </label>
+                    <input 
+                        name="1" 
+                        type="number" 
+                        value={props.items[0]} 
+                        key="1"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item2">Hot Dog: </label>
+                    <input 
+                        name="2" 
+                        type="number" 
+                        value={props.items[1]} 
+                        key="2"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item3">Stew: </label>
+                    <input 
+                        name="3" 
+                        type="number" 
+                        value={props.items[2]} 
+                        key="3"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item4">Vegan Burrito: </label>
+                    <input 
+                        name="4" 
+                        type="number" 
+                        value={props.items[3]} 
+                        key="4"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item5">Greek Salad: </label>
+                    <input 
+                        name="5" 
+                        type="number" 
+                        value={props.items[4]} 
+                        key="5"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item6">Viennese Schnitzel: </label>
+                    <input 
+                        name="6" 
+                        type="number" 
+                        value={props.items[5]} 
+                        key="6"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item7">Coke: </label>
+                    <input 
+                        name="7" 
+                        type="number" 
+                        value={props.items[6]} 
+                        key="7"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item8">Irn Bru: </label>
+                    <input 
+                        name="8" 
+                        type="number" 
+                        value={props.items[7]} 
+                        key="8"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item9">Lilt: </label>
+                    <input 
+                        name="9" 
+                        type="number" 
+                        value={props.items[8]} 
+                        key="9"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item10">Red Wine: </label>
+                    <input 
+                        name="10" 
+                        type="number" 
+                        value={props.items[9]} 
+                        key="10"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item11">Champagne: </label>
+                    <input 
+                        name="11" 
+                        type="number" 
+                        value={props.items[10]} 
+                        key="11"
+                        onChange={props.handleChange}
+                    /></p>
+                    <p><label htmlFor="item12">Beer: </label>
+                    <input 
+                        name="12" 
+                        type="number" 
+                        value={props.items[11]} 
+                        key="12"
+                        onChange={props.handleChange}
+                    /></p>
+                    <button type="button" onClick={props.submitOrders}>Create Orders</button>
                 </form>
                 <button type="button" onClick={props.backToTables}>Back to Table View</button>
         </div>
