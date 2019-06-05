@@ -8,6 +8,7 @@ class BookingDetails extends Component{
     this.state ={
       booking: []
     }
+     this.onDelete = this.onDelete.bind(this);
   }
   componentDidMount(){
     this.getBooking();
@@ -60,7 +61,7 @@ class BookingDetails extends Component{
          }
          </td>
 
-         <Link classNAme="btn" to={'/bookings/edit/${this.state.details.id}'}>
+         <Link className="btn" to={'/bookings/edit/${this.state.details.id}'}>
         Edit</Link>
         <button onClick={this.onDelete.bind(this)} className="btn red right">Delete</button>
 
