@@ -15,6 +15,9 @@ class CurrentTableTableList extends Component {
   }
 
     render() {
+      if (this.props.orderClicked === true){
+        return null;
+      }
        return (
         <div className="page-container">
           <div className="table-display-div">

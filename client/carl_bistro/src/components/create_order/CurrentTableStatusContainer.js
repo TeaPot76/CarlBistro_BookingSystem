@@ -20,7 +20,8 @@ import CurrentTableTableList from "./CurrentTableTableList";
           return(
               <React.Fragment>
                   <CurrentTableTableList
-                  
+                    orderClicked={this.state.orderClicked}
+
                   />
                   <AddOrder
                     orderClicked={this.state.orderClicked}
