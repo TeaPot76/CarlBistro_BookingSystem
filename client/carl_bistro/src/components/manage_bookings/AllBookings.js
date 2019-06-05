@@ -86,18 +86,18 @@ class AllBookings extends Component {
                  matchSorter(rows, filter.value, { keys: ["phone"] }),
                filterAll: true
              },
-
-              { Header: "Edit" ,
-                id: "edit",
-                accessor: "id",
-                Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
-              },
-
-              { Header: "Delete",
-                id: "delete",
-                accessor: "id",
-                Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
-              },
+// buttons to be updated with delete and edit function via link and params
+              // { Header: "Edit" ,
+              //   id: "edit",
+              //   accessor: "id",
+              //   Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
+              // },
+              //
+              // { Header: "Delete",
+              //   id: "delete",
+              //   accessor: "id",
+              //   Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
+              // },
 
 
              {
@@ -121,7 +121,7 @@ class AllBookings extends Component {
                        value={filter ? filter.value : "all"}
                      >
                        <option value="all">Show All</option>
-                       <option value="true">Booking History</option>
+                       <option value="true">Past Bookings</option>
                        <option value="false">Upcoming Bookings</option>
                      </select>
                   }

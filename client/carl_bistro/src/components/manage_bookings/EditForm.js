@@ -11,6 +11,8 @@ class EditForm extends React.Component {
     this.state = this.props.location.state.booking;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+
   }
 
   componentWillMount() {
@@ -33,8 +35,19 @@ class EditForm extends React.Component {
     .catch(err => console.log(err));
   }
 
+
+
   handleSubmit(event) {
+
     event.preventDefault();
+    // axios.get(`http://localhost:8080/bookings/${this.props.id}/${this.props.booker}`)
+    // .then(response => {
+    //   this.setState({booker: booker})
+    // })
+    axios.get(`http://localhost:8080/bookings/${this.props.id}/${this.props.booker}`)
+    .then(response => {
+      this.setState({booking: booking})
+    })
     const request = new Request();
     const booking = {
       "date": this.state.date,
@@ -105,13 +118,13 @@ class EditForm extends React.Component {
 
             <label><span>Time:</span></label>
             <input
-              type="text"
+              type="time"
               ref="time"
               value={this.state.time}
               name="time"
               placeholder="time"
-              minLength="10"
-              maxLength="11"
+              minLength="5"
+              maxLength="5"
               required
               onChange={this.handleInputChange.bind(this)}
             />
