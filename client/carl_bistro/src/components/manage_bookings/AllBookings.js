@@ -31,6 +31,7 @@ class AllBookings extends Component {
 
 
     render() {
+<<<<<<< HEAD
       let content = this.state.bookings.map((booking) => {
        return (
 
@@ -78,6 +79,14 @@ class AllBookings extends Component {
      //
      // }
       return <ReactTable data={this.state.bookings}
+=======
+
+      return (
+        
+        <div className="all-bookings">
+          <h1 className="booking-h1">Booking Log</h1>
+         <ReactTable data={this.state.bookings}
+>>>>>>> fbd3d18fc8a38b3a964d303b2b35126072097014
                          filterable
                          defaultFilterMethod={(filter, row)=>
                          String(row[filter.id])===filter.value}
@@ -128,6 +137,7 @@ class AllBookings extends Component {
                filterAll: true
              },
 
+<<<<<<< HEAD
 
                //onClick require the props function redirecting to edit and update booking
                //
@@ -147,6 +157,20 @@ class AllBookings extends Component {
               //   Cell: ({value}) =>(<button onClick={() => this.handleButtonClick}>Delete</button>)
               // },
               //
+=======
+              { Header: "Edit" ,
+                id: "edit",
+                accessor: "id",
+                Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
+              },
+
+              { Header: "Delete",
+                id: "delete",
+                accessor: "id",
+                Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
+              },
+
+>>>>>>> fbd3d18fc8a38b3a964d303b2b35126072097014
 
              {
                    Header: "Bookings",
@@ -169,8 +193,8 @@ class AllBookings extends Component {
                        value={filter ? filter.value : "all"}
                      >
                        <option value="all">Show All</option>
-                       <option value="true">Can Drink</option>
-                       <option value="false">Can't Drink</option>
+                       <option value="true">Booking History</option>
+                       <option value="false">Upcoming Bookings</option>
                      </select>
                   }
                 ]
@@ -179,16 +203,9 @@ class AllBookings extends Component {
      }
             defaultPageSize={10}
             className="-striped -highlight"
-
-                    //
-                    // <th>Date</th>
-                    // <td><th>Time</th></td>
-                    // <td><th>Party Size</th></td>
-                    // <td><th>Table Number</th></td>
-                    // <td><th>Customer Name</th></td>
-                    // <td><th>Customer Phone</th></td>
-
-      />
+      /> 
+        </div>
+      )
     }
 
   }
