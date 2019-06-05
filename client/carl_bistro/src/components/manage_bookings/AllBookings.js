@@ -31,57 +31,57 @@ class AllBookings extends Component {
     render() {
 
       return (
-        
+
         <div className="all-bookings">
           <h1 className="booking-h1">Booking Log</h1>
          <ReactTable data={this.state.bookings}
-                         filterable
-                         defaultFilterMethod={(filter, row)=>
-                         String(row[filter.id])===filter.value}
-                         columns={[
-                           {
-                             Header: "Date",
-                             accessor: "date",
-                             filterMethod: (filter, row ) =>
-                             row[filter.id].startsWith(filter.value)&&
-                             row[filter.id].endsWith(filter.value)
-                           },
+           filterable
+           defaultFilterMethod={(filter, row)=>
+           String(row[filter.id])===filter.value}
+           columns={[
+             {
+               Header: "Date",
+               accessor: "date",
+               filterMethod: (filter, rows ) =>
+               matchSorter(rows, filter.value, {keys: ["date"]}),
+               filterAll: true
+             },
 
-                           {
-                    Header: "Time",
-                    id: "time",
-                    accessor: d => d.time,
-                    filterMethod: (filter, rows) =>
-                      matchSorter(rows, filter.value, { keys: ["time"] }),
-                    filterAll: true
-                  },
-                 {  Header: "Party Size",
-                  id: "partySize",
-                  accessor: d => d.partySize,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["partySize"] }),
-                  filterAll: true
-                },
+             {
+                Header: "Time",
+                id: "time",
+                accessor: d => d.time,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["time"] }),
+                filterAll: true
+            },
+             {  Header: "Party Size",
+                id: "partySize",
+                accessor: d => d.partySize,
+                filterMethod: (filter, rows) =>
+                  matchSorter(rows, filter.value, { keys: ["partySize"] }),
+                filterAll: true
+            },
                 {  Header: "Table #",
-                 id: "seatingTable.tableNumber",
+                 id: "tableNumber",
                  accessor: d => d.seatingTable.tableNumber,
                  filterMethod: (filter, rows) =>
-                   matchSorter(rows, filter.value, { keys: ["seatingTabletableNumber"] }),
+                   matchSorter(rows, filter.value, { keys: ["tableNumber"] }),
                  filterAll: true
                },
                {  Header: "Name",
-                id: "booker.name",
+                id: "name",
                 accessor: d => d.booker.name,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["booker.name"] }),
+                  matchSorter(rows, filter.value, { keys: ["name"] }),
                 filterAll: true
               },
 
               { Header: "Contact",
-               id: "booker.phone",
+               id: "phone",
                accessor: d => d.booker.phone,
                filterMethod: (filter, rows) =>
-                 matchSorter(rows, filter.value, { keys: ["booker.phone"] }),
+                 matchSorter(rows, filter.value, { keys: ["phone"] }),
                filterAll: true
              },
 
@@ -100,9 +100,9 @@ class AllBookings extends Component {
 
              {
                    Header: "Bookings",
-                   accessor: "partySize",
+                   accessor: "date",
                    id: "over",
-                   Cell: ({ value }) => (value = 3 ? "Yes" : "No"),
+                   Cell: ({ value }) => (value > Date.now() ? "Upcoming" : "Past"),
                    filterMethod: (filter, row) => {
                      if (filter.value === "all") {
                        return true;
@@ -128,7 +128,7 @@ class AllBookings extends Component {
      }
             defaultPageSize={10}
             className="-striped -highlight"
-      /> 
+      />
         </div>
       )
     }

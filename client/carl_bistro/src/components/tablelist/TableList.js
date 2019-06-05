@@ -14,7 +14,7 @@ class TableList extends Component {
       tables: [],
       selectedTable: null
     }
-  } 
+  }
 
     render() {
        return (
@@ -42,7 +42,7 @@ class TableList extends Component {
                       style={{ ...this.getTipPosition(this.state.hoveredArea)}}>
                     { <TableCard table={this.state.selectedTable} />}
                   </span>
-                } 
+                }
               </div>
             </div>
          </div>
@@ -51,10 +51,8 @@ class TableList extends Component {
 
      clicked(area) {
        this.setState( {clickedTable: area});
-       console.log(area);
        this.props.availableTables.forEach((table) => {
          if (table.tableNumber == area.name) {
-           console.log(table);
            this.props.onSelectedTable(area.name);
            this.setState({ selectedTable: table }, () => {
             console.log(this.state.selectedTable);

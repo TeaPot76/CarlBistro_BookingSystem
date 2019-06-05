@@ -76,9 +76,11 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
             //doesnt work yet
             Criteria cr2 = session.createCriteria(SeatingTable.class);
             cr2.add(Restrictions.ge("capacity", partysize));
-            cr2.createAlias("bookings", "bookingsAlias", JoinType.INNER_JOIN);
+            cr2.createAlias("bookings", "bookingsAlias");
             cr2.add(Restrictions.not(
-                    Restrictions.eq("bookingsAlias.date", LocalDate.of(2019, 03, 27))));
+                    Restrictions.eq("bookingsAlias.date", todaysDate)));
+            cr2.add(Restrictions.not(
+                    Restrictions.eq("bookingsAlias.time", now)));
 
 
             results = cr1.list();
