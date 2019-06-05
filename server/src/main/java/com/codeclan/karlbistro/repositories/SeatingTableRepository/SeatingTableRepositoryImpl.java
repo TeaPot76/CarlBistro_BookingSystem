@@ -69,9 +69,9 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
 
         try {
             // gets all tables with big enough capacity that have no bookings
-            Criteria cr1 = session.createCriteria(SeatingTable.class);
-            cr1.add(Restrictions.isEmpty("bookings"));
-            cr1.add(Restrictions.ge("capacity", partysize));
+//            Criteria cr1 = session.createCriteria(SeatingTable.class);
+//            cr1.add(Restrictions.isEmpty("bookings"));
+//            cr1.add(Restrictions.ge("capacity", partysize));
 
             //doesnt work yet
             Criteria cr2 = session.createCriteria(SeatingTable.class);
@@ -80,11 +80,11 @@ public class SeatingTableRepositoryImpl implements SeatingTableRepositoryCustom{
             cr2.add(Restrictions.not(
                     Restrictions.eq("bookingsAlias.date", todaysDate)));
             cr2.add(Restrictions.not(
-                    Restrictions.eq("bookingsAlias.time", now)));
+                    Restrictions.between("bookingsAlias.time", LocalTime.of(11,00), LocalTime.of(18, 30))));
 
 
-            results = cr1.list();
-            results.addAll(cr2.list());
+            results = cr2.list();
+//            results.addAll(cr2.list());
 
         } catch (HibernateException ex){
             ex.printStackTrace();
