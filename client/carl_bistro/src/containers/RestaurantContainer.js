@@ -11,6 +11,7 @@ import EditForm from "../components/manage_bookings/EditForm";
 import BookingDetails from "../components/manage_bookings/BookingDetails";
 import CurrentTableStatusContainer from "../components/create_order/CurrentTableStatusContainer"
 import ChartComponent from "../components/chart_component/ChartComponent"
+import Chart from "../components/chart_component/Chart"
 
 
 class RestaurantContainer extends Component {
@@ -32,7 +33,7 @@ class RestaurantContainer extends Component {
               <Route exact path="/bookings/edit/:id" component={EditForm} />
               <Route exact path="/bookingdetails" component={BookingDetails}/>
               <Route exact path="/currenttablestatus" render={()=><CurrentTableStatusContainer/>}/>
-              <Route exact path="/chart" component={ChartComponent}/>
+              <Route exact path="/chart" component={Chart}/>
 
 
             </Switch>

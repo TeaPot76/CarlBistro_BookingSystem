@@ -53,7 +53,7 @@ class EditForm extends React.Component {
       "date": this.state.date,
       "time": this.state.time,
       "partySize": this.state.partySize,
-      "booker": 'http://localhost:8080/bookers/1',
+      "booker": `http://localhost:8080/bookers/${this.state.id}`,
       "seatingTable": this.state.table,
       "bookingNote": this.state.bookingNote
     };

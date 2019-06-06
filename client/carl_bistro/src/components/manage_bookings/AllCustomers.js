@@ -29,51 +29,8 @@ class AllCustomers extends Component {
 
 
     render() {
-     //  let content = this.state.bookings.map((booking) => {
-     //   return (
-     //
-     //
-     //     <tr>
-     //     <td>
-     //    {
-     //     booking.booker.name
-     //     }
-     //     </td>
-     //     <td>
-     //     {
-     //       booking.time.slice(0, -3)
-     //     }
-     //     </td>
-     //
-     //     <td>
-     //      {
-     //       booking.partySize
-     //     }
-     //     </td>
-     //
-     //     <td>
-     //     {
-     //       booking.seatingTable.tableNumber
-     //     }
-     //     </td>
-     //     <td>
-     //     {
-     //       booking.date
-     //     }
-     //     </td>
-     //     <td>
-     //       {
-     //       booking.booker.phone
-     //     }
-     //     </td>
-     //
-     //      <button type ="button">edit</button>
-     //      <button type ="button">cancel </button> </tr>
-     //
-     //   );
-     // })
 
-      return <ReactTable data={this.state.bookings}
+        return <ReactTable data={this.state.bookings}
                          filterable
                          defaultFilterMethod={(filter, row)=>
                          String(row[filter.id])===filter.value}
