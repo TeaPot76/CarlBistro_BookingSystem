@@ -1,50 +1,54 @@
 import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
+import BarGraph from './BarGraph';
 
+ class Chart extends Component{
+   constructor(props) {
+     super(props);
+     this.state = {
+       bookings: []
+     }
+   }
 
-class Chart extends Component {
-  constructor(props){
-    super(props);
-    //displayName: 'LineExample',
-    this.state = {
+           componentDidMount() {
+             const url = 'http://localhost:8080/bookings';
+             fetch(url)
+               .then(res => res.json())
+               .then((allBookings) => {
+                   this.setState({
+                       bookings: allBookings}
+                     );
+                   });
 
-
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      label: 'My First dataset',
-      fill: false,
-      lineTension: 0.1,
-      backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
-      borderCapStyle: 'butt',
-      borderDash: [],
-      borderDashOffset: 0.0,
-      borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(75,192,192,1)',
-      pointBackgroundColor: '#fff',
-      pointBorderWidth: 1,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-      pointHoverBorderColor: 'rgba(220,220,220,1)',
-      pointHoverBorderWidth: 2,
-      pointRadius: 1,
-      pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }
-  ]
-}
 }
 
 
   render() {
-    return (
-      <div>
-        <h2>Line Example</h2>
-        <Line data={this.state} />
-      </div>
-    )
-  }
+   //  let content = this.state.bookings.map((booking) => {
+   //   return (
+   //     <div key={this.booking.partySize} > {this.booking.seatingTable.capacity}</div>
+   //
+   //   )
+   // })
+   return (
+    <div >
+
+    {}
+      <BarGraph/>
+    </div>
+
+
+
+
+
+   )
+
+ }
+
 }
+
+
+
 
 export default Chart;
