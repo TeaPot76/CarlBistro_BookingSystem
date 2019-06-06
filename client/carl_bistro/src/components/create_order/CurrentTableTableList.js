@@ -9,7 +9,7 @@ class CurrentTableTableList extends Component {
     super(props);
     this.state = {
       tables: [],
-      selectedTable: null
+      selectedTable: null,
     }
   }
 
@@ -23,26 +23,18 @@ class CurrentTableTableList extends Component {
            <div className="tables-container">
             <h1> Tables </h1>
               <ImageMapper
-                src={require("../../images/map.png")}
+                src={require("../../images/restaurant.png")}
                 map={{
                   name: "my-map",
-                  areas: [{ name: "1", shape: "rect", coords: [43, 98, 105, 131], preFillColor: "pink", fillColor: "green" },
-                  { name: "2", shape: "rect", coords: [43, 272, 105, 307], preFillColor: "pink", fillColor: "blue"  },
-                  { name: "3", shape: "rect", coords: [42, 470, 104, 504], preFillColor: "pink", fillColor: "green" },
-                  { name: "4", shape: "rect", coords: [41, 648, 105, 687], preFillColor: "pink", fillColor: "green" },
-                  { name: "5", shape: "circle", coords: [304, 131, 45], preFillColor: "pink", fillColor: "green" },
-                  { name: "6", shape: "circle", coords: [307, 350, 42], preFillColor: "pink", fillColor: "green" },
-                  { name: "7", shape: "circle", coords: [302, 586, 43], preFillColor: "pink", fillColor: "green" },
-                  { name: "8", shape: "circle", coords: [577, 198, 43], preFillColor: "pink", fillColor: "green" },
-                  { name: "9", shape: "rect", coords: [556, 626, 666, 429], preFillColor: "pink", fillColor: "green" }]
+                  areas: this.props.areas
                 }}
-                width={400}
-                imgWidth={750}
+                width={500}
+                imgWidth={500}
                 onMouseEnter={area => this.enterArea(area)}
                 onMouseLeave={area => this.leaveArea(area)}
                 onClick={area => this.clicked(area)}
                 strokeColor= "white"
-                lineWidth= {5}
+                lineWidth= {0}
               />
               <CreateOrderTablecard
               table={this.state.selectedTable}

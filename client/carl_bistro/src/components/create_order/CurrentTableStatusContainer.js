@@ -14,31 +14,53 @@ import { log } from "util";
             selectedTable: null,
             selectedBookingUrl: null,
             menu: null,
-            items: [0,0,0,0,0,0,0,0,0,0,0,0]
+            items: [0,0,0,0,0,0,0,0,0,0,0,0],
+            areas: [{ name: "1", shape: "rect", coords: [50,185,97,231], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "2", shape: "rect", coords: [125,185,173,231], preFillColor: "#456c3b", fillColor: "#306030"  },
+            { name: "3", shape: "rect", coords: [49,273,97,320], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "4", shape: "rect", coords: [125,273,172,320], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "5", shape: "rect", coords: [49,362,98,410], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "6", shape: "rect", coords: [125,362,173,410], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "7", shape: "circle", coords: [265,252,30], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "8", shape: "circle", coords: [265,359,30], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "9", shape: "circle", coords: [267,109,41], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "10", shape: "circle", coords: [385,135,42], preFillColor: "#456c3b", fillColor: "#306030" },
+            { name: "11", shape: "rect", coords: [372,246,457,390], preFillColor: "#456c3b", fillColor: "#306030" }],
+            occupiedAreas: []
           }
           this.handleClickedTable = this.handleClickedTable.bind(this);
       }
 
       componentDidMount(){
-          const url = `http://localhost:8080/seatingTables`; // all tables
+          const url = `http://localhost:8080/seatingTables/currentlyOccupied`; // currently occupied
           const request = new Request();
           request.get(url)
           .then((tables)=>{
               this.setState({
-                allTables: tables._embedded.seatingTables
+                occupiedTables: tables
               },()=>{
                 const url2 = `http://localhost:8080/menuItems`;
                 request.get(url2)
                 .then((menuItems)=>{
                     this.setState({
-                        menu: menuItems._embedded.menuItems,
-                        [menuItems._embedded.menuItems[1].name]: "hello"
-
+                        menu: menuItems._embedded.menuItems
+                    },()=>{
+                        let newArrayAreas = [];
+                        this.state.occupiedTables.forEach(table => {
+                        let tableNumberOrAreaIndex = table.tableNumber - 1;
+                        let areaObject = this.state.areas[tableNumberOrAreaIndex];
+                        newArrayAreas.push(areaObject);
+                        })
+                        this.setState({
+                        occupiedAreas: newArrayAreas
+                        })
                     })
                 })
               })
           })
       }
+
+      
 
       handleChange = event => {
         const index = event.target.name - 1;
@@ -124,9 +146,10 @@ import { log } from "util";
               <React.Fragment>
                   <CurrentTableTableList
                     orderClicked={this.state.orderClicked}
-                    occupiedTables={this.state.allTables} //change back to occupied tables when query successful
+                    occupiedTables={this.state.occupiedTables} //change back to occupied tables when query successful
                     orderButtonClick={this._orderClicked}
                     handleClickedTable={this.handleClickedTable}
+                    areas={this.state.occupiedAreas}
                   />
                   <AddOrder
                     orderClicked={this.state.orderClicked}

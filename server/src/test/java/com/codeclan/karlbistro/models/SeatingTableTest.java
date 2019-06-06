@@ -74,28 +74,7 @@ public class SeatingTableTest {
         assertEquals(false, table.isAvailableOnDate(2019, 06, 5));
     }
 
-    @Test
-    public void isAvailableAtTimeFalse() {
-        assertEquals(false, table.isAvailableAtTime(17, 30));
-    }
 
-    @Test
-    public void isAvailableAtTimeFalseHours() {
-
-        LocalTime time1 = LocalTime.of(20, 00);
-        LocalTime time2 = LocalTime.of(23, 00);
-        LocalTime booking = LocalTime.of(21, 00);
-
-        System.out.println(booking.isAfter(time1));
-        System.out.println(booking.plusHours(2).isBefore(time2));
-
-        assertEquals(false, table.isAvailableAtTime(20, 00));
-    }
-
-    @Test
-    public void isAvailableAtTimeTrue() {
-        assertEquals(true, table.isAvailableAtTime(12, 30));
-    }
 
 
 
