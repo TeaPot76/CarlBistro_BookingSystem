@@ -23,18 +23,18 @@ class TableList extends Component {
            <div className="tables-container">
             <h1> Tables </h1>
               <ImageMapper
-                src={require("../../images/map.png")}
+                src={require("../../images/restaurant.png")}
                 map={{
-                  name: "my-map",
+                  name: "restaurant",
                   areas: this.props.availableAreas
                 }}
-                width={400}
-                imgWidth={750}
+                width={500}
+                imgWidth={500}
                 onMouseEnter={area => this.enterArea(area)}
                 onMouseLeave={area => this.leaveArea(area)}
                 onClick={area => this.clicked(area)}
                 strokeColor= "white"
-                lineWidth= {5}
+                lineWidth= {0}
               />
                 {
                   this.state.hoveredArea &&
