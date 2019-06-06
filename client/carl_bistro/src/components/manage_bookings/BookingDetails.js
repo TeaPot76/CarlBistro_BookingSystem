@@ -21,7 +21,7 @@ class BookingDetails extends Component{
 
   getBookings(){
     // let bookingId = this.props.match.params.name;
-    axios.get('http://localhost:8080/allbookings')
+    axios.get('http://localhost:8080/bookings/allbookings')
      .then(response => {
           this.setState({
               bookings: response.data}, () =>{

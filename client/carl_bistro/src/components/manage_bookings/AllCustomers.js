@@ -5,10 +5,12 @@ import Request from "../../helpers/Request";
 import ReactTable from "react-table";
 import matchSorter from "match-sorter";
 import "react-table/react-table.css";
+import EditForm from "./EditForm";
 
 
 
-class AllCustomers extends Component {
+
+class AllBookings extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,207 +19,105 @@ class AllCustomers extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://localhost:8080/allbookings';
+    const url = 'http://localhost:8080/bookings/allbookings';
     fetch(url)
       .then(res => res.json())
       .then((allBookings) => {
-        this.setState({
-          bookings: allBookings
-        }
-        );
-      })
-  }
-
-
-  render() {
-    //  let content = this.state.bookings.map((booking) => {
-    //   return (
-    //
-    //
-    //     <tr>
-    //     <td>
-    //    {
-    //     booking.booker.name
-    //     }
-    //     </td>
-    //     <td>
-    //     {
-    //       booking.time.slice(0, -3)
-    //     }
-    //     </td>
-    //
-    //     <td>
-    //      {
-    //       booking.partySize
-    //     }
-    //     </td>
-    //
-    //     <td>
-    //     {
-    //       booking.seatingTable.tableNumber
-    //     }
-    //     </td>
-    //     <td>
-    //     {
-    //       booking.date
-    //     }
-    //     </td>
-    //     <td>
-    //       {
-    //       booking.booker.phone
-    //     }
-    //     </td>
-    //
-    //      <button type ="button">edit</button>
-    //      <button type ="button">cancel </button> </tr>
-    //
-    //   );
-    // })
-
-    return <ReactTable data={this.state.bookings}
-      filterable
-      defaultFilterMethod={(filter, row) =>
-        String(row[filter.id]) === filter.value}
-      columns={[
-        {
-          Header: "Name",
-          accessor: "booker.name",
-          filterMethod: (filter, row) =>
-            row[filter.id].startsWith(filter.value) &&
-            row[filter.id].endsWith(filter.value)
-        },
-
-
-        {
-          Header: "Phone number",
-          id: "phone",
-          accessor: d => d.booker.phone,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["booker.phone"] }),
-          filterAll: true
-        },
-
-        {
-          Header: "Number of Guests",
-          id: "partySize",
-          accessor: d => d.partySize,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["partySize"] }),
-          filterAll: true
-        },
-
-        {
-          Header: "Table",
-          id: "seatingTable",
-          accessor: d => d.seatingTable.tableNumber,
-          filterMethod: (filter, rows) =>
-            matchSorter(rows, filter.value, { keys: ["seatingTable.tableNumber"] }),
-          filterAll: true
-        },
-
-
-        //onClick require the props function redirecting to edit and update booking
-
-
-        //onClick require the props function redirecting to delete  booking
-
-
-
-
-        {
-          Header: "Bookings",
-          accessor: "partySize",
-          id: "over",
-          Cell: ({ value }) => (value = 4 ? "Yes" : "No"),
-          filterMethod: (filter, row) => {
-            if (filter.value === "all") {
-              return true;
-            }
-            if (filter.value === "true") {
-              return row[filter.id] >= 4;
-            }
-            return row[filter.id] < 4;
-          },
-          Filter: ({ filter, onChange }) =>
-            <select
-              onChange={event => onChange(event.target.value)}
-              style={{ width: "100%" }}
-              value={filter ? filter.value : "all"}
-            >
-              <option value="all">Show All</option>
-              <option value="true">Large party</option>
-              <option value="false">Small party</option>
-            </select>
-        }
-      ]
-
+          this.setState({
+              bookings: allBookings}
+            );
+          })
       }
-      defaultPageSize={10}
-      className="-striped -highlight"
+
 
 
     render() {
 
-        return <ReactTable data={this.state.bookings}
-                         filterable
-                         defaultFilterMethod={(filter, row)=>
-                         String(row[filter.id])===filter.value}
-                         columns={[
-                           {
-                             Header: "Name",
-                             accessor: "booker.name",
-                             filterMethod: (filter, row ) =>
-                             row[filter.id].startsWith(filter.value)&&
-                             row[filter.id].endsWith(filter.value)
-                           },
+      return (
+
+        <div className="all-customers">
+          <h1 className="booking-h1">Booking Log</h1>
+         <ReactTable data={this.state.bookings}
+           filterable
+           defaultFilterMethod={(filter, row)=>
+           String(row[filter.id])===filter.value}
+           columns={[
 
 
-                 {  Header: "Phone number",
-                  id: "phone",
-                  accessor: d => d.booker.phone,
-                  filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["booker.phone"] }),
-                  filterAll: true
-                },
-
-               {  Header: "Number of Guests",
-                id: "partySize",
-                accessor: d => d.partySize,
+               {  Header: "Name",
+                id: "name",
+                accessor: d => d.booker.name,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["partySize"] }),
+                  matchSorter(rows, filter.value, { keys: ["name"] }),
                 filterAll: true
               },
 
-              { Header: "Table",
-               id: "seatingTable",
-               accessor: d => d.seatingTable.tableNumber,
+              { Header: "Contact",
+               id: "phone",
+               accessor: d => d.booker.phone,
                filterMethod: (filter, rows) =>
-                 matchSorter(rows, filter.value, { keys: ["seatingTable.tableNumber"] }),
+                 matchSorter(rows, filter.value, { keys: ["phone"] }),
+               filterAll: true
+             },
+
+             {
+               Header: "Date",
+               accessor: "date",
+               filterMethod: (filter, rows ) =>
+               matchSorter(rows, filter.value, {keys: ["date"]}),
                filterAll: true
              },
 
 
-               //onClick require the props function redirecting to edit and update booking
-
-
-              //onClick require the props function redirecting to delete  booking
-
-
+                          {
+                             Header: "Time",
+                             id: "time",
+                             accessor: d => d.time,
+                             filterMethod: (filter, rows) =>
+                               matchSorter(rows, filter.value, { keys: ["time"] }),
+                             filterAll: true
+                         },
+                          {  Header: "Party Size",
+                             id: "partySize",
+                             accessor: d => d.partySize,
+                             filterMethod: (filter, rows) =>
+                               matchSorter(rows, filter.value, { keys: ["partySize"] }),
+                             filterAll: true
+                         },
+                             {  Header: "Table #",
+                              id: "tableNumber",
+                              accessor: d => d.seatingTable.tableNumber,
+                              filterMethod: (filter, rows) =>
+                                matchSorter(rows, filter.value, { keys: ["tableNumber"] }),
+                              filterAll: true
+                            },
+// buttons to be updated with delete and edit function via link and params
+              // { Header: "Edit" ,
+              //   id: "edit",
+              //   accessor: "id",
+              //   Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
+              // },
+              //
+              // { Header: "Delete",
+              //   id: "delete",
+              //   accessor: "id",
+              //   Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
+              // },
 
 
              {
                    Header: "Bookings",
-                   accessor: "partySize",
+                   accessor: "date",
                    id: "over",
-                   Cell: ({ value }) => (value = 4 ? "Yes" : "No"),
+                   Cell: ({ value }) => (value > Date.now() ? "Upcoming" : "Past"),
                    filterMethod: (filter, row) => {
                      if (filter.value === "all") {
                        return true;
                      }
                      if (filter.value === "true") {
-                       return row[filter.id] >= 4;
+                       return row[filter.id] >= 3;
                      }
-                     return row[filter.id] < 4;
+                     return row[filter.id] < 3;
                    },
                    Filter: ({ filter, onChange }) =>
                      <select
@@ -226,24 +126,21 @@ class AllCustomers extends Component {
                        value={filter ? filter.value : "all"}
                      >
                        <option value="all">Show All</option>
-                       <option value="true">Large party</option>
-                       <option value="false">Small party</option>
+                       <option value="true">Past Bookings</option>
+                       <option value="false">Upcoming Bookings</option>
                      </select>
                   }
                 ]
 
+
      }
             defaultPageSize={10}
             className="-striped -highlight"
-
-
-
       />
+        </div>
+      )
     }
 
-    />
   }
 
-}
-
-export default AllCustomers;
+  export default AllBookings;

@@ -20,7 +20,7 @@ class EditForm extends React.Component {
   }
 
   getBookingDetails() {
-    axios.get(`http://localhost:8080/bookings/${this.props.id}`)
+    axios.get(`http://localhost:8080/bookings/allbookings/${this.props.id}`)
       .then(response => {
         this.setState({
           id: response.data.id,
