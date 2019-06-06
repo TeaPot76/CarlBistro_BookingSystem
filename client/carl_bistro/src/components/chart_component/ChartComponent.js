@@ -8,6 +8,8 @@ class ChartComponent extends Component{
   constructor(props){
     super(props);
     this.state = {
+      booker: null,
+      bookings: [],
 	labels: [
 		'June',
 		'July',
@@ -29,15 +31,50 @@ class ChartComponent extends Component{
 }
 };
 
+// componentDidMount() {
+//   const url = 'http://localhost:8080/allbookings';
+//   fetch(url)
+//     .then(res => res.json())
+//     .then((allBookings) => {
+//         this.setState({
+//             bookings: allBookings}
+//           );
+//         })
+//     }
+
   render() {
-    return (
+   //  let content = this.state.bookings.map((booking) => {
+   // return (
+   //
+   //  <li>
+   //   Date:
+   //  {
+   //   booking.booker.name
+   //   }
+   // </li>
+   //
+   //  )
+
+     return (
+
+
       <div>
+
         <h2>Booking Chart</h2>
         <h2>Bookings By Month</h2>
-        <Pie data={this.state} />
-      </div>
-    );
-  }
+        <Pie data={this.state}/>
+
+        </div>
+        // <Pie data={this.state.bookings.map((booking)=>{
+        //   return(
+        //     booking.booker.name)
+        //
+        // })} />
+
+
+)}
+
 }
+
 
 export default ChartComponent;
