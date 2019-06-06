@@ -29,49 +29,49 @@ class AllCustomers extends Component {
 
 
     render() {
-      let content = this.state.bookings.map((booking) => {
-       return (
-
-
-         <tr>
-         <td>
-        {
-         booking.date
-         }
-         </td>
-         <td>
-         {
-           booking.time.slice(0, -3)
-         }
-         </td>
-
-         <td>
-          {
-           booking.partySize
-         }
-         </td>
-
-         <td>
-         {
-           booking.seatingTable.tableNumber
-         }
-         </td>
-         <td>
-         {
-           booking.booker.name
-         }
-         </td>
-         <td>
-           {
-           booking.booker.phone
-         }
-         </td>
-
-          <button type ="button">edit</button>
-          <button type ="button">cancel </button> </tr>
-
-       );
-     })
+     //  let content = this.state.bookings.map((booking) => {
+     //   return (
+     //
+     //
+     //     <tr>
+     //     <td>
+     //    {
+     //     booking.booker.name
+     //     }
+     //     </td>
+     //     <td>
+     //     {
+     //       booking.time.slice(0, -3)
+     //     }
+     //     </td>
+     //
+     //     <td>
+     //      {
+     //       booking.partySize
+     //     }
+     //     </td>
+     //
+     //     <td>
+     //     {
+     //       booking.seatingTable.tableNumber
+     //     }
+     //     </td>
+     //     <td>
+     //     {
+     //       booking.date
+     //     }
+     //     </td>
+     //     <td>
+     //       {
+     //       booking.booker.phone
+     //     }
+     //     </td>
+     //
+     //      <button type ="button">edit</button>
+     //      <button type ="button">cancel </button> </tr>
+     //
+     //   );
+     // })
 
       return <ReactTable data={this.state.bookings}
                          filterable
@@ -79,35 +79,35 @@ class AllCustomers extends Component {
                          String(row[filter.id])===filter.value}
                          columns={[
                            {
-                             Header: "Date",
-                             accessor: "date",
+                             Header: "Name",
+                             accessor: "booker.name",
                              filterMethod: (filter, row ) =>
                              row[filter.id].startsWith(filter.value)&&
                              row[filter.id].endsWith(filter.value)
                            },
 
 
-                 {  Header: "Party Size",
-                  id: "partySize",
-                  accessor: d => d.partySize,
+                 {  Header: "Phone number",
+                  id: "phone",
+                  accessor: d => d.booker.phone,
                   filterMethod: (filter, rows) =>
-                    matchSorter(rows, filter.value, { keys: ["partySize"] }),
+                    matchSorter(rows, filter.value, { keys: ["booker.phone"] }),
                   filterAll: true
                 },
 
-               {  Header: "Name",
-                id: "booker.name",
-                accessor: d => d.booker.name,
+               {  Header: "Number of Guests",
+                id: "partySize",
+                accessor: d => d.partySize,
                 filterMethod: (filter, rows) =>
-                  matchSorter(rows, filter.value, { keys: ["booker.name"] }),
+                  matchSorter(rows, filter.value, { keys: ["partySize"] }),
                 filterAll: true
               },
 
-              { Header: "Contact",
-               id: "booker.phone",
-               accessor: d => d.booker.phone,
+              { Header: "Table",
+               id: "seatingTable",
+               accessor: d => d.seatingTable.tableNumber,
                filterMethod: (filter, rows) =>
-                 matchSorter(rows, filter.value, { keys: ["booker.phone"] }),
+                 matchSorter(rows, filter.value, { keys: ["seatingTable.tableNumber"] }),
                filterAll: true
              },
 
@@ -124,15 +124,15 @@ class AllCustomers extends Component {
                    Header: "Bookings",
                    accessor: "partySize",
                    id: "over",
-                   Cell: ({ value }) => (value = 3 ? "Yes" : "No"),
+                   Cell: ({ value }) => (value = 4 ? "Yes" : "No"),
                    filterMethod: (filter, row) => {
                      if (filter.value === "all") {
                        return true;
                      }
                      if (filter.value === "true") {
-                       return row[filter.id] >= 3;
+                       return row[filter.id] >= 4;
                      }
-                     return row[filter.id] < 3;
+                     return row[filter.id] < 4;
                    },
                    Filter: ({ filter, onChange }) =>
                      <select
@@ -141,8 +141,8 @@ class AllCustomers extends Component {
                        value={filter ? filter.value : "all"}
                      >
                        <option value="all">Show All</option>
-                       <option value="true">Can Drink</option>
-                       <option value="false">Can't Drink</option>
+                       <option value="true">Large party</option>
+                       <option value="false">Small party</option>
                      </select>
                   }
                 ]

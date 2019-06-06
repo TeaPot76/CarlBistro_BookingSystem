@@ -13,6 +13,8 @@ class NavBar extends Component {
                 <NavLink exact activeClassName="active-link" className="link" to="/bookingdetails">Edit / Delete</NavLink>
 
                 <NavLink exact activeClassName="active-link" className="link" to="/currenttablestatus">Tables</NavLink>
+                <NavLink exact activeClassName="active-link" className="link" to="/chart">Chart</NavLink>
+
             </nav>
          );
     }
