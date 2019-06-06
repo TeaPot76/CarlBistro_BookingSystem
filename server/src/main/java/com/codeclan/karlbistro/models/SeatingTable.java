@@ -1,7 +1,9 @@
 package com.codeclan.karlbistro.models;
 
+import com.codeclan.karlbistro.repositories.BookingRepository.BookingRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -115,7 +117,7 @@ public class SeatingTable {
             if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
                 return true;
             }
-            else if (bookedStart.isBefore(proposedStart) && (bookedEnd.isAfter(proposedStart))) {
+            else if (bookedStart.isAfter(proposedStart) && (bookedStart.isBefore(proposedEnd))) {
                 return true;
             }
             else if (bookedStart.equals(proposedStart)) {
@@ -134,21 +136,53 @@ public class SeatingTable {
     }
 
 
-    public boolean isAvailableAtTime(int hour, int minute) {
-        LocalTime bookingStart = LocalTime.of(hour, minute + 1);
-        LocalTime bookingTime = null;
+//    @Autowired
+//    BookingRepository bookingRepository;
+
+    public boolean isAvailableAtTimeAndDate(String date, String hour, String min){
+
+        String time = hour + ":" + min;
+        LocalTime proposedStart = LocalTime.parse( time );
+        LocalTime proposedEnd = proposedStart.plusHours(2);
+        LocalTime bookedStart = null;
+        LocalTime bookedEnd = null;
+        Long tableId = getId();
+
+        LocalDate proposedDate = LocalDate.parse(date);
 
         for (Booking booking : bookings) {
-            bookingTime = booking.getTime();
+            bookedStart = booking.getTime();
+            bookedEnd = booking.getTime().plusHours(2);
 
-            if (bookingStart.isAfter(bookingTime) && (bookingStart.isBefore(bookingTime.plusHours(2)))) {
-                return false;
+
+            if ((bookedStart.isBefore(proposedEnd)) && (bookedEnd.isAfter(proposedStart))) {
+                System.out.println("first if");
+                return true;
+            }
+            else if ((bookedStart.isBefore(proposedEnd)) && (bookedEnd.isAfter(proposedEnd))) {
+                System.out.println("second if");
+
+                return true;
+            }
+            else if ((bookedStart.equals(proposedStart))  && (booking.getDate() == proposedDate )) {
+                System.out.println("third if");
+
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
-
-
-
 }
+
+//            System.out.println("---");
+//            System.out.println(bookedStart);
+//            System.out.println("is before");
+//            System.out.println(proposedEnd);
+//            System.out.println(bookedEnd);
+//            System.out.println("is after");
+//            System.out.println(proposedStart);
+//            System.out.println(booking.getDate());
+//            System.out.println("is equal to");
+//            System.out.println(proposedDate);
+//            System.out.println("---");

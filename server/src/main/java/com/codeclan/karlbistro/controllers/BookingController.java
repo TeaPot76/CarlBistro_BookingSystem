@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-
+@RequestMapping(value = "/bookings")
 public class BookingController {
 
     @Autowired
@@ -23,9 +23,15 @@ public class BookingController {
         return bookingRepository.findAll();
     }
 
-    @RequestMapping(value = "/bookings/today/seatingTable/{seatingTableId}")
+//    shows only the bookings of the time now (when running) or in the future (relative to now)
+    @RequestMapping(value = "/today/seatingTable/{seatingTableId}")
     public List<Booking> findBookingsTodayBySeatingTableId(@PathVariable Long seatingTableId) {
         return bookingRepository.findBookingsTodayBySeatingTableId(seatingTableId);
+    }
+
+    @RequestMapping(value = "/date/{date}/seatingTable/{seatingTableId}")
+    public List<Booking> findBookingsByDateAndSeatingTableId(@PathVariable String date, @PathVariable Long seatingTableId) {
+        return bookingRepository.findBookingsByDateAndSeatingTableId(date, seatingTableId);
     }
 }
 

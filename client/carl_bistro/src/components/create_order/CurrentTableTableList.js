@@ -23,26 +23,28 @@ class CurrentTableTableList extends Component {
            <div className="tables-container">
             <h1> Tables </h1>
               <ImageMapper
-                src={require("../../images/map.png")}
+                src={require("../../images/restaurant.png")}
                 map={{
                   name: "my-map",
-                  areas: [{ name: "1", shape: "rect", coords: [43, 98, 105, 131], preFillColor: "pink", fillColor: "green" },
-                  { name: "2", shape: "rect", coords: [43, 272, 105, 307], preFillColor: "pink", fillColor: "blue"  },
-                  { name: "3", shape: "rect", coords: [42, 470, 104, 504], preFillColor: "pink", fillColor: "green" },
-                  { name: "4", shape: "rect", coords: [41, 648, 105, 687], preFillColor: "pink", fillColor: "green" },
-                  { name: "5", shape: "circle", coords: [304, 131, 45], preFillColor: "pink", fillColor: "green" },
-                  { name: "6", shape: "circle", coords: [307, 350, 42], preFillColor: "pink", fillColor: "green" },
-                  { name: "7", shape: "circle", coords: [302, 586, 43], preFillColor: "pink", fillColor: "green" },
-                  { name: "8", shape: "circle", coords: [577, 198, 43], preFillColor: "pink", fillColor: "green" },
-                  { name: "9", shape: "rect", coords: [556, 626, 666, 429], preFillColor: "pink", fillColor: "green" }]
+                  areas: [{ name: "1", shape: "rect", coords: [50,185,97,231], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "2", shape: "rect", coords: [125,185,173,231], preFillColor: "#456c3b", fillColor: "#306030"  },
+      { name: "3", shape: "rect", coords: [49,273,97,320], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "4", shape: "rect", coords: [125,273,172,320], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "5", shape: "rect", coords: [49,362,98,410], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "6", shape: "rect", coords: [125,362,173,410], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "7", shape: "circle", coords: [265,252,30], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "8", shape: "circle", coords: [265,359,30], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "9", shape: "circle", coords: [267,109,41], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "10", shape: "circle", coords: [385,135,42], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "11", shape: "rect", coords: [372,246,457,390], preFillColor: "#456c3b", fillColor: "#306030" }]
                 }}
-                width={400}
-                imgWidth={750}
+                width={500}
+                imgWidth={500}
                 onMouseEnter={area => this.enterArea(area)}
                 onMouseLeave={area => this.leaveArea(area)}
                 onClick={area => this.clicked(area)}
                 strokeColor= "white"
-                lineWidth= {5}
+                lineWidth= {0}
               />
               <CreateOrderTablecard
               table={this.state.selectedTable}

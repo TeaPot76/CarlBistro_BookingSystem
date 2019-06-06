@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -46,6 +47,34 @@ public class BookingRepositoryImpl implements BookingRepositoryCustom {
 
             return results;
         }
+
+    public List<Booking> findBookingsByDateAndSeatingTableId(String dateString, Long seatingTableId){
+
+        List<Booking> results = null;
+        Session session = entityManager.unwrap(Session.class);
+        LocalDate date = LocalDate.parse(dateString);
+        System.out.println(date);
+        System.out.println(seatingTableId);
+
+        try {
+            Criteria cr = session.createCriteria(Booking.class);
+
+            cr.createAlias("seatingTable", "seatingTableAlias");
+            cr.add(Restrictions.eq("seatingTableAlias.id", seatingTableId));
+            cr.add(Restrictions.eq("date", date));
+
+
+            results = cr.list();
+
+
+        } catch (HibernateException ex){
+            ex.printStackTrace();
+        }
+
+        return results;
+    }
+
+
     }
 
 
