@@ -25,7 +25,7 @@ class TableList extends Component {
               <ImageMapper
                 src={require("../../images/restaurant.png")}
                 map={{
-                  name: "my-map",
+                  name: "restaurant",
                   areas: this.props.availableAreas
                 }}
                 width={500}
