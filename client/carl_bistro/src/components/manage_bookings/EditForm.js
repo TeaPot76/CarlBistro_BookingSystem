@@ -44,7 +44,7 @@ class EditForm extends React.Component {
     // .then(response => {
     //   this.setState({booker: booker})
     // })
-    axios.get(`http://localhost:8080/bookings/${this.props.id}/${this.props.booker}`)
+    axios.get(`http://localhost:8080/bookings/allbookings/${this.props.id}/${this.props.booker}`)
     .then(response => {
       this.setState({booking: booking})
     })
