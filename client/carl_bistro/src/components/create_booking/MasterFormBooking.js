@@ -11,30 +11,33 @@ class MasterForm extends React.Component {
       currentStep: 1,
       name:  '',
       phone: '',
-      booker: '', 
+      booker: '',
       partySize: '',
       date: '',
       time: '',
       table: '',
       bookingNote: '',
-      areas: [{ name: "1", shape: "rect", coords: [43, 98, 105, 131], preFillColor: "pink", fillColor: "green" },
-      { name: "2", shape: "rect", coords: [43, 272, 105, 307], preFillColor: "pink", fillColor: "blue"  },
-      { name: "3", shape: "rect", coords: [42, 470, 104, 504], preFillColor: "pink", fillColor: "green" },
-      { name: "4", shape: "rect", coords: [41, 648, 105, 687], preFillColor: "pink", fillColor: "green" },
-      { name: "5", shape: "circle", coords: [304, 131, 45], preFillColor: "pink", fillColor: "green" },
-      { name: "6", shape: "circle", coords: [307, 350, 42], preFillColor: "pink", fillColor: "green" },
-      { name: "7", shape: "circle", coords: [302, 586, 43], preFillColor: "pink", fillColor: "green" },
-      { name: "8", shape: "circle", coords: [577, 198, 43], preFillColor: "pink", fillColor: "green" },
-      { name: "9", shape: "rect", coords: [556, 626, 666, 429], preFillColor: "pink", fillColor: "green" }],
+      areas: [{ name: "1", shape: "rect", coords: [50,185,97,231], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "2", shape: "rect", coords: [125,185,173,231], preFillColor: "#456c3b", fillColor: "#306030"  },
+      { name: "3", shape: "rect", coords: [49,273,97,320], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "4", shape: "rect", coords: [125,273,172,320], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "5", shape: "rect", coords: [49,362,98,410], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "6", shape: "rect", coords: [125,362,173,410], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "7", shape: "circle", coords: [265,252,30], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "8", shape: "circle", coords: [265,359,30], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "9", shape: "circle", coords: [267,109,41], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "10", shape: "circle", coords: [385,135,42], preFillColor: "#456c3b", fillColor: "#306030" },
+      { name: "11", shape: "rect", coords: [372,246,457,390], preFillColor: "#456c3b", fillColor: "#306030" }],
       availableAreas: []
     }
   }
+
 
   handleChange = event => {
     const {name, value} = event.target
     this.setState({
       [name]: value
-    })    
+    })
   }
 
   handleChangePartySize = event => {
@@ -42,7 +45,7 @@ class MasterForm extends React.Component {
     this.setState({
       [name]: value
     } , ()=>{
-      const url2 = `http://localhost:8080/seatingTables/partySize/${this.state.partySize}`; //available tables (capacity only) 
+      const url2 = `http://localhost:8080/seatingTables/partySize/${this.state.partySize}`; //available tables (capacity only)
       const request = new Request();
       request.get(url2)
       .then((result)=>{
@@ -65,8 +68,8 @@ class MasterForm extends React.Component {
         })
       })
     }
-    
-    
+
+
     )
 
   }
@@ -74,7 +77,7 @@ class MasterForm extends React.Component {
   handleTableChoice = tableStateObj => {
     this.setState(tableStateObj);
   }
-   
+
   // require Spring query for find booker ID by booker phone WORKS
   handleSubmit = event => {
     event.preventDefault()
@@ -85,7 +88,7 @@ class MasterForm extends React.Component {
       request.get(`http://localhost:8080/bookers/phone/${this.state.phone}`)
       .then((result)=>{
         console.log(result[0]); //returns sql ID of booker by query on phone number WORKS
-        
+
         this.setState({booker: `http://localhost:8080/bookers/${result[0]}`},()=>{
             const bookingObj = {
               "date": this.state.date,
@@ -100,7 +103,7 @@ class MasterForm extends React.Component {
       })
     })
   }
-  
+
   _next = () => {
     let currentStep = this.state.currentStep
     currentStep = currentStep >= 2? 3: currentStep + 1
@@ -108,7 +111,7 @@ class MasterForm extends React.Component {
       currentStep: currentStep
     })
   }
-    
+
   _prev = () => {
     let currentStep = this.state.currentStep
     currentStep = currentStep <= 1? 1: currentStep - 1
@@ -124,8 +127,8 @@ previousButton() {
   let currentStep = this.state.currentStep;
   if(currentStep !==1){
     return (
-      <button 
-        className="btn btn-secondary" 
+      <button
+        className="btn btn-secondary"
         type="button" onClick={this._prev}>
       Previous
       </button>
@@ -138,35 +141,35 @@ nextButton(){
   let currentStep = this.state.currentStep;
   if(currentStep <3){
     return (
-      <button 
-        className="btn btn-primary float-right" 
+      <button
+        className="btn btn-primary float-right"
         type="button" onClick={this._next}>
       Next
-      </button>        
+      </button>
     )
   }
   return null;
 }
-  
-  render() {    
+
+  render() {
     return (
       <React.Fragment>
       <div className="page-container">
       <h1>Booking Form:</h1>
-      <p>Step {this.state.currentStep} of 3</p> 
+      <p>Step {this.state.currentStep} of 3</p>
 
       <form onSubmit={this.handleSubmit}>
-      {/* 
+      {/*
         render the form steps and pass required props in
       */}
-        <Step1 
-          currentStep={this.state.currentStep} 
+        <Step1
+          currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           name={this.state.name}
           phone={this.state.phone}
         />
-        <Step2 
-          currentStep={this.state.currentStep} 
+        <Step2
+          currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           handleChangePartySize={this.handleChangePartySize}
           date={this.state.date}
@@ -174,8 +177,8 @@ nextButton(){
           partySize={this.state.partySize}
           bookingNote={this.state.bookingNote}
         />
-        <Step3 
-          currentStep={this.state.currentStep} 
+        <Step3
+          currentStep={this.state.currentStep}
           handleChange={this.handleChange}
           table={this.state.table}
           handleTableChoice={this.handleTableChoice}
@@ -199,7 +202,7 @@ nextButton(){
 function Step1(props) {
   if (props.currentStep !== 1) {
     return null
-  } 
+  }
   return(
     <div className="form-group">
       <label htmlFor="name">Customer Name:</label>
@@ -231,7 +234,7 @@ function Step1(props) {
 function Step2(props) {
   if (props.currentStep !== 2) {
     return null
-  } 
+  }
   return(
     <div className="form-group">
       <label htmlFor="date">Date:</label>
@@ -240,7 +243,7 @@ function Step2(props) {
         id="date"
         name="date"
         type="date"
-        
+
         value={props.date}
         onChange={props.handleChange}
         />
@@ -262,7 +265,7 @@ function Step2(props) {
         value={props.partySize}
         onChange={props.handleChangePartySize}
         default="1"
-        
+
         />
       <label htmlFor="bookingNote">Booking Note:</label>
       <input
@@ -273,7 +276,7 @@ function Step2(props) {
         value={props.bookingNote}
         onChange={props.handleChange}
         />
-        
+
     </div>
   );
 }
@@ -321,11 +324,11 @@ class Step3 extends Component {
   render(){
     if (this.props.currentStep !== 3) {
       return null
-    } 
+    }
     return(
       <React.Fragment>
-        
-      <TableList 
+
+      <TableList
       availableAreas={this.props.availableAreas}
       availableTables={this.props.availableTables}
       onSelectedTable={this.handleTableClicked}/>
@@ -339,7 +342,7 @@ class Step3 extends Component {
 // function Step3(props) {
   // if (props.currentStep !== 3) {
   //   return null
-  // } 
+  // }
 //   return(
 //     // render radio buttons  based on tables request
 //     <React.Fragment>
@@ -360,5 +363,5 @@ export default MasterForm;
   type="table"
   value={this.props.table}
   onChange={this.props.handleChange}
-  />      
+  />
 </div> */}
