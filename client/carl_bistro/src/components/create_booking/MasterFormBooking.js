@@ -157,10 +157,7 @@ nextButton(){
       <div className="page-container">
       <div className="landing-page">
       <h1>Booking Form:</h1>
-<<<<<<< HEAD
-=======
       <p>Step {this.state.currentStep} of 3</p>
->>>>>>> develop
 
       <form onSubmit={this.handleSubmit}>
       {/*

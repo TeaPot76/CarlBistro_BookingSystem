@@ -1,21 +1,26 @@
  * {
   font-family: Montserrat;
+    color: green;
+    ;
 }
 
-html {
+button {
+  color: black;
+}
+/* html {
   background-image: url("./images/bistro.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .app {
   align-items: center;
 }
 
 .landing-page {
- position: fixed; 
+ position: fixed;
   width: 100%;
   height: 100%;
   height: auto;
@@ -25,7 +30,7 @@ html {
   opacity: 0.9;
 }
 
-.customer-page {
+/* .customer-page {
   background-color: #252122;
   opacity: 0.9;
   color: #FCFAFB;
@@ -39,7 +44,7 @@ html {
   color: #FCFAFB;
   margin-top: 2.5em;
   margin-bottom: 2.5em;
-}
+} */
 
  .nav-link-container {
   display: flex;
@@ -68,7 +73,7 @@ html {
   display: flex;
   flex-direction: column;
   padding: 3em;
-  color: #FCFAFB;
+  color: black;
 }
 
 .form-group input{
@@ -98,11 +103,11 @@ form {
   background-color: #FCFAFB;
 }
 
-.form-inputs input:focus {
+/* .form-inputs input:focus {
     outline: none !important;
     border: 2px solid #800000;
     box-shadow: 0 0 50px #800000;
-}
+} */
 
 .booking-list {
   height: auto;
@@ -111,14 +116,14 @@ form {
   background-color: #252122;
   opacity: 0.9;
 }
-
+/*
  .booking-edit-form {
   height: auto;
   width: 35em;
   text-align: center;
   background-color: #252122;
   opacity: 0.9;
-}
+} */
 
 .table-list {
   height: auto;
@@ -142,15 +147,15 @@ form {
   text-decoration: none;
   font-size:  1.5em;
 }
-
+/*
 .table-display-div {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: auto 15em;
-}
+} */
 
-.table-card {
+/* .table-card {
   height: auto;
   width: 25em;
   text-align: center;
@@ -158,7 +163,7 @@ form {
   color: #FCFAFB;
   opacity: 0.9;
   padding-bottom: 1.5em;
-}
+} */
 
 .active-link {
  color: #800000;
@@ -210,7 +215,7 @@ h1 {
   text-align: center;
   margin-top: 2.5em;
 }
-
+/*
 .details-table a, th {
  font-size: 1.5em;
  color: #800000;
@@ -229,9 +234,9 @@ h1 {
 .details-table-div {
   display: flex;
   justify-content: center;
-}
+} */
 
-.tables-container {
+/* .tables-container {
   display: flex;
   flex-direction: row;
-}
+} */
