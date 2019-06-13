@@ -153,7 +153,7 @@ class EditForm extends React.Component {
             />
           </fieldset>
 
-          <input type="submit" value="Save" id="save" />
+          <input type="submit" value="Save" id="save" onClick = { () =>  window.location='/managebookings'}/>
           <input type="button" value="Go Back" id="go-back" onClick = { () =>  window.location='/'}/>
         </form>
       </div>

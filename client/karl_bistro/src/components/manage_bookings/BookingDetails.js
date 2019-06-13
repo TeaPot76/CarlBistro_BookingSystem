@@ -48,7 +48,7 @@ getSingleBooking(){
   onDelete(evt){
      axios.delete(`http://localhost:8080/bookings/${evt.target.value}` )
       .then(response => {
-        this.props.history.push('/');
+        this.props.history.push('/managebookings');
       }) .catch(err => console.log(err));
   }
 
@@ -56,6 +56,7 @@ getSingleBooking(){
 
 
     render() {
+    
       let content = this.state.bookings.map((booking) => {
        return (
          <tr>
@@ -100,14 +101,16 @@ getSingleBooking(){
       return (
           <div className="details-page-container">
             <div className="details-page">
-              <h1 className="booking-h1">Edit/Delete</h1>
+              <h1 className="booking-h1">Manage Bookings</h1>
               <div className="details-table-div">
               <table className="details-table">
                 <thead>
+                  <tr>
                   <th>Id:</th>
                   <th>Name:</th>
                   <th>Date:</th>
                   <th>Time:</th>
+                  </tr>
                 </thead>
                   {content}
               </table>

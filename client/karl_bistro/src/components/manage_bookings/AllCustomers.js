@@ -84,52 +84,47 @@ class AllBookings extends Component {
                                matchSorter(rows, filter.value, { keys: ["partySize"] }),
                              filterAll: true
                          },
-                             {  Header: "Table #",
-                              id: "tableNumber",
-                              accessor: d => d.seatingTable.tableNumber,
-                              filterMethod: (filter, rows) =>
-                                matchSorter(rows, filter.value, { keys: ["tableNumber"] }),
-                              filterAll: true
-                            },
-// buttons to be updated with delete and edit function via link and params
-              // { Header: "Edit" ,
-              //   id: "edit",
-              //   accessor: "id",
-              //   Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
-              // },
-              //
-              // { Header: "Delete",
-              //   id: "delete",
-              //   accessor: "id",
-              //   Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
-              // },
 
 
-             {
-                   Header: "Bookings",
-                   accessor: "date",
-                   id: "over",
-                   Cell: ({ value }) => (value > Date.now() ? "Upcoming" : "Past"),
-                   filterMethod: (filter, row) => {
-                     if (filter.value === "all") {
-                       return true;
-                     }
-                     if (filter.value === "true") {
-                       return row[filter.id] >= 3;
-                     }
-                     return row[filter.id] < 3;
-                   },
-                   Filter: ({ filter, onChange }) =>
-                     <select
-                       onChange={event => onChange(event.target.value)}
-                       style={{ width: "100%" }}
-                       value={filter ? filter.value : "all"}
-                     >
-                       <option value="all">Show All</option>
-                       <option value="true">Past Bookings</option>
-                       <option value="false">Upcoming Bookings</option>
-                     </select>
-                  }
+//buttons to be updated with delete and edit function via link and params
+              { Header: "Edit" ,
+                id: "edit",
+                accessor: "id",
+                Cell: ({value}) =>(<button onClick={this.setState}>Edit</button>)
+              },
+
+              { Header: "Delete",
+                id: "delete",
+                accessor: "id",
+                Cell: ({value}) =>(<button onClick={this.setState}>Delete</button>)
+              },
+
+
+             // {
+             //       Header: "Bookings",
+             //       accessor: "date",
+             //       id: "over",
+             //       Cell: ({ value }) => (value > Date.now() ? "Upcoming" : "Past"),
+             //       filterMethod: (filter, row) => {
+             //         if (filter.value === "all") {
+             //           return true;
+             //         }
+             //         if (filter.value === "true") {
+             //           return row[filter.id] >= 3;
+             //         }
+             //         return row[filter.id] < 3;
+             //       },
+             //       Filter: ({ filter, onChange }) =>
+             //         <select
+             //           onChange={event => onChange(event.target.value)}
+             //           style={{ width: "100%" }}
+             //           value={filter ? filter.value : "all"}
+             //         >
+             //           <option value="all">Show All</option>
+             //           <option value="true">Past Bookings</option>
+             //           <option value="false">Upcoming Bookings</option>
+             //         </select>
+             //      }
                 ]
 
 

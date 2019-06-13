@@ -7,13 +7,13 @@
 button {
   color: black;
 }
-/* html {
+html {
   background-image: url("./images/bistro.jpg");
   height: 100%;
   background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
+
+
+}
 
 .app {
   align-items: center;
@@ -36,15 +36,15 @@ button {
   color: #FCFAFB;
   margin-top: 2.5em;
 
-}
+} */
 
-.details-page {
+.details-page-container {
   background-color: #252122;
   opacity: 0.9;
   color: #FCFAFB;
   margin-top: 2.5em;
   margin-bottom: 2.5em;
-} */
+}
 
  .nav-link-container {
   display: flex;
@@ -116,14 +116,14 @@ form {
   background-color: #252122;
   opacity: 0.9;
 }
-/*
- .booking-edit-form {
+
+  .booking-edit-form {
   height: auto;
   width: 35em;
   text-align: center;
   background-color: #252122;
   opacity: 0.9;
-} */
+}
 
 .table-list {
   height: auto;

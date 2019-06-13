@@ -193,6 +193,7 @@ nextButton(){
         {this.previousButton()}
         {this.nextButton()}
 
+
       </form>
           </div>
       </div>
@@ -335,6 +336,7 @@ class Step3 extends Component {
       availableTables={this.props.availableTables}
       onSelectedTable={this.handleTableClicked}/>
       <button className="btn btn-success btn-block">Create Booking</button>
+      <button classNmae="btn"   onClick = { () =>  window.location='/managebookings'}>All Booking</button>
       </React.Fragment>
     )
   }
