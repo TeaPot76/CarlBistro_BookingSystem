@@ -1,7 +1,9 @@
 package com.codeclan.karlbistro.models;
 
+import com.codeclan.karlbistro.repositories.MenuRepository.MenuRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +18,9 @@ public class BookerTest {
         booking = new Booking();
 
     }
+
+
+
 
     @Test
     public void getName() {
